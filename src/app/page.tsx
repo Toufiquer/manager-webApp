@@ -8,7 +8,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ResizableHandle,
@@ -18,6 +18,7 @@ import {
 import SideBar from "@/components/common/side-bar";
 import { useGlobalStore } from "@/lib/global-store";
 import Header from "@/components/common/header";
+import Outlet from "@/components/common/outlet";
 
 const Page = () => {
   const apiData = useGlobalStore((store) => store.apiData);
@@ -61,7 +62,9 @@ const Page = () => {
           <SideBar />
         </ResizablePanel>
         <ResizableHandle withHandle />
-        <ResizablePanel>Two</ResizablePanel>
+        <ResizablePanel>
+          <Outlet />
+        </ResizablePanel>
       </ResizablePanelGroup>
     </main>
   );

@@ -13,12 +13,16 @@ import { create } from "zustand";
 interface useGlobalStoreType {
   isRestaurant: boolean;
   setIsRestaurant: (payload: any) => void;
+  currentItem: string;
+  setCurrentItem: (payload: any) => void;
   apiData: any;
   setApiData: (payload: any) => void;
 }
 export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   isRestaurant: true,
   setIsRestaurant: (payload) => set(() => ({ isRestaurant: payload })),
+  currentItem: "",
+  setCurrentItem: (payload) => set(() => ({ currentItem: payload })),
   apiData: [],
   setApiData: (payload) => set(() => ({ apiData: payload })),
 }));

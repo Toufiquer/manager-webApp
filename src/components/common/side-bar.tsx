@@ -17,13 +17,15 @@ import { Button } from "@/components/ui/button";
 
 const SideBar = () => {
   const apiData = useGlobalStore((store) => store.apiData);
-
-  console.log("apiData : ", apiData);
+  const setCurrentItem = useGlobalStore((store) => store.setCurrentItem);
   return (
     <main>
       <ScrollArea className="h-screen w-auto rounded-md border pr-3">
         {apiData?.map((curr: any, idx: number) => (
-          <div className="flex w-[96%] flex-row justify-between m-2 border border-slate-400 px-2 py-1 rounded-lg pl-1">
+          <div
+            onClick={() => setCurrentItem(curr.name)}
+            className="cursor-pointer flex w-[96%] flex-row justify-between m-2 border border-slate-400 px-2 py-1 rounded-lg pl-1"
+          >
             <div
               key={curr.name + idx}
               className="flex flex-row gap-4 mx-4 w-full"
@@ -36,7 +38,8 @@ const SideBar = () => {
                 </p>
                 {curr?.data?.lst?.length > 0 ? (
                   <p className="text-sm">
-                    {curr.data.lst.length} item{curr.data.lst.length > 1 && "s"}
+                    {curr.data.lst.length} item
+                    {curr.data.lst.length > 1 && "s"}
                   </p>
                 ) : (
                   <p className="font-bold">No item</p>
