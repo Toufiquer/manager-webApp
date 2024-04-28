@@ -13,6 +13,7 @@ import { RxCross1 } from "react-icons/rx";
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import MutationForm from "./mutation-form";
+import DeleteUi from "./delete-ui";
 
 const Outlet = () => {
   const currentItem = useGlobalStore((store) => store.currentItem);
@@ -119,7 +120,7 @@ const Outlet = () => {
       </div>
     );
   }
-  if (currentItem !== "" && mutationData.type === "update") {
+  if (mutationData.type === "update") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
         <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
@@ -132,7 +133,7 @@ const Outlet = () => {
       </div>
     );
   }
-  if (currentItem !== "" && mutationData.type === "add") {
+  if (mutationData.type === "add") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
         <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
@@ -145,18 +146,8 @@ const Outlet = () => {
       </div>
     );
   }
-  if (currentItem !== "" && mutationData.type === "delete") {
-    renderUI = (
-      <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
-        <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
-          <div className="text-2xl uppercase">Delete</div>
-          <div className="cursor-pointer" onClick={() => setMutationData("")}>
-            <RxCross1 />
-          </div>
-        </div>
-        <MutationForm />
-      </div>
-    );
+  if (mutationData.type === "delete") {
+    renderUI = <DeleteUi />;
   }
   return <main>{renderUI}</main>;
 };
