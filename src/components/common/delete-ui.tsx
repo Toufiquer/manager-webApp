@@ -13,22 +13,28 @@ const DeleteUi = () => {
   const apiData = useGlobalStore((store) => store.apiData);
   const setApiData = useGlobalStore((store) => store.setApiData);
   const setMutationData = useGlobalStore((store) => store.setMutationData);
+  const currentItem = useGlobalStore((store) => store.currentItem);
+  const setCurrentItem = useGlobalStore((store) => store.setCurrentItem);
   const mutationData = useGlobalStore((store) => store.mutationData);
   const confirmDelete = () => {
     let result = [];
+    let noLeft = false;
     if (mutationData.item) {
       result = apiData.map((curr) => {
         let i = { ...curr };
         i.data.lst = i.data.lst.filter(
           (item) => item.item !== mutationData.item
         );
+        if (i.data.lst.length === 0) noLeft = true;
         return i;
       });
     } else {
+      noLeft = true;
       result = apiData.filter((curr) => curr.name !== mutationData.name);
     }
     setApiData(result);
     setMutationData("");
+    noLeft && setCurrentItem("");
   };
   return (
     <main className="w-full h-full flex flex-col">
