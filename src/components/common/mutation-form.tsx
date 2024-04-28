@@ -1,5 +1,3 @@
-import { ScrollArea } from "../ui/scroll-area";
-
 /*
 |-----------------------------------------
 | setting up MutationForm for the App
@@ -7,42 +5,101 @@ import { ScrollArea } from "../ui/scroll-area";
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
 */
+import { ScrollArea } from "../ui/scroll-area";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+export const zodItemSchema = z.object({
+  item: z
+    .string({
+      invalid_type_error: "Item must be a string",
+      required_error: "Item is required",
+    })
+    .min(3, "Minimum 3 characters")
+    .max(20, "Maximum 20 characters")
+    .trim(),
+
+  price: z
+    .string()
+    .refine((value) => !isNaN(parseFloat(value)), {
+      message: "Please provide a number",
+    })
+    .optional(),
+
+  info: z
+    .string({
+      invalid_type_error: "Info must be a string",
+    })
+    .min(3, "Minimum 3 characters")
+    .max(120, "Maximum 120 characters")
+    .trim()
+    .optional(),
+
+  option: z
+    .object({
+      name: z
+        .string({
+          invalid_type_error: "Name must be a string",
+          required_error: "Name is required",
+        })
+        .min(3, "Minimum 3 characters")
+        .max(20, "Maximum 20 characters")
+        .trim(),
+
+      optionFor: z
+        .string({
+          invalid_type_error: "OptionFor must be a string",
+        })
+        .min(3, "Minimum 3 characters")
+        .max(60, "Maximum 60 characters")
+        .trim()
+        .optional(),
+
+      required: z.boolean().optional(),
+
+      options: z
+        .object({
+          name: z
+            .string({
+              invalid_type_error: "Name must be a string",
+            })
+            .min(3, "Minimum 3 characters")
+            .max(20, "Maximum 20 characters")
+            .trim(),
+          price: z
+            .string()
+            .refine((value) => !isNaN(parseFloat(value)), {
+              message: "Please provide a number",
+            })
+            .optional(),
+        })
+        .array()
+        .optional(),
+    })
+    .array()
+    .optional(),
+});
+type newItemFormSchema = z.infer<typeof zodItemSchema>;
+
 const MutationForm = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<newItemFormSchema>({ resolver: zodResolver(zodItemSchema) });
+  const onSubmit = handleSubmit((data) => console.log(data));
   let renderUIData = (
     <ScrollArea className="h-[92vh] w-full">
       <div className="min-h-[92vh] h-full w-full flex items-start justify-start pt-4 flex-col">
-        <div className="cursor-pointer flex w-[96%] flex-row justify-between m-2 border border-slate-400 px-2 py-1 rounded-lg pl-1">
-          <div className="flex flex-row gap-4 mx-4 w-full">
-            <div>
-              <p className={`text-xl text-slate-700 font-semibold`}>
-                The item name
-                <span className="text-sm text-slate-900 font-semibold">
-                  &#163; 23
-                </span>
-              </p>
-              <p className={`text-sm text-slate-600`}>
-                the info Lorem ipsum dolor sit amet consectetur, adipisicing
-                elit. Ut suscipit at maxime modi officia, excepturi minus magnam
-                vitae error, natus ad. Ad assumenda dolorem vitae voluptas quas
-                quidem ea quia.
-              </p>
-              {/* {curr?.option?.length > 0 && (
-                <p className="text-sm">
-                  {curr.option?.length} item
-                  {curr.option?.length > 1 && "s"}
-                </p>
-              )} */}
-            </div>
-          </div>
-          {/* <div className="flex flex-row items-center justify-between gap-4 pr-2 max-w-[90px]">
-            <div onClick={() => handleSetMutationData(curr.item)}>
-              <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
-            </div>
-            <div onClick={() => handleSetMutationData(curr.item)}>
-              <FaTrash className="text-red-300 hover:text-red-400 cursor-pointer h-4 w-4" />
-            </div>
-          </div>  */}
-        </div>
+        <form onSubmit={onSubmit}>
+          <input {...register("info")} placeholder="Info" />
+          {errors?.info && <p>{errors.info.message}</p>}
+
+          <input {...register("item")} placeholder="Item" />
+
+          <input type="submit" />
+        </form>
       </div>
       <div className="mt-12" />
     </ScrollArea>
