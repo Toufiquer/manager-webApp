@@ -19,6 +19,6 @@ interface useGlobalStoreType {
 export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   isRestaurant: true,
   setIsRestaurant: (payload) => set(() => ({ isRestaurant: payload })),
-  apiData: {},
+  apiData: [],
   setApiData: (payload) => set(() => ({ apiData: payload })),
 }));
