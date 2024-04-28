@@ -8,7 +8,6 @@
 
 "use client";
 
-import Image from "next/image";
 import { useEffect } from "react";
 
 import {
@@ -18,7 +17,7 @@ import {
 } from "@/components/ui/resizable";
 import SideBar from "@/components/common/side-bar";
 import { useGlobalStore } from "@/lib/global-store";
-import Profile from "@/components/common/profile";
+import Header from "@/components/common/header";
 
 const Page = () => {
   const apiData = useGlobalStore((store) => store.apiData);
@@ -56,24 +55,7 @@ const Page = () => {
   }, [apiData]);
   return (
     <main>
-      <div className="border w-full h-[8vh]">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center justify-start w-[70vw]">
-            <div className="border px-4 py-1">
-              <Image
-                width={40}
-                height={40}
-                alt="Logo"
-                src="/profile.webp"
-              ></Image>
-            </div>
-            <p className="text-bold text-2xl text-start">Meal Night</p>
-          </div>
-          <div className="flex items-center justify-end w-[30vw]">
-            <Profile />
-          </div>
-        </div>
-      </div>
+      <Header />
       <ResizablePanelGroup direction="horizontal" className="min-h-[92vh]">
         <ResizablePanel defaultSize={30}>
           <SideBar />
