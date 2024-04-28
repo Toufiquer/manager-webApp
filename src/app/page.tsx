@@ -42,7 +42,7 @@ const Page = () => {
             setApiData(result);
           });
       };
-      runFetch();
+     apiData.length === 0 && runFetch();
       // result = true;
     } catch (err) {
       console.log("Fetch error: ", err);
