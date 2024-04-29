@@ -100,7 +100,10 @@ const MutationForm = () => {
     formState: { errors },
   } = useForm<newItemFormSchema>({ resolver: zodResolver(zodItemSchema) });
 
+  const apiData = useGlobalStore((store) => store.apiData);
+  const setApiData = useGlobalStore((store) => store.setApiData);
   const mutationData = useGlobalStore((store) => store.mutationData);
+  const setMutationData = useGlobalStore((store) => store.setMutationData);
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "option",
@@ -278,7 +281,35 @@ const MutationForm = () => {
         mutationData.option.map((i, idx) => update(idx, i));
     }
   }, []);
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => {
+    if (mutationData.type === "update") {
+      let result = [];
+      result = apiData.map((curr) => {
+        let i = { ...curr };
+        i.data.lst = i.data.lst.map((item) => {
+          let innerItem = { ...item };
+          if (innerItem.item === mutationData.item) {
+            innerItem = data;
+          }
+          return innerItem;
+        });
+        return i;
+      });
+      setApiData(result);
+      setMutationData("");
+    } else {
+      let result = [];
+
+      result = apiData.map((curr) => {
+        let i = { ...curr };
+        i.data.lst.push(data);
+        return i;
+      });
+
+      setApiData(result);
+      setMutationData("");
+    }
+  });
   let renderUIData = (
     <ScrollArea className="h-[92vh] w-full bg-blue-50">
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center pt-4 flex-col">
