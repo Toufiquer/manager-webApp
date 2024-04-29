@@ -29,7 +29,9 @@ const SideBar = () => {
               className=" flex w-[96%] flex-row justify-between m-2 border border-slate-400 px-2 py-1 rounded-lg pl-1"
             >
               <div
-                onClick={() => setCurrentItem(curr.name)}
+                onClick={() => {
+                  setCurrentItem(curr.name), setMutationData("");
+                }}
                 className="flex flex-row gap-4 mx-4 w-full cursor-pointer"
               >
                 <div>
