@@ -12,6 +12,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FiPlus } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
 import { Switch } from "@/components/ui/switch";
+import { useEffect } from "react";
+import { useGlobalStore } from "@/lib/global-store";
 
 const BorderStyle =
   "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800";
@@ -23,7 +25,7 @@ export const zodItemSchema = z.object({
       required_error: "Item is required",
     })
     .min(3, "Minimum 3 characters")
-    .max(20, "Maximum 20 characters")
+    .max(40, "Maximum 40 characters")
     .trim(),
 
   price: z
@@ -50,7 +52,7 @@ export const zodItemSchema = z.object({
           required_error: "Name is required",
         })
         .min(3, "Minimum 3 characters")
-        .max(20, "Maximum 20 characters")
+        .max(40, "Maximum 40 characters")
         .trim(),
 
       optionFor: z
@@ -71,7 +73,7 @@ export const zodItemSchema = z.object({
               invalid_type_error: "Name must be a string",
             })
             .min(3, "Minimum 3 characters")
-            .max(20, "Maximum 20 characters")
+            .max(40, "Maximum 40 characters")
             .trim(),
           price: z
             .string()
@@ -90,11 +92,15 @@ type newItemFormSchema = z.infer<typeof zodItemSchema>;
 
 const MutationForm = () => {
   const {
+    reset,
     control,
     register,
+    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<newItemFormSchema>({ resolver: zodResolver(zodItemSchema) });
+
+  const mutationData = useGlobalStore((store) => store.mutationData);
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "option",
@@ -164,7 +170,7 @@ const MutationForm = () => {
           <Controller
             control={control}
             render={({ field: { onChange, value, ref } }) => (
-              <Switch onValueChange={onChange} value={value} />
+              <Switch onChange={onChange} value={value} />
             )}
             name={`option.${index}.required`}
             defaultValue={false}
@@ -262,6 +268,16 @@ const MutationForm = () => {
       </div>
     );
   };
+  useEffect(() => {
+    reset();
+    if (mutationData.type === "update") {
+      setValue("item", mutationData?.item || "");
+      setValue("price", mutationData?.price || "");
+      setValue("info", mutationData?.info || "");
+      mutationData?.option &&
+        mutationData.option.map((i, idx) => update(idx, i));
+    }
+  }, []);
   const onSubmit = handleSubmit((data) => console.log(data));
   let renderUIData = (
     <ScrollArea className="h-[92vh] w-full bg-blue-50">
