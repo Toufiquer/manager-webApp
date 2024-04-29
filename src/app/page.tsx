@@ -29,7 +29,7 @@ const Page = () => {
     queryKey: ["fetchApi"],
     queryFn: () =>
       axios
-        .get("https://api.mealnight.com/checkout/menu/top_g/n8")
+        .get(`${process.env.NEXT_PUBLIC_APP_URL}` as string)
         .then((res) => res.data),
   });
   useEffect(() => {
