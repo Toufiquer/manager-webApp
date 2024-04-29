@@ -172,11 +172,11 @@ const MutationForm = () => {
           <p className="text-gray-900">Required</p>
           <Controller
             control={control}
-            render={({ field: { onChange, value, ref } }) => (
-              <Switch onChange={onChange} value={value} />
+            render={({ field: { onChange, value } }) => (
+              <Switch checked={value} onCheckedChange={onChange} />
             )}
             name={`option.${index}.required`}
-            defaultValue={false}
+            defaultValue={true}
           />
         </div>
 
