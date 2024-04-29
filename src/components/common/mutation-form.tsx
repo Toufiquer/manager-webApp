@@ -5,15 +5,16 @@
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
 */
-import { ScrollArea } from "../ui/scroll-area";
-import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import { useEffect } from "react";
 import { FiPlus } from "react-icons/fi";
 import { RxCross2 } from "react-icons/rx";
+import { useForm, useFieldArray, Controller } from "react-hook-form";
+
 import { Switch } from "@/components/ui/switch";
-import { useEffect } from "react";
 import { useGlobalStore } from "@/lib/global-store";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const BorderStyle =
   "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800";

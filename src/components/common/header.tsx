@@ -6,6 +6,7 @@
 |-----------------------------------------
 */
 import Image from "next/image";
+
 import Profile from "./profile";
 
 const Header = () => {

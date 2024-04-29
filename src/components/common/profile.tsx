@@ -5,7 +5,6 @@
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
 */
-import { Button } from "@/components/ui/button";
 import {
   Dialog,
   DialogContent,
@@ -17,6 +16,7 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { Button } from "@/components/ui/button";
 
 const Profile = () => {
   return (

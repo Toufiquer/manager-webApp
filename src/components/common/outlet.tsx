@@ -6,12 +6,13 @@
 |-----------------------------------------
 */
 
+import { RxCross1 } from "react-icons/rx";
 import { FaTrash } from "react-icons/fa6";
 import { FaRegEdit } from "react-icons/fa";
-import { RxCross1 } from "react-icons/rx";
 
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
 import MutationForm from "./mutation-form";
 import DeleteUi from "./delete-ui";
 

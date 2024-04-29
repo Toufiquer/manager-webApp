@@ -13,7 +13,6 @@ import { IoAddSharp } from "react-icons/io5";
 
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
 
 const SideBar = () => {
   const apiData = useGlobalStore((store) => store.apiData);
@@ -22,6 +21,7 @@ const SideBar = () => {
   return (
     <main>
       <ScrollArea className="h-screen w-auto rounded-md border pr-3">
+        <p className={`text-xl font-bold uppercase text-slate-800 p-4`}>Menu</p>
         {Array.isArray(apiData) &&
           apiData?.map((curr: any, idx: number) => (
             <div
@@ -68,14 +68,6 @@ const SideBar = () => {
               </div>
             </div>
           ))}
-
-        <div className="pb-4" />
-        <Button
-          variant="outline"
-          className="flex flex-row gap-4 mx-4 my-2 bg-blue-200 hover:bg-blue-300  px-2 py-1 rounded-lg w-[90%] "
-        >
-          <p className="uppercase text-blue-600">Add</p>
-        </Button>
         <div className="pb-12" />
       </ScrollArea>
     </main>

@@ -5,9 +5,10 @@
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
 */
-import { useGlobalStore } from "@/lib/global-store";
 import { RxCross1 } from "react-icons/rx";
+
 import { Button } from "@/components/ui/button";
+import { useGlobalStore } from "@/lib/global-store";
 
 const DeleteUi = () => {
   const apiData = useGlobalStore((store) => store.apiData);
