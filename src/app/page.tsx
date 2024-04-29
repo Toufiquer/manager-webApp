@@ -8,7 +8,8 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
+import axios from "axios";
+import { useEffect } from "react";
 
 import {
   ResizableHandle,
@@ -19,42 +20,38 @@ import SideBar from "@/components/common/side-bar";
 import { useGlobalStore } from "@/lib/global-store";
 import Header from "@/components/common/header";
 import Outlet from "@/components/common/outlet";
+import { useQuery } from "@tanstack/react-query";
+import Loading from "./loading";
 
 const Page = () => {
-  const apiData = useGlobalStore((store) => store.apiData);
   const setApiData = useGlobalStore((store) => store.setApiData);
-  const fetchApi = (data: string) => {
-    try {
-      const runFetch = async () => {
-        fetch(data)
-          .then((res) => res.json())
-          .then((data) => {
-            delete data.content?.a;
-            delete data.content?.n;
-            const result = [];
-            for (const m in data.content) {
-              const item = {
-                name: m.split("_").join(" ").split("-").join(" "),
-                data: data.content[m],
-              };
-              result.push(item);
-            }
-            setApiData(result);
-          });
-      };
-     apiData.length === 0 && runFetch();
-      // result = true;
-    } catch (err) {
-      console.log("Fetch error: ", err);
+  const { isPending, error, data, isFetching } = useQuery({
+    queryKey: ["fetchApi"],
+    queryFn: () =>
+      axios
+        .get("https://api.mealnight.com/checkout/menu/top_g/n8")
+        .then((res) => res.data),
+  });
+  useEffect(() => {
+    console.log("home page : ", { isPending, error, data, isFetching });
+    if (data?.content?.a) {
+      delete data.content.a;
+      delete data?.content?.n;
+      const result = [];
+      for (const m in data.content) {
+        const item = {
+          name: m.split("_").join(" ").split("-").join(" "),
+          data: data.content[m],
+        };
+        result.push(item);
+      }
+      console.log("result : ", result);
+      setApiData(result);
     }
-  };
-  useEffect(() => {
-    fetchApi("https://api.mealnight.com/checkout/menu/top_g/n8");
-  }, []);
-  useEffect(() => {
-    // console.log("apiData : ", apiData);
-  }, [apiData]);
-  return (
+  }, [isPending]);
+  return isFetching ? (
+    <Loading />
+  ) : (
     <main>
       <Header />
       <ResizablePanelGroup direction="horizontal" className="min-h-[92vh]">
