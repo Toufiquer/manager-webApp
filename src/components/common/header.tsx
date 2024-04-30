@@ -8,6 +8,7 @@
 import Image from "next/image";
 
 import Profile from "./profile";
+import Link from "next/link";
 
 const Header = () => {
   return (
@@ -25,6 +26,8 @@ const Header = () => {
           <p className="text-bold text-2xl text-start">Meal Night</p>
         </div>
         <div className="flex items-center justify-end w-[30vw]">
+          <Link href="/signUp">Sign Up</Link>
+          <Link href="/signIn">Sign in</Link>
           <Profile />
         </div>
       </div>
