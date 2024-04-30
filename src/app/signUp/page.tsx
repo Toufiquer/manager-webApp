@@ -215,10 +215,10 @@ const Page = () => {
             <div className="w-full flex gap-4 items-center justify-center text-slate-500">
               Already have an account?
               <Link
-                href="/signUp"
+                href="/signIn"
                 className="text-blue-400 cursor-pointer hover:underline font-semibold"
               >
-                Sign Up
+                Sign In
               </Link>
             </div>
           </div>
