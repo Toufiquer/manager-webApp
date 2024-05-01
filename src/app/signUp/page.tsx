@@ -22,7 +22,7 @@ import { FaChevronRight } from "react-icons/fa6";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 const BorderStyle =
-  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:border-slate-500 focus:outline-none";
+  "w-full border-transparent border-b-slate-400 rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:border-slate-500 focus:outline-none";
 
 export const signUPSchema = z.object({
   fullName: z
@@ -93,13 +93,13 @@ const Page = () => {
   });
   return (
     <main className="min-h-screen w-full grid grid-cols-1 md:grid-cols-2 ">
-      <div className="p-4 w-full flex items-center">
+      <div className="p-4 w-full flex items-center justify-center">
         <Image
-          src="/image-with-people.png"
+          src="/sign-up.png"
           width={1440}
           height={1440}
           alt="Logo"
-          className="h-full w-full"
+          className="h-[80%] w-[80%]"
         />
       </div>
       <div className="w-full flex flex-col items-center md:items-start justify-center ">
@@ -110,16 +110,10 @@ const Page = () => {
           <form onSubmit={onSubmit} className="w-full px-4 ">
             <div className="w-full flex flex-col gap-2 ">
               <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="fullName"
-                >
-                  Full Name
-                </label>
                 <input
                   className={BorderStyle}
                   {...register("fullName")}
-                  placeholder="name"
+                  placeholder="Full Name"
                 />
                 {errors?.fullName && (
                   <p className="text-sm text-rose-400">
@@ -128,16 +122,10 @@ const Page = () => {
                 )}
               </div>
               <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="email"
-                >
-                  Email
-                </label>
                 <input
                   className={BorderStyle}
                   {...register("email")}
-                  placeholder="example@gmail.com"
+                  placeholder="Email"
                 />
                 {errors?.email && (
                   <p className="text-sm text-rose-400">
@@ -146,20 +134,14 @@ const Page = () => {
                 )}
               </div>
               <div className="flex flex-col mt-4 relative">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="password"
-                >
-                  Password
-                </label>
                 <input
                   type={passType.password}
                   className={BorderStyle}
                   {...register("password")}
-                  placeholder="******"
+                  placeholder="password"
                 />
                 <div
-                  className="absolute top-[30px] right-2 cursor-pointer"
+                  className="absolute top-[10px] right-2 cursor-pointer"
                   onClick={() => handlePassType("password")}
                 >
                   {passType.password === "password" ? (
@@ -175,20 +157,14 @@ const Page = () => {
                 )}
               </div>
               <div className="flex flex-col mt-4 relative">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="confirmPassword"
-                >
-                  Confirm Password
-                </label>
                 <input
                   className={BorderStyle}
                   {...register("confirmPassword")}
-                  placeholder="******"
+                  placeholder="Confirm Password"
                   type={passType.confirmPass}
                 />
                 <div
-                  className="absolute top-[30px] right-2 cursor-pointer"
+                  className="absolute top-[10px] right-2 cursor-pointer"
                   onClick={() => handlePassType("confirmPass")}
                 >
                   {passType.confirmPass === "password" ? (

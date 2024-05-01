@@ -74,13 +74,13 @@ const Page = () => {
   });
   return (
     <main className="min-h-screen w-full grid grid-cols-1 md:grid-cols-2 ">
-      <div className="p-4 w-full flex items-center">
+      <div className="p-4 w-full flex items-center justify-center">
         <Image
-          src="/image-with-people.png"
+          src="/sign-in.png"
           width={1440}
           height={1440}
           alt="Logo"
-          className="h-full w-full"
+          className="h-[80%] w-[80%]"
         />
       </div>
       <div className="w-full flex flex-col items-center md:items-start justify-center ">
