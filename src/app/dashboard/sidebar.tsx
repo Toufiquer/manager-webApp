@@ -18,7 +18,7 @@ import { HiOutlineInboxArrowDown } from "react-icons/hi2";
 
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-
+import { useGlobalStore } from "@/lib/global-store";
 type sidebarType = {
   id: number;
   name: string;
@@ -26,7 +26,7 @@ type sidebarType = {
   outlet: string;
   message?: number;
 };
-const sidebarData: sidebarType[] = [
+export const sidebarData: sidebarType[] = [
   {
     id: 1,
     name: "Home",
@@ -55,9 +55,9 @@ const sidebarData: sidebarType[] = [
   },
   {
     id: 5,
-    name: "People",
+    name: "Peoples",
     logo: <IoPeopleOutline className="w-6 h-6" />,
-    outlet: "people",
+    outlet: "peoples",
   },
   {
     id: 5,
@@ -67,65 +67,89 @@ const sidebarData: sidebarType[] = [
   },
 ];
 
-const invitePeopleDataImageCss =
-  "cursor-pointer hover:border-slate-500 border-transparent border rounded-full";
-const invitePeopleData = [
-  {
-    id: 1,
-    name: "John",
-    image: (
-      <div className={invitePeopleDataImageCss}>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
-    ),
-  },
-  {
-    id: 2,
-    name: "Fahd",
-    image: (
-      <div className={invitePeopleDataImageCss}>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
-    ),
-  },
-  {
-    id: 1,
-    name: "Raul",
-    image: (
-      <div className={invitePeopleDataImageCss}>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
-    ),
-  },
-  {
-    id: 1,
-    name: "Sbin",
-    image: (
-      <div className={invitePeopleDataImageCss}>
-        <Avatar>
-          <AvatarImage src="https://github.com/shadcn.png" />
-          <AvatarFallback>CN</AvatarFallback>
-        </Avatar>
-      </div>
-    ),
-  },
-];
-const handleSidebarOutlet = (outletName: string) => {
-  console.log(outletName);
-};
-const commonCss = "p-4 flex items-start justify-start gap-4 flex-col w-full";
-const buttonStyle =
-  "flex border px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
 const Sidebar = () => {
+  const dashboardData = useGlobalStore((store) => store.dashboardData);
+  const setDashboardData = useGlobalStore((store) => store.setDashboardData);
+
+  const invitePeopleDataImageCss =
+    "cursor-pointer hover:border-slate-500 border-transparent border rounded-full";
+  const invitePeopleData = [
+    {
+      id: 1,
+      name: "John",
+      image: (
+        <div className={invitePeopleDataImageCss}>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+      ),
+    },
+    {
+      id: 2,
+      name: "Fahd",
+      image: (
+        <div className={invitePeopleDataImageCss}>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+      ),
+    },
+    {
+      id: 1,
+      name: "Raul",
+      image: (
+        <div className={invitePeopleDataImageCss}>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+      ),
+    },
+    {
+      id: 1,
+      name: "Sbin",
+      image: (
+        <div className={invitePeopleDataImageCss}>
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
+      ),
+    },
+  ];
+  const setSidebarOutlet = (outletName: string) => {
+    const result = { ...dashboardData, currentOutletName: outletName };
+    setDashboardData({ ...result });
+    console.log(outletName);
+  };
+  const handleSidebarOutlet = (outletName: string) => {
+    setSidebarOutlet(outletName);
+  };
+  const handlePeopleDetails = (people: string) => {
+    const result = {
+      ...dashboardData,
+      currentOutletName: "people-details",
+      peopleData: { name: people },
+    };
+    setDashboardData({ ...result });
+  };
+  const handleAddPeople = () => {
+    const result = {
+      ...dashboardData,
+      currentOutletName: "invite-people",
+      peopleData: {},
+    };
+    setDashboardData({ ...result });
+  };
+  const commonCss = "p-4 flex items-start justify-start gap-4 flex-col w-full";
+  const buttonStyle =
+    "flex border px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
   return (
     <ScrollArea className="h-screen w-auto">
       <main className={commonCss}>
@@ -150,20 +174,25 @@ const Sidebar = () => {
           <h2 className="text-slate-400">Invite People</h2>
           <div className="flex items-center justify-center gap-0">
             {invitePeopleData.map((curr) => (
-              <div className="ml-[-8px]">{curr.image}</div>
+              <div
+                onClick={() => handlePeopleDetails(curr.name)}
+                className="ml-[-8px]"
+              >
+                {curr.image}
+              </div>
             ))}
-            <div className="cursor-pointer">
+            <div className="cursor-pointer" onClick={handleAddPeople}>
               <CiCirclePlus className="h-8 w-8 ml-4" />
             </div>
           </div>
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
           <h2 className="text-slate-400">Projects</h2>
-          <div className={buttonStyle + ""}>
+          <div className={buttonStyle + ""} onClick={()=>setSidebarOutlet("onboarding")}>
             <div className="w-3 h-3 bg-green-400 rounded-full" />
             <div className="">Onboarding</div>
           </div>
-          <div className={buttonStyle + " "}>
+          <div className={buttonStyle + " "} onClick={()=>setSidebarOutlet('off-boarding')}>
             <div className="w-3 h-3 bg-orange-300 rounded-full" /> Off boarding
           </div>
         </div>

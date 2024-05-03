@@ -19,6 +19,8 @@ interface useGlobalStoreType {
   setApiData: (payload: any) => void;
   mutationData: any;
   setMutationData: (payload: any) => void;
+  dashboardData: any;
+  setDashboardData: (payload: any) => void;
 }
 export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   isRestaurant: true,
@@ -29,4 +31,6 @@ export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   setApiData: (payload) => set(() => ({ apiData: payload })),
   mutationData: {},
   setMutationData: (payload) => set(() => ({ mutationData: payload })),
+  dashboardData: {},
+  setDashboardData: (payload) => set(() => ({ dashboardData: payload })),
 }));
