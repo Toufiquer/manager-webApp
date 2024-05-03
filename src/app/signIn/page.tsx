@@ -110,7 +110,7 @@ const Page = () => {
                   placeholder="Password"
                 />
                 <div
-                  className="absolute top-[30px] right-2 cursor-pointer"
+                  className="absolute top-[15px] right-2 cursor-pointer"
                   onClick={() => handlePassType("password")}
                 >
                   {passType.password === "password" ? (
