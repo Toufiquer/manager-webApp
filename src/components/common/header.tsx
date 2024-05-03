@@ -26,8 +26,15 @@ const Header = () => {
           <p className="text-bold text-2xl text-start">Meal Night</p>
         </div>
         <div className="flex items-center justify-end w-[30vw]">
-          <Link href="/signUp">Sign Up</Link>
-          <Link href="/signIn">Sign in</Link>
+          <Link className="px-2 hover:underline" href="/onboarding">
+            OnBoarding
+          </Link>
+          <Link className="px-2 hover:underline" href="/signUp">
+            Sign Up
+          </Link>
+          <Link className="px-2 hover:underline" href="/signIn">
+            Sign in
+          </Link>
           <Profile />
         </div>
       </div>
