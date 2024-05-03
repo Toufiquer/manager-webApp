@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/resizable";
 import Testing from "./testing";
 import HeaderDashboard from "./header-dashboard";
+import Sidebar from "./sidebar";
 
 const Page = () => {
   return (
@@ -19,7 +20,9 @@ const Page = () => {
       <HeaderDashboard />
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel minSize={10}>
-          <div className="min-h-screen"></div>
+          <div className="min-h-screen">
+            <Sidebar />
+          </div>
         </ResizablePanel>
         <ResizableHandle />
         <ResizablePanel>
