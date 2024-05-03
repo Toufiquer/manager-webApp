@@ -16,9 +16,9 @@ import { IoPeopleOutline } from "react-icons/io5";
 import { IoSettingsOutline } from "react-icons/io5";
 import { HiOutlineInboxArrowDown } from "react-icons/hi2";
 
+import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { useGlobalStore } from "@/lib/global-store";
 type sidebarType = {
   id: number;
   name: string;
@@ -147,9 +147,9 @@ const Sidebar = () => {
     };
     setDashboardData({ ...result });
   };
-  const commonCss = "p-4 flex items-start justify-start gap-4 flex-col w-full";
+  const commonCss = "p-4 flex items-start justify-start gap-1 flex-col w-full";
   const buttonStyle =
-    "flex border px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
+    "flex border w-full px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
   return (
     <ScrollArea className="h-screen w-auto">
       <main className={commonCss}>
@@ -158,7 +158,10 @@ const Sidebar = () => {
             <div
               key={curr.id}
               onClick={() => handleSidebarOutlet(curr.outlet)}
-              className="py-1 flex items-center justify-start gap-2 cursor-pointer hover:bg-slate-200 px-2 rounded-full w-full duration-200"
+              className={`py-1 flex items-center justify-start gap-2 cursor-pointer hover:bg-slate-300 px-2 rounded-full w-full duration-200  ${
+                dashboardData.currentOutletName === curr.outlet &&
+                " bg-slate-300"
+              }`}
             >
               {curr.logo}
               {curr.name}
@@ -188,11 +191,23 @@ const Sidebar = () => {
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
           <h2 className="text-slate-400">Projects</h2>
-          <div className={buttonStyle + ""} onClick={()=>setSidebarOutlet("onboarding")}>
+          <div
+            className={`${buttonStyle} ${
+              dashboardData?.currentOutletName === "onboarding" &&
+              " bg-slate-300"
+            }`}
+            onClick={() => setSidebarOutlet("onboarding")}
+          >
             <div className="w-3 h-3 bg-green-400 rounded-full" />
             <div className="">Onboarding</div>
           </div>
-          <div className={buttonStyle + " "} onClick={()=>setSidebarOutlet('off-boarding')}>
+          <div
+            className={`${buttonStyle} ${
+              dashboardData?.currentOutletName === "off-boarding" &&
+              " bg-slate-300"
+            }`}
+            onClick={() => setSidebarOutlet("off-boarding")}
+          >
             <div className="w-3 h-3 bg-orange-300 rounded-full" /> Off boarding
           </div>
         </div>

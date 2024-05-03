@@ -19,7 +19,7 @@ const Page = () => {
     <div className="flex flex-col h-screen bg-gray-100">
       <HeaderDashboard />
       <ResizablePanelGroup direction="horizontal">
-        <ResizablePanel minSize={10}>
+        <ResizablePanel minSize={10} defaultSize={15}>
           <div className="min-h-screen">
             <Sidebar />
           </div>
