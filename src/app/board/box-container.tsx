@@ -25,7 +25,11 @@ const BoxContainer = ({
   const boardTask = useGlobalStore((store) => store.boardTask);
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
   useEffect(() => {
-    const result = { ...boardTask, task: [1, 2, 3] };
+    const result = {
+      ...boardTask,
+      task: [{ id: "1" }, { id: "2" }, { id: "3" }],
+    };
+
     setBoardTask(result);
   }, []);
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
@@ -39,24 +43,42 @@ const BoxContainer = ({
     }),
   }));
 
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("");
+  console.log("outside fn : boardTask", boardTask);
   const addDivToBoard = (item: any) => {
     const result = { ...boardTask };
+    console.log("inside fn : boardTask", boardTask);
+    console.log("inside function addDivToBoard -> result ", result);
+
+    // setBoardTask(result);
+  };
+  const addDivToBoard22 = (item: any) => {
+    console.log("");
+    console.log("");
+    console.log("");
+    console.log("upcoming boardTask: ", item.boardTask);
+    const result = { ...item.boardTask };
     if (title.toLocaleLowerCase() === "task") {
-      // result.task = [...boardTask.task, item.id];
+      result.task = [...item.boardTask.task, { id: item.id }];
     } else if (title.toLocaleLowerCase() === "inprogress") {
-      // result.inprogress = [...boardTask.inprogress, item.id];
+      result.inprogress = [...item.boardTask.inprogress, { id: item.id }];
     } else if (title.toLocaleLowerCase() === "done") {
-      // result.done = [...boardTask.done, item.id];
+      result.done = [...item.boardTask.done, { id: item.id }];
     }
 
     if (item.parentDiv === "task") {
-      const othersArr = boardTask.task.filter((i) => i !== item.id);
+      result.task = item.boardTask.task.filter((i) => i.id !== item.id);
+    } else if (item.parentDiv === "inprogress") {
+      result.inprogress = item.boardTask.inprogress.filter(
+        (i) => i.id !== item.id
+      );
+    } else if (item.parentDiv === "done") {
+      result.done = item.boardTask.done.filter((i) => i.id !== item.id);
     }
-    // else if (item.parentDiv === "inprogress") {
-    //   result.inprogress = othersArr(result.inprogress, item.id);
-    // } else if (item.parentDiv === "done") {
-    //   result.done = othersArr(result.done, item.id);
-    // }
+    console.log("final result: ", result);
     setBoardTask(result);
   };
   return (
@@ -75,17 +97,29 @@ const BoxContainer = ({
           {title.toLocaleLowerCase() === "task" &&
             boardTask?.task.length > 0 &&
             boardTask.task?.map((curr, idx) => (
-              <SingleBox curr={curr} key={curr + idx} parentDiv="task" />
+              <SingleBox
+                curr={curr}
+                key={"" + curr.id + idx}
+                parentDiv="task"
+              />
             ))}
           {title.toLocaleLowerCase() === "inprogress" &&
             boardTask?.inprogress.length > 0 &&
             boardTask.inprogress?.map((curr, idx) => (
-              <SingleBox curr={curr} key={curr + idx} parentDiv="inprogress" />
+              <SingleBox
+                curr={curr}
+                key={"" + curr.id + idx}
+                parentDiv="inprogress"
+              />
             ))}
           {title.toLocaleLowerCase() === "done" &&
             boardTask?.done.length > 0 &&
             boardTask.done?.map((curr, idx) => (
-              <SingleBox curr={curr} key={curr + idx} parentDiv="done" />
+              <SingleBox
+                curr={curr}
+                key={"" + curr.id + idx}
+                parentDiv="done"
+              />
             ))}
         </div>
       </div>
