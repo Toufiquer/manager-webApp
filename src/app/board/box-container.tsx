@@ -52,7 +52,17 @@ const BoxContainer = ({
     const result = { ...boardTask };
     console.log("inside fn : boardTask", boardTask);
     console.log("inside function addDivToBoard -> result ", result);
-
+    if (title.toLocaleLowerCase() === "task") {
+      result.task = [...item.boardTask.task, { id: item.id }];
+    } else if (title.toLocaleLowerCase() === "inprogress") {
+      result.inprogress = [...item.boardTask.inprogress, { id: item.id }];
+    } else if (title.toLocaleLowerCase() === "done") {
+      result.done = [...item.boardTask.done, { id: item.id }];
+    }
+    console.log("");
+    console.log("");
+    console.log("");
+    console.log("final result : ", result);
     // setBoardTask(result);
   };
   const addDivToBoard22 = (item: any) => {
