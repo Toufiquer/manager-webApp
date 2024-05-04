@@ -21,6 +21,8 @@ interface useGlobalStoreType {
   setMutationData: (payload: any) => void;
   dashboardData: any;
   setDashboardData: (payload: any) => void;
+  boardTask: { task: any[]; inprogress: any[]; done: any[] };
+  setBoardTask: (payload: any) => void;
 }
 export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   isRestaurant: true,
@@ -33,4 +35,6 @@ export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   setMutationData: (payload) => set(() => ({ mutationData: payload })),
   dashboardData: {},
   setDashboardData: (payload) => set(() => ({ dashboardData: payload })),
+  boardTask: { task: [], inprogress: [], done: [] },
+  setBoardTask: (payload) => set(() => ({ boardTask: payload })),
 }));
