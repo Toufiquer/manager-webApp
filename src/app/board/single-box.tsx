@@ -6,13 +6,12 @@
 |-----------------------------------------
 */
 
-import { useGlobalStore } from "@/lib/global-store";
 import { useDrag } from "react-dnd";
+
 const SingleBox = ({ curr, parentDiv }: { parentDiv: string; curr: any }) => {
-  const boardTask = useGlobalStore((store) => store.boardTask);
   const [{ isDragging }, drag, dragPreview] = useDrag(() => ({
     type: "BOX",
-    item: { id: curr.id, parentDiv, boardTask },
+    item: { id: curr.id, data: curr, parentDiv },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),

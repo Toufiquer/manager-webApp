@@ -8,13 +8,15 @@
 
 "use client";
 
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useDrop } from "react-dnd";
 import { BsPlusLg } from "react-icons/bs";
 import { HiDotsHorizontal } from "react-icons/hi";
-import SingleBox from "./single-box";
-import { useDrop } from "react-dnd";
-import { useGlobalStore } from "@/lib/global-store";
 import { UseFormSetValue } from "react-hook-form";
+import { Dispatch, SetStateAction, useEffect } from "react";
+
+import { useGlobalStore } from "@/lib/global-store";
+
+import SingleBox from "./single-box";
 
 const BoxContainer = ({
   title,
@@ -56,43 +58,22 @@ const BoxContainer = ({
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     // The type (or types) to accept - strings or symbols
     accept: "BOX",
-    drop: (item) => addDivToBoard(item),
+    drop: (item) => updateBoard(item),
     // Props to collect
     collect: (monitor) => ({
       isOver: monitor.isOver(),
       canDrop: monitor.canDrop(),
     }),
   }));
-
-  // console.log("");
-  // console.log("");
-  // console.log("");
-  // console.log("outside fn : boardTask", boardTask);
-  const addDivToBoard = (item: any) => {
-    // console.log("");
-    // console.log("");
-    // console.log("");
-    // console.log("upcoming boardTask: ", item.boardTask);
-    const result = { ...item.boardTask };
-    if (title.toLocaleLowerCase() === "task") {
-      result.task = [...item.boardTask.task, { id: item.id }];
-    } else if (title.toLocaleLowerCase() === "inprogress") {
-      result.inprogress = [...item.boardTask.inprogress, { id: item.id }];
-    } else if (title.toLocaleLowerCase() === "done") {
-      result.done = [...item.boardTask.done, { id: item.id }];
-    }
-
-    if (item.parentDiv === "task") {
-      result.task = item.boardTask.task.filter((i) => i.id !== item.id);
-    } else if (item.parentDiv === "inprogress") {
-      result.inprogress = item.boardTask.inprogress.filter(
-        (i) => i.id !== item.id
-      );
-    } else if (item.parentDiv === "done") {
-      result.done = item.boardTask.done.filter((i) => i.id !== item.id);
-    }
-    console.log("final result: ", result);
-    setBoardTask(result);
+  const updateBoard = (item: any) => {
+    const result = boardTask.data.map((curr) => {
+      if (curr.id === item.id) {
+        curr.status = title;
+      }
+      return curr;
+    });
+    // console.log("box container result : ", result);
+    // setBoardTask(result);
   };
 
   return (
@@ -161,7 +142,7 @@ const BoxContainer = ({
                 <SingleBox
                   curr={curr}
                   key={"" + curr.id + idx}
-                  parentDiv="task"
+                  parentDiv={title}
                 />
               ))}
         </div>

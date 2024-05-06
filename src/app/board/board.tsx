@@ -5,17 +5,18 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-import { CiFilter } from "react-icons/ci";
-import { BiSort } from "react-icons/bi";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import BoxContainer from "./box-container";
-import { useGlobalStore } from "@/lib/global-store";
-import { useState } from "react";
-
-import { RxCross1 } from "react-icons/rx";
 import { z } from "zod";
+import { useState } from "react";
+import { BiSort } from "react-icons/bi";
+import { CiFilter } from "react-icons/ci";
 import { useForm } from "react-hook-form";
+import { RxCross1 } from "react-icons/rx";
+
+import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { ScrollArea } from "@/components/ui/scroll-area";
+
+import BoxContainer from "./box-container";
 
 export const zodItemSchema = z.object({
   title: z
@@ -49,7 +50,6 @@ const Board = () => {
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
   const {
     reset,
-    control,
     register,
     setValue,
     handleSubmit,
@@ -61,7 +61,6 @@ const Board = () => {
     reset();
   };
   const onSubmit = handleSubmit((data) => {
-    console.log(data);
     const result = { ...boardTask };
     if (addNew.newBoard) {
       // add board if addNew.newBoard is true
@@ -78,15 +77,13 @@ const Board = () => {
         }
       });
     } else if (!addNew.newBoard) {
-      console.log(" add item", data);
+      // add new item under board
       result.data = [
         ...boardTask.data,
-        { ...data, status: addNew.currentBoard || "" },
+        { ...data, status: addNew.currentBoard || "", id: Math.random() + "" },
       ];
     }
-    console.log(" final result : ", result);
     setBoardTask({ ...result });
-    reset();
     handleCancel();
   });
   const BorderStyle =
