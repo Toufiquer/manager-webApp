@@ -42,6 +42,7 @@ const Board = () => {
     newBoard: false,
     isRender: false,
     isUpdate: false,
+    currentBoard: "",
   });
   const boardTask = useGlobalStore((store) => store.boardTask);
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
@@ -57,12 +58,23 @@ const Board = () => {
   const handleCancel = () => setAddNew({ ...addNew, isRender: false });
   const onSubmit = handleSubmit((data) => {
     console.log(data);
-    // add board if addNew.newBoard is true
+    const result = { ...boardTask };
     if (addNew.newBoard) {
-      const result = { ...boardTask };
+      // add board if addNew.newBoard is true
       result.statusLst = [...boardTask.statusLst, data.title];
-      setBoardTask({ ...result });
+    } else if (addNew.isUpdate) {
+      // update board if addNew.isUpdate is true
+      result.statusLst = boardTask.statusLst.map((status) => {
+        if (
+          status.toLocaleLowerCase() === addNew.currentBoard.toLocaleLowerCase()
+        ) {
+          return data.title;
+        } else {
+          return status;
+        }
+      });
     }
+    setBoardTask({ ...result });
     reset();
     handleCancel();
   });

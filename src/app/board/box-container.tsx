@@ -33,6 +33,7 @@ const BoxContainer = ({
       newBoard: boolean;
       isRender: boolean;
       isUpdate: boolean;
+      currentBoard?: string;
     }>
   >;
   setValue: UseFormSetValue<{
@@ -140,6 +141,7 @@ const BoxContainer = ({
                 setValue("title", title);
                 setAddNew({
                   ...addNew,
+                  currentBoard: title,
                   isRender: true,
                   newBoard: false,
                   isUpdate: true,
