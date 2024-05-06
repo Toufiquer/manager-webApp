@@ -49,9 +49,11 @@ const BoxContainer = ({
   console.log("");
   console.log("outside fn : boardTask", boardTask);
   const addDivToBoard = (item: any) => {
-    const result = { ...boardTask };
-    console.log("inside fn : boardTask", boardTask);
-    console.log("inside function addDivToBoard -> result ", result);
+    console.log("");
+    console.log("");
+    console.log("");
+    console.log("upcoming boardTask: ", item.boardTask);
+    const result = { ...item.boardTask };
     if (title.toLocaleLowerCase() === "task") {
       result.task = [...item.boardTask.task, { id: item.id }];
     } else if (title.toLocaleLowerCase() === "inprogress") {
@@ -59,11 +61,18 @@ const BoxContainer = ({
     } else if (title.toLocaleLowerCase() === "done") {
       result.done = [...item.boardTask.done, { id: item.id }];
     }
-    console.log("");
-    console.log("");
-    console.log("");
-    console.log("final result : ", result);
-    // setBoardTask(result);
+
+    if (item.parentDiv === "task") {
+      result.task = item.boardTask.task.filter((i) => i.id !== item.id);
+    } else if (item.parentDiv === "inprogress") {
+      result.inprogress = item.boardTask.inprogress.filter(
+        (i) => i.id !== item.id
+      );
+    } else if (item.parentDiv === "done") {
+      result.done = item.boardTask.done.filter((i) => i.id !== item.id);
+    }
+    console.log("final result: ", result);
+    setBoardTask(result);
   };
   const addDivToBoard22 = (item: any) => {
     console.log("");
