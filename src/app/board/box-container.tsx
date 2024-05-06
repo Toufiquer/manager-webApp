@@ -69,6 +69,7 @@ const BoxContainer = ({
     const result = boardTask.data.map((curr) => {
       if (curr.id === item.id) {
         curr.status = title;
+        curr.lstUpdate = new Date();
       }
       return curr;
     });
@@ -138,6 +139,7 @@ const BoxContainer = ({
                 (curr) =>
                   curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
               )
+              .sort((a, b) => a.lstUpdate - b.lstUpdate)
               .map((curr, idx) => (
                 <SingleBox
                   curr={curr}

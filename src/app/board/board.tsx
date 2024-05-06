@@ -80,7 +80,12 @@ const Board = () => {
       // add new item under board
       result.data = [
         ...boardTask.data,
-        { ...data, status: addNew.currentBoard || "", id: Math.random() + "" },
+        {
+          ...data,
+          status: addNew.currentBoard || "",
+          id: Math.random() + "",
+          lstUpdate: new Date(),
+        },
       ];
     }
     setBoardTask({ ...result });
