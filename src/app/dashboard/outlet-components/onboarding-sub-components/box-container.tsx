@@ -94,18 +94,24 @@ const BoxContainer = ({
       <div className="flex flex-col w-full h-full">
         <div className="w-full flex items-center justify-between p-4 pb-1">
           <div className="flex flex-col w-full items-start justify-center">
-            <h2 className="text-slate-600 text-2xl font-semibold">
+            <h2 className="text-slate-600 text-xl font-semibold">
               {title}
-              <small className="text-slate-500 text-sm">
-                (
-                {boardTask.data.length > 0 &&
-                  boardTask.data.filter(
-                    (curr) =>
-                      curr.status.toLocaleLowerCase() ===
-                      title.toLocaleLowerCase()
-                  ).length}
-                )
-              </small>
+              {boardTask.data.filter(
+                (curr) =>
+                  curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
+              ).length > 0 && (
+                <small className="text-slate-500 text-sm">
+                  (
+                  {
+                    boardTask.data.filter(
+                      (curr) =>
+                        curr.status.toLocaleLowerCase() ===
+                        title.toLocaleLowerCase()
+                    ).length
+                  }
+                  )
+                </small>
+              )}
             </h2>
           </div>
           <div className="flex items-center justify-center gap-4">
@@ -185,6 +191,7 @@ const BoxContainer = ({
                   />
                 ))}
           </div>
+          <div className="h-[120px]" />
         </ScrollArea>
       </div>
     </div>

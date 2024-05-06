@@ -14,6 +14,9 @@ import Workflow from "./onboarding-sub-components/workflow";
 
 const DashboardOnboarding = () => {
   const [currOutlet, setCurrOutlet] = useState("board");
+  const buttonStyle =
+    "font-semibold border-b-4 cursor-pointer border-transparent hover:text-blue-400 text-slate-400";
+  const activeButton = "border-blue-500 border-b text-blue-600";
   return (
     <main>
       <div className="p-4">
@@ -22,18 +25,16 @@ const DashboardOnboarding = () => {
           <div className="flex w-full items-start justify-start border-b gap-4">
             <h4
               onClick={() => setCurrOutlet("board")}
-              className={`font-semibold text-slate-500 border-b-4 cursor-pointer border-transparent hover:text-blue-400 ${
-                currOutlet === "board" &&
-                " text-blue-500 border-blue-500 border-b"
+              className={` ${buttonStyle} ${
+                currOutlet.toLocaleLowerCase() === "board" && activeButton
               }`}
             >
               Board
             </h4>
             <h4
               onClick={() => setCurrOutlet("workflow")}
-              className={`font-semibold text-slate-500 border-b-4 cursor-pointer border-transparent hover:text-blue-400 ${
-                currOutlet === "workflow" &&
-                " text-blue-500 border-blue-500 border-b"
+              className={` ${buttonStyle} ${
+                currOutlet.toLocaleLowerCase() === "workflow" && activeButton
               }`}
             >
               Workflow
