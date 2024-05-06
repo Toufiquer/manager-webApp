@@ -55,7 +55,10 @@ const Board = () => {
     formState: { errors },
   } = useForm<newItemFormSchema>({ resolver: zodResolver(zodItemSchema) });
 
-  const handleCancel = () => setAddNew({ ...addNew, isRender: false });
+  const handleCancel = () => {
+    setAddNew({ ...addNew, isRender: false });
+    reset();
+  };
   const onSubmit = handleSubmit((data) => {
     console.log(data);
     const result = { ...boardTask };
