@@ -12,13 +12,14 @@ import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
 import BoardComponents from "./board-components";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Board = () => {
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="p-12">
+      <ScrollArea className="h-screen w-full pr-4">
         <BoardComponents />
-      </div>
+      </ScrollArea>
     </DndProvider>
   );
 };

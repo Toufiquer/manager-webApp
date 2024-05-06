@@ -19,19 +19,21 @@ import { HiOutlineInboxArrowDown } from "react-icons/hi2";
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 type sidebarType = {
   id: number;
   name: string;
   logo: JSX.Element;
-  outlet: string;
+  outlet?: string;
   message?: number;
+  link?: string;
 };
 export const sidebarData: sidebarType[] = [
   {
     id: 1,
     name: "Home",
     logo: <IoHomeOutline className="w-6 h-6" />,
-    outlet: "home",
+    link: "/",
   },
   {
     id: 2,
@@ -150,28 +152,35 @@ const Sidebar = () => {
   const commonCss = "p-4 flex items-start justify-start gap-1 flex-col w-full";
   const buttonStyle =
     "flex border w-full px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
+  const MakeButton = ({ curr }: { curr: sidebarType }) => (
+    <div
+      onClick={() => handleSidebarOutlet(curr.outlet || "home")}
+      className={`py-1 flex items-center justify-start gap-2 cursor-pointer hover:bg-slate-300 px-2 rounded-full w-full duration-200  ${
+        dashboardData.currentOutletName === curr.outlet && " bg-slate-300"
+      }`}
+    >
+      {curr.logo}
+      {curr.name}
+      {curr.message && (
+        <div className="bg-orange-300 text-white px-1 rounded-full  text-xs">
+          {curr.message}
+        </div>
+      )}
+    </div>
+  );
   return (
     <ScrollArea className="h-screen w-auto">
       <main className={commonCss}>
         <div className={commonCss + ""}>
-          {sidebarData.map((curr) => (
-            <div
-              key={curr.id}
-              onClick={() => handleSidebarOutlet(curr.outlet)}
-              className={`py-1 flex items-center justify-start gap-2 cursor-pointer hover:bg-slate-300 px-2 rounded-full w-full duration-200  ${
-                dashboardData.currentOutletName === curr.outlet &&
-                " bg-slate-300"
-              }`}
-            >
-              {curr.logo}
-              {curr.name}
-              {curr.message && (
-                <div className="bg-orange-300 text-white px-1 rounded-full  text-xs">
-                  {curr.message}
-                </div>
-              )}
-            </div>
-          ))}
+          {sidebarData.map((curr) =>
+            curr.link ? (
+              <Link href={curr.link} key={curr.id} className="w-full">
+                <MakeButton curr={curr} />
+              </Link>
+            ) : (
+              <MakeButton curr={curr} key={curr.id} />
+            )
+          )}
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
           <h2 className="text-slate-400">Invite People</h2>
