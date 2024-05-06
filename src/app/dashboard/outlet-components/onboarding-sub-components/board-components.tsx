@@ -75,6 +75,25 @@ const BoardComponents = () => {
           return status;
         }
       });
+      // console.log(" result : ", addNew.currentBoard.toLocaleLowerCase());
+      result.data = boardTask.data.map((curr) => {
+        const item = { ...curr };
+        // console.log(
+        //   "items : ",
+        //   curr.status.toLocaleLowerCase() ===
+        //     addNew.currentBoard.toLocaleLowerCase(),
+        //   curr.status.toLocaleLowerCase(),
+        //   addNew.currentBoard.toLocaleLowerCase(),
+        //   curr
+        // );
+        if (
+          curr.status.toLocaleLowerCase() ===
+          addNew.currentBoard.toLocaleLowerCase()
+        ) {
+          item.status = data.title;
+        }
+        return item;
+      });
     } else if (!addNew.newBoard) {
       // add new item under board
       result.data = [
@@ -87,6 +106,7 @@ const BoardComponents = () => {
         },
       ];
     }
+    console.log("final result: ", result);
     setBoardTask({ ...result });
     handleCancel();
   });

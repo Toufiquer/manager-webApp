@@ -31,7 +31,7 @@ const SingleBox = ({ curr, parentDiv }: { parentDiv: string; curr: any }) => {
       >
         <div
           key={curr}
-          className="w-full relative h-[180px] cursor-pointer hover:bg-slate-200 duration-200 bg-slate-100 rounded-lg p-2"
+          className="w-full relative min-h-[180px] cursor-pointer hover:bg-slate-200 duration-200 bg-slate-100 rounded-lg p-2"
         >
           <h2 className="text-slate-600 font-semibold">{curr.title}</h2>
           <p className="text-slate-500">{curr.description}</p>

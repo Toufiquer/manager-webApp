@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 
 import SingleBox from "./single-box";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const BoxContainer = ({
   title,
@@ -89,9 +90,9 @@ const BoxContainer = ({
   };
 
   return (
-    <div ref={drop} className="min-h-[80vh] bg-white w-full p-4 rounded-lg">
+    <div ref={drop} className="min-h-[80vh] bg-white w-full rounded-lg">
       <div className="flex flex-col w-full h-full">
-        <div className="w-full flex items-center justify-between">
+        <div className="w-full flex items-center justify-between p-4 pb-1">
           <div className="flex flex-col w-full items-start justify-center">
             <h2 className="text-slate-600 text-2xl font-semibold">
               {title}
@@ -158,30 +159,33 @@ const BoxContainer = ({
             </DropdownMenu>
           </div>
         </div>
-        <div className="flex flex-col gap-4 mt-4 min-h-[80vh]">
-          {boardTask.data.filter(
-            (curr) =>
-              curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
-          ).length === 0 && (
-            <div className="flex items-center justify-center cursor-pointer hover:border-slate-900  rounded-lg border border-slate-500 h-full w-full text-sm py-2 text-slate-600 font-semibold">
-              Nothing was found
-            </div>
-          )}
-          {boardTask.data.length > 0 &&
-            boardTask.data
-              .filter(
-                (curr) =>
-                  curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
-              )
-              .sort((a, b) => a.lstUpdate - b.lstUpdate)
-              .map((curr, idx) => (
-                <SingleBox
-                  curr={curr}
-                  key={"" + curr.id + idx}
-                  parentDiv={title}
-                />
-              ))}
-        </div>
+        <ScrollArea className="w-full h-[70vh] px-3">
+          <div className="flex flex-col gap-4 mt-4 min-h-[80vh]">
+            {boardTask.data.filter(
+              (curr) =>
+                curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
+            ).length === 0 && (
+              <div className="flex items-center justify-center cursor-pointer hover:border-slate-900  rounded-lg border border-slate-500 h-full w-full text-sm py-2 text-slate-600 font-semibold">
+                Nothing was found
+              </div>
+            )}
+            {boardTask.data.length > 0 &&
+              boardTask.data
+                .filter(
+                  (curr) =>
+                    curr.status.toLocaleLowerCase() ===
+                    title.toLocaleLowerCase()
+                )
+                .sort((a, b) => a.lstUpdate - b.lstUpdate)
+                .map((curr, idx) => (
+                  <SingleBox
+                    curr={curr}
+                    key={"" + curr.id + idx}
+                    parentDiv={title}
+                  />
+                ))}
+          </div>
+        </ScrollArea>
       </div>
     </div>
   );
