@@ -41,6 +41,7 @@ const Board = () => {
   const [addNew, setAddNew] = useState({
     newBoard: false,
     isRender: false,
+    isUpdate: false,
   });
   const boardTask = useGlobalStore((store) => store.boardTask);
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
@@ -98,7 +99,10 @@ const Board = () => {
               <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg border-slate-400 flex items-center justify-between">
                 <div className="w-full flex items-center justify-between">
                   <h2 className="font-semibold">
-                    {addNew.newBoard ? "New Board" : "New Item"}
+                    {!addNew.isUpdate &&
+                      (addNew.newBoard ? "New Board" : "New Item")}
+                    {addNew.isUpdate &&
+                      (addNew.newBoard ? "Add Item" : "Update Board")}
                   </h2>
                   <div onClick={handleCancel} className="cursor-pointer">
                     <RxCross1 />
@@ -157,7 +161,12 @@ const Board = () => {
           ) : (
             <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
               {boardTask.statusLst.map((curr) => (
-                <BoxContainer title={curr} />
+                <BoxContainer
+                  title={curr}
+                  addNew={addNew}
+                  setAddNew={setAddNew}
+                  setValue={setValue}
+                />
               ))}
             </div>
           )}

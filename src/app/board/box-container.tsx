@@ -8,17 +8,37 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { Dispatch, SetStateAction, useEffect } from "react";
 import { BsPlusLg } from "react-icons/bs";
 import { HiDotsHorizontal } from "react-icons/hi";
 import SingleBox from "./single-box";
 import { useDrop } from "react-dnd";
 import { useGlobalStore } from "@/lib/global-store";
+import { UseFormSetValue } from "react-hook-form";
 
 const BoxContainer = ({
   title,
   sampleData = [],
+  setValue,
+  addNew,
+  setAddNew,
 }: {
+  addNew: {
+    newBoard: boolean;
+    isRender: boolean;
+    isUpdate: boolean;
+  };
+  setAddNew: Dispatch<
+    SetStateAction<{
+      newBoard: boolean;
+      isRender: boolean;
+      isUpdate: boolean;
+    }>
+  >;
+  setValue: UseFormSetValue<{
+    title: string;
+    description?: string | undefined;
+  }>;
   title: string;
   sampleData?: number[];
 }) => {
@@ -108,8 +128,24 @@ const BoxContainer = ({
             {title} <small className="text-slate-500 text-sm">(3)</small>
           </h2>
           <div className="flex items-center justify-center gap-4">
-            <BsPlusLg className="cursor-pointer" />
-            <HiDotsHorizontal className="cursor-pointer" />
+            <BsPlusLg
+              className="cursor-pointer"
+              onClick={() =>
+                setAddNew({ ...addNew, isRender: true, newBoard: true })
+              }
+            />
+            <HiDotsHorizontal
+              className="cursor-pointer"
+              onClick={() => {
+                setValue("title", title);
+                setAddNew({
+                  ...addNew,
+                  isRender: true,
+                  newBoard: false,
+                  isUpdate: true,
+                });
+              }}
+            />
           </div>
         </div>
         <div className="flex flex-col gap-4 mt-4 min-h-[80vh]">
