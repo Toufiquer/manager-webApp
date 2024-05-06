@@ -172,21 +172,26 @@ const Sidebar = () => {
     <ScrollArea className="h-screen w-auto">
       <main className={commonCss}>
         <div className={commonCss + ""}>
-          {sidebarData.map((curr) =>
+          {sidebarData.map((curr, idx) =>
             curr.link ? (
-              <Link href={curr.link} key={curr.id} className="w-full">
+              <Link
+                href={curr.link}
+                key={curr.id + idx + ""}
+                className="w-full"
+              >
                 <MakeButton curr={curr} />
               </Link>
             ) : (
-              <MakeButton curr={curr} key={curr.id} />
+              <MakeButton curr={curr} key={curr.id + idx + ""} />
             )
           )}
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
           <h2 className="text-slate-400">Invite People</h2>
           <div className="flex items-center justify-center gap-0">
-            {invitePeopleData.map((curr) => (
+            {invitePeopleData.map((curr, idx) => (
               <div
+                key={curr.name + idx + ""}
                 onClick={() => handlePeopleDetails(curr.name)}
                 className="ml-[-8px]"
               >

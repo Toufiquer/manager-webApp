@@ -15,6 +15,12 @@ import { UseFormSetValue } from "react-hook-form";
 import { Dispatch, SetStateAction, useEffect } from "react";
 
 import { useGlobalStore } from "@/lib/global-store";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 
 import SingleBox from "./single-box";
 
@@ -73,8 +79,13 @@ const BoxContainer = ({
       }
       return curr;
     });
-    // console.log("box container result : ", result);
-    // setBoardTask(result);
+    setBoardTask({ ...boardTask, data: result });
+  };
+  const handleDelete = (statusName: string) => {
+    const filterData = boardTask.statusLst.filter(
+      (curr) => curr !== statusName
+    );
+    setBoardTask({ ...boardTask, statusLst: filterData });
   };
 
   return (
@@ -110,20 +121,41 @@ const BoxContainer = ({
                 })
               }
             />
-            <HiDotsHorizontal
-              className="cursor-pointer"
-              onClick={() => {
-                setValue("title", title);
-                setAddNew({
-                  ...addNew,
-                  currentBoard: title,
-                  isRender: true,
-                  newBoard: false,
-                  isUpdate: true,
-                  isAddItem: false,
-                });
-              }}
-            />
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <HiDotsHorizontal className="cursor-pointer" />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuItem>
+                  <div
+                    className="font-semibold cursor-pointer w-full"
+                    onClick={() => {
+                      setValue("title", title);
+                      setAddNew({
+                        ...addNew,
+                        currentBoard: title,
+                        isRender: true,
+                        newBoard: false,
+                        isUpdate: true,
+                        isAddItem: false,
+                      });
+                    }}
+                  >
+                    Edit
+                  </div>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <div
+                    className="font-semibold cursor-pointer w-full"
+                    onClick={() => {
+                      handleDelete(title);
+                    }}
+                  >
+                    Delete
+                  </div>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </div>
         </div>
         <div className="flex flex-col gap-4 mt-4 min-h-[80vh]">
