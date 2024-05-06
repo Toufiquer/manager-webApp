@@ -33,7 +33,8 @@ const BoxContainer = ({
       newBoard: boolean;
       isRender: boolean;
       isUpdate: boolean;
-      currentBoard?: string;
+      currentBoard: string;
+      isAddItem: boolean;
     }>
   >;
   setValue: UseFormSetValue<{
@@ -64,16 +65,16 @@ const BoxContainer = ({
     }),
   }));
 
-  console.log("");
-  console.log("");
-  console.log("");
-  console.log("");
-  console.log("outside fn : boardTask", boardTask);
+  // console.log("");
+  // console.log("");
+  // console.log("");
+  // console.log("");
+  // console.log("outside fn : boardTask", boardTask);
   const addDivToBoard = (item: any) => {
-    console.log("");
-    console.log("");
-    console.log("");
-    console.log("upcoming boardTask: ", item.boardTask);
+    // console.log("");
+    // console.log("");
+    // console.log("");
+    // console.log("upcoming boardTask: ", item.boardTask);
     const result = { ...item.boardTask };
     if (title.toLocaleLowerCase() === "task") {
       result.task = [...item.boardTask.task, { id: item.id }];
@@ -96,10 +97,10 @@ const BoxContainer = ({
     setBoardTask(result);
   };
   const addDivToBoard22 = (item: any) => {
-    console.log("");
-    console.log("");
-    console.log("");
-    console.log("upcoming boardTask: ", item.boardTask);
+    // console.log("");
+    // console.log("");
+    // console.log("");
+    // console.log("upcoming boardTask: ", item.boardTask);
     const result = { ...item.boardTask };
     if (title.toLocaleLowerCase() === "task") {
       result.task = [...item.boardTask.task, { id: item.id }];
@@ -118,7 +119,7 @@ const BoxContainer = ({
     } else if (item.parentDiv === "done") {
       result.done = item.boardTask.done.filter((i) => i.id !== item.id);
     }
-    console.log("final result: ", result);
+    // console.log("final result: ", result);
     setBoardTask(result);
   };
   return (
@@ -132,7 +133,14 @@ const BoxContainer = ({
             <BsPlusLg
               className="cursor-pointer"
               onClick={() =>
-                setAddNew({ ...addNew, isRender: true, newBoard: true })
+                setAddNew({
+                  ...addNew,
+                  isRender: true,
+                  newBoard: false,
+                  isAddItem: true,
+                  isUpdate: false,
+                  currentBoard: title,
+                })
               }
             />
             <HiDotsHorizontal
@@ -145,6 +153,7 @@ const BoxContainer = ({
                   isRender: true,
                   newBoard: false,
                   isUpdate: true,
+                  isAddItem: false,
                 });
               }}
             />

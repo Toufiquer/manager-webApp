@@ -40,6 +40,7 @@ type newItemFormSchema = z.infer<typeof zodItemSchema>;
 const Board = () => {
   const [addNew, setAddNew] = useState({
     newBoard: false,
+    isAddItem: false,
     isRender: false,
     isUpdate: false,
     currentBoard: "",
@@ -76,6 +77,8 @@ const Board = () => {
           return status;
         }
       });
+    } else if (!addNew.newBoard) {
+      console.log(" add item", data);
     }
     setBoardTask({ ...result });
     reset();
@@ -118,6 +121,11 @@ const Board = () => {
                       (addNew.newBoard ? "New Board" : "New Item")}
                     {addNew.isUpdate &&
                       (addNew.newBoard ? "Add Item" : "Update Board")}
+                    {!addNew.isUpdate && !addNew.newBoard && (
+                      <small className="text-sm text-slate-400 px-2">
+                        ({addNew.currentBoard})
+                      </small>
+                    )}
                   </h2>
                   <div onClick={handleCancel} className="cursor-pointer">
                     <RxCross1 />
