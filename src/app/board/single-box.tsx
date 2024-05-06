@@ -29,7 +29,7 @@ const SingleBox = ({ curr, parentDiv }: { parentDiv: string; curr: any }) => {
         role="Handle"
         ref={drag}
       >
-        {curr.id}
+        {curr.title}
       </div>
     </div>
   );

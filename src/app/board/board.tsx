@@ -79,7 +79,12 @@ const Board = () => {
       });
     } else if (!addNew.newBoard) {
       console.log(" add item", data);
+      result.data = [
+        ...boardTask.data,
+        { ...data, status: addNew.currentBoard || "" },
+      ];
     }
+    console.log(" final result : ", result);
     setBoardTask({ ...result });
     reset();
     handleCancel();
@@ -185,7 +190,7 @@ const Board = () => {
             <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
               {boardTask.statusLst.map((curr) => (
                 <BoxContainer
-                  title={curr}
+                  title={curr || ""}
                   addNew={addNew}
                   setAddNew={setAddNew}
                   setValue={setValue}
