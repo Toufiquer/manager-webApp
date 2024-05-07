@@ -11,6 +11,8 @@ import Profile from "./profile";
 import Link from "next/link";
 
 const Header = () => {
+  const linkButton =
+    "px-2 hover:underline text-sm font-semibold text-slate-500 hover:text-slate-600";
   return (
     <div className="border w-full h-[8vh]">
       <div className="flex items-center justify-between">
@@ -26,13 +28,13 @@ const Header = () => {
           <p className="text-bold text-2xl text-start">Meal Night</p>
         </div>
         <div className="flex items-center justify-end w-[30vw]">
-          <Link className="px-2 hover:underline" href="/dashboard">
+          <Link className={linkButton} href="/dashboard">
             Dashboard
           </Link>
-          <Link className="px-2 hover:underline" href="/signUp">
+          <Link className={linkButton} href="/signUp">
             Sign Up
           </Link>
-          <Link className="px-2 hover:underline" href="/signIn">
+          <Link className={linkButton} href="/signIn">
             Sign in
           </Link>
           <Profile />

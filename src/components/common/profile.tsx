@@ -18,11 +18,18 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+
 const Profile = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline"> Profile</Button>
+        <div className="p-2 cursor-pointer">
+          <Avatar>
+            <AvatarImage src="https://github.com/shadcn.png" />
+            <AvatarFallback>CN</AvatarFallback>
+          </Avatar>
+        </div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
