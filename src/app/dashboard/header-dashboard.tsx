@@ -7,7 +7,7 @@
 */
 import { CiBellOn } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
-import { AiTwotoneQuestionCircle } from "react-icons/ai";
+import { GoQuestion } from "react-icons/go";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -23,6 +23,7 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { webAppH2 } from "@/components/common/style";
 
 const SearchBar = () => {
   return (
@@ -100,24 +101,28 @@ const ProfileIcon = () => {
   );
 };
 
+const iconStyle =
+  " text-slate-500 hover:text-slate-600 w-6 h-6 cursor-pointer mr-1";
 const HeaderDashboard = () => {
   return (
     <main className="min-h-[60px] flex items-center justify-between border-b bg-white">
       <div className="w-full px-4 flex items-center justify-between">
-        <div className="font-bold text-2xl uppercase">dashboard</div>
+        <div className={webAppH2 + " text-2xl text-slate-700 uppercase"}>
+          dashboard
+        </div>
         <div className="search w-full">
           <SearchBar />
         </div>
         <div className="flex items-center justify-center">
           <div className="flex items-center justify-center mr-4 gap-2">
-            <MdOutlineMailOutline className="w-8 h-8 cursor-pointer" />
+            <MdOutlineMailOutline className={iconStyle} />
             <div className="relative">
-              <CiBellOn className="w-8 h-8 cursor-pointer" />
-              <div className="absolute bg-rose-500 text-white top-0 right-0 rounded-full px-1 text-xs">
+              <CiBellOn className={iconStyle} />
+              <div className="absolute bg-rose-400 text-white top-[-5px] right-0 rounded-full px-1 text-xs">
                 5
               </div>
             </div>
-            <AiTwotoneQuestionCircle className="w-8 h-8 cursor-pointer" />
+            <GoQuestion className={iconStyle} />
           </div>
 
           <ProfileIcon />

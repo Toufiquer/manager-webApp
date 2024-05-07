@@ -20,6 +20,7 @@ import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import Link from "next/link";
+import { webAppH2Light, webAppPLight } from "@/components/common/style";
 type sidebarType = {
   id: number;
   name: string;
@@ -28,43 +29,44 @@ type sidebarType = {
   message?: number;
   link?: string;
 };
+const iconSize = "h-4 w-4";
 export const sidebarData: sidebarType[] = [
   {
     id: 1,
     name: "Home",
-    logo: <IoHomeOutline className="w-6 h-6" />,
+    logo: <IoHomeOutline className={iconSize} />,
     link: "/",
   },
   {
     id: 2,
     name: "My Task",
-    logo: <MdTaskAlt className="w-6 h-6" />,
+    logo: <MdTaskAlt className={iconSize} />,
     outlet: "my-task",
     message: 4,
   },
   {
     id: 3,
     name: "Reporting",
-    logo: <IoStatsChart className="w-6 h-6" />,
+    logo: <IoStatsChart className={iconSize} />,
     outlet: "reporting",
     message: 6,
   },
   {
     id: 4,
     name: "Inbox",
-    logo: <HiOutlineInboxArrowDown className="w-6 h-6" />,
+    logo: <HiOutlineInboxArrowDown className={iconSize} />,
     outlet: "inbox",
   },
   {
     id: 5,
     name: "Peoples",
-    logo: <IoPeopleOutline className="w-6 h-6" />,
+    logo: <IoPeopleOutline className={iconSize} />,
     outlet: "peoples",
   },
   {
     id: 5,
     name: "Settings",
-    logo: <IoSettingsOutline className="w-6 h-6" />,
+    logo: <IoSettingsOutline className={iconSize} />,
     outlet: "settings",
   },
 ];
@@ -151,18 +153,26 @@ const Sidebar = () => {
   };
   const commonCss = "p-4 flex items-start justify-start gap-1 flex-col w-full";
   const buttonStyle =
-    "flex border w-full px-4 pr-6 hover:bg-slate-400 py-1 cursor-pointer rounded-full items-center justify-center gap-2 bg-slate-200";
+    "flex w-full pr-6 py-1 cursor-pointer items-center justify-start gap-2 rounded-full";
   const MakeButton = ({ curr }: { curr: sidebarType }) => (
     <div
       onClick={() => handleSidebarOutlet(curr.outlet || "home")}
-      className={`py-1 flex items-center justify-start gap-2 cursor-pointer hover:bg-slate-300 px-2 rounded-full w-full duration-200  ${
-        dashboardData.currentOutletName === curr.outlet && " bg-slate-300"
-      }`}
+      className={`flex items-center justify-start gap-2 hover:bg-blue-50 duration-200 cursor-pointer rounded-full w-full`}
     >
-      {curr.logo}
-      {curr.name}
+      <p className={webAppPLight}>{curr.logo}</p>
+      <p
+        className={
+          webAppPLight +
+          ` ${
+            dashboardData.currentOutletName === curr.outlet &&
+            " text-slate-600 underline"
+          }`
+        }
+      >
+        {curr.name}
+      </p>
       {curr.message && (
-        <div className="bg-orange-300 text-white px-1 rounded-full  text-xs">
+        <div className="bg-violet-300 text-white px-1 rounded-full  text-xs">
           {curr.message}
         </div>
       )}
@@ -187,7 +197,7 @@ const Sidebar = () => {
           )}
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
-          <h2 className="text-slate-400">Invite People</h2>
+          <h2 className={webAppH2Light}>Invite People</h2>
           <div className="flex items-center justify-center gap-0">
             {invitePeopleData.map((curr, idx) => (
               <div
@@ -198,17 +208,20 @@ const Sidebar = () => {
                 {curr.image}
               </div>
             ))}
-            <div className="cursor-pointer" onClick={handleAddPeople}>
+            <div
+              className={webAppH2Light + " cursor-pointer hover:text-slate-600"}
+              onClick={handleAddPeople}
+            >
               <CiCirclePlus className="h-8 w-8 ml-4" />
             </div>
           </div>
         </div>
         <div className={commonCss + " border-t border-slate-500"}>
-          <h2 className="text-slate-400">Projects</h2>
+          <h2 className={webAppH2Light}>Projects</h2>
           <div
-            className={`${buttonStyle} ${
+            className={`${webAppH2Light} ${buttonStyle} ${
               dashboardData?.currentOutletName === "onboarding" &&
-              " bg-slate-300"
+              " text-slate-600 underline"
             }`}
             onClick={() => setSidebarOutlet("onboarding")}
           >
@@ -216,9 +229,9 @@ const Sidebar = () => {
             <div className="">Onboarding</div>
           </div>
           <div
-            className={`${buttonStyle} ${
+            className={`${webAppH2Light} ${buttonStyle} ${
               dashboardData?.currentOutletName === "off-boarding" &&
-              " bg-slate-300"
+              " text-slate-600 underline"
             }`}
             onClick={() => setSidebarOutlet("off-boarding")}
           >

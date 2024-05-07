@@ -16,7 +16,7 @@ import DashboardOutlet from "./dashboard-outlet";
 
 const Page = () => {
   return (
-    <div className="flex flex-col h-screen bg-gray-100">
+    <div className="flex flex-col h-screen bg-white">
       <HeaderDashboard />
       <ResizablePanelGroup direction="horizontal">
         <ResizablePanel minSize={10} defaultSize={15}>
