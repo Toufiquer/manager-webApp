@@ -10,6 +10,7 @@
 
 import axios from "axios";
 import { useEffect } from "react";
+import { Roboto } from "next/font/google";
 
 import {
   ResizableHandle,
@@ -22,6 +23,11 @@ import Header from "@/components/common/header";
 import Outlet from "@/components/common/outlet";
 import { useQuery } from "@tanstack/react-query";
 import Loading from "./loading";
+
+const roboto = Roboto({
+  weight: "400",
+  subsets: ["latin"],
+});
 
 const Page = () => {
   const setApiData = useGlobalStore((store) => store.setApiData);
@@ -52,7 +58,7 @@ const Page = () => {
   return isFetching ? (
     <Loading />
   ) : (
-    <main>
+    <main className={roboto.className}>
       <Header />
       <ResizablePanelGroup direction="horizontal" className="min-h-[92vh]">
         <ResizablePanel defaultSize={30}>

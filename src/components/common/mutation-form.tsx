@@ -312,96 +312,99 @@ const MutationForm = () => {
     }
   });
   let renderUIData = (
-    <ScrollArea className="h-[92vh] w-full bg-blue-50">
-      <div className="min-h-[92vh] h-full w-full flex items-center justify-center pt-4 flex-col">
+    <div>
+      <div className="min-h-[52vh] h-full w-full flex items-center justify-center pt-4 flex-col">
         <form onSubmit={onSubmit}>
-          <div className="w-full flex flex-col gap-2 min-w-[400px]">
-            <div className="flex flex-col mt-4">
-              <label
-                className="text-sm font-semibold text-slate-500"
-                htmlFor="item"
-              >
-                Item Name
-              </label>
-              <input
-                className={BorderStyle}
-                {...register("item")}
-                placeholder="name"
-              />
-              {errors?.item && (
-                <p className="text-sm text-rose-400">{errors.item.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className="text-sm font-semibold text-slate-500"
-                htmlFor="price"
-              >
-                Item Price
-              </label>
-              <input
-                className={BorderStyle}
-                {...register("price")}
-                placeholder="Price"
-              />
-              {errors?.price && (
-                <p className="text-sm text-rose-400">{errors.price.message}</p>
-              )}
-            </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className="text-sm font-semibold text-slate-500"
-                htmlFor="info"
-              >
-                Item Info
-              </label>
-              <textarea
-                className={BorderStyle}
-                rows="4"
-                {...register("info")}
-                placeholder="Info"
-              />
-              {errors?.info && (
-                <p className="text-sm text-rose-400">{errors.info.message}</p>
-              )}
-            </div>
-
-            <div className="flex flex-col mt-4">
-              <div className="my-4 flex w-full flex-row items-center justify-between ">
-                <p className="text-sm text-gray-900">Option</p>
-                <div
-                  onClick={() =>
-                    append({
-                      name: "",
-                      options: [],
-                    })
-                  }
+          <ScrollArea className="h-[52vh] w-full bg-blue-50 px-4">
+            <div className="w-full flex flex-col gap-2 min-w-[400px]">
+              <div className="flex flex-col mt-4">
+                <label
+                  className="text-sm font-semibold text-slate-500"
+                  htmlFor="item"
                 >
-                  <div className="flex items-center cursor-pointer justify-center">
-                    <FiPlus className="text-blue-400" />
+                  Item Name
+                </label>
+                <input
+                  className={BorderStyle}
+                  {...register("item")}
+                  placeholder="name"
+                />
+                {errors?.item && (
+                  <p className="text-sm text-rose-400">{errors.item.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col mt-4">
+                <label
+                  className="text-sm font-semibold text-slate-500"
+                  htmlFor="price"
+                >
+                  Item Price
+                </label>
+                <input
+                  className={BorderStyle}
+                  {...register("price")}
+                  placeholder="Price"
+                />
+                {errors?.price && (
+                  <p className="text-sm text-rose-400">
+                    {errors.price.message}
+                  </p>
+                )}
+              </div>
+              <div className="flex flex-col mt-4">
+                <label
+                  className="text-sm font-semibold text-slate-500"
+                  htmlFor="info"
+                >
+                  Item Info
+                </label>
+                <textarea
+                  className={BorderStyle}
+                  rows="4"
+                  {...register("info")}
+                  placeholder="Info"
+                />
+                {errors?.info && (
+                  <p className="text-sm text-rose-400">{errors.info.message}</p>
+                )}
+              </div>
+
+              <div className="flex flex-col mt-4">
+                <div className="my-4 flex w-full flex-row items-center justify-between ">
+                  <p className="text-sm text-gray-900">Option</p>
+                  <div
+                    onClick={() =>
+                      append({
+                        name: "",
+                        options: [],
+                      })
+                    }
+                  >
+                    <div className="flex items-center cursor-pointer justify-center">
+                      <FiPlus className="text-blue-400" />
+                    </div>
                   </div>
                 </div>
+                <div className="mt-2" />
+                {fields.map((field, index) => (
+                  <div key={field.id}>
+                    <OptionComponents
+                      key={field.id}
+                      {...{ control, index, field }}
+                    />
+                  </div>
+                ))}
               </div>
-              <div className="mt-2" />
-              {fields.map((field, index) => (
-                <div key={field.id}>
-                  <OptionComponents
-                    key={field.id}
-                    {...{ control, index, field }}
-                  />
-                </div>
-              ))}
             </div>
-          </div>
-
+            <div className="mt-12" />
+          </ScrollArea>
           <input
             type="submit"
             className="w-full mt-8 bg-blue-300 hover:bg-blue-400 cursor-pointer text-white hover:text-white rounded-lg py-2"
           />
         </form>
       </div>
-      <div className="mt-12" />
-    </ScrollArea>
+    </div>
   );
   return renderUIData;
 };

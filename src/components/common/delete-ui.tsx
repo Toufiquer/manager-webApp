@@ -38,38 +38,39 @@ const DeleteUi = () => {
     noLeft && setCurrentItem("");
   };
   return (
-    <main className="w-full h-full flex flex-col">
-      <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
-        <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
-          <div className="text-2xl uppercase">Delete</div>
-          <div className="cursor-pointer" onClick={() => setMutationData("")}>
-            <RxCross1 />
+    <main className="w-full min-h-[90vh] h-full flex items-center justify-center">
+      <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50">
+        <div className="min-h-[50vh] h-full w-full flex flex-col p-2">
+          <div className="w-full flex items-center justify-between pr-1 mr-2">
+            <div className="text-2xl uppercase">Delete</div>
+            <div className="cursor-pointer" onClick={() => setMutationData("")}>
+              <RxCross1 />
+            </div>
           </div>
-        </div>
-        <div className="h-full min-h-[92vh] border w-full flex flex-col gap-4 items-center justify-center">
-          <div className="min-w-[300px] max-w-[500px] w-full gap-4 flex flex-col">
-            <p className="uppercase text-2xl">
-              {mutationData.name || mutationData.item}
-            </p>
-            <p className="text-sm">{mutationData.info}</p>
-            <div className="border p-4 text-rose-400">
-              <strong>Note</strong>
-              <p>After Delete Your data will not be recoverable</p>
+          <div className="h-full min-h-[50vh] w-full flex flex-col gap-4 items-center justify-center">
+            <div className="min-w-[300px] max-w-[500px] w-full gap-4 flex flex-col">
+              <p className="uppercase text-2xl">
+                {mutationData.name || mutationData.item}
+              </p>
+              <p className="text-sm">{mutationData.info}</p>
+              <div className="border p-4 text-rose-400">
+                <strong>Note</strong>
+                <p>After Delete Your data will not be recoverable</p>
+              </div>
+              <div className="text-center pt-4 mb-0 pb-0 text-rose-400">
+                Are You Confirm?
+              </div>
+              <Button
+                variant="outline"
+                onClick={confirmDelete}
+                className="bg-rose-400 hover:bg-rose-500 text-white hover:text-white font-bold"
+              >
+                Delete
+              </Button>
             </div>
-            <div className="text-center pt-4 mb-0 pb-0 text-rose-400">
-              Are You Confirm?
-            </div>
-            <Button
-              variant="outline"
-              onClick={confirmDelete}
-              className="bg-rose-400 hover:bg-rose-500 text-white hover:text-white font-bold"
-            >
-              Delete
-            </Button>
           </div>
         </div>
       </div>
-      ;
     </main>
   );
 };

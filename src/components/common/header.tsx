@@ -9,10 +9,10 @@ import Image from "next/image";
 
 import Profile from "./profile";
 import Link from "next/link";
+import { webAppTextSM } from "./style";
 
 const Header = () => {
-  const linkButton =
-    "px-2 hover:underline text-sm font-semibold text-slate-500 hover:text-slate-600";
+  const linkButton = `px-2 hover:underline ${webAppTextSM}`;
   return (
     <div className="border w-full h-[8vh]">
       <div className="flex items-center justify-between">

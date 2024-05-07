@@ -15,6 +15,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 
 import MutationForm from "./mutation-form";
 import DeleteUi from "./delete-ui";
+import { webAppH2, webAppH2Light, webAppPLight, webAppTitleXl } from "./style";
 
 const Outlet = () => {
   const currentItem = useGlobalStore((store) => store.currentItem);
@@ -43,7 +44,7 @@ const Outlet = () => {
   if (renderData.length >= 1 && renderData[0]?.data?.lst?.length === 0) {
     renderData = (
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-        <div className="text-2xl">Ops! Nothing was found</div>
+        <div className={webAppH2}>Ops! Nothing was found</div>
       </div>
     );
   }
@@ -56,20 +57,20 @@ const Outlet = () => {
             return (
               <div
                 key={curr.item + idx}
-                className=" flex w-[96%] flex-row justify-between m-2 border border-slate-400 px-2 py-1 rounded-lg pl-1"
+                className=" flex w-[96%] flex-row justify-between m-2 border border-slate-400 hover:border-slate-500 px-2 py-1 rounded-lg pl-1"
               >
-                <div className="flex flex-row gap-4 mx-4 w-full">
+                <div className="flex flex-row gap-4 mx-4 ml-2 w-full">
                   <div>
-                    <p className={`text-xl text-slate-700 font-semibold`}>
+                    <p className={webAppH2}>
                       {curr.item}{" "}
-                      <span className="text-sm text-slate-900 font-semibold">
+                      <span className={webAppH2Light + " text-[12px]"}>
                         (&#163;
                         {curr.price})
                       </span>
                     </p>
-                    <p className={`text-sm text-slate-600`}>{curr.info}</p>
+                    <p className={webAppPLight + " font-normal"}>{curr.info}</p>
                     {curr?.option?.length > 0 && (
-                      <p className="text-sm">
+                      <p className={webAppPLight + " font-normal"}>
                         {curr.option?.length} item
                         {curr.option?.length > 1 && "s"}
                       </p>
@@ -108,13 +109,13 @@ const Outlet = () => {
   }
   let renderUI = (
     <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-      <div className="text-2xl">Please Select Item</div>
+      <div className={webAppTitleXl}>Please Select Item</div>
     </div>
   );
   if (currentItem !== "") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
-        <div className="text-2xl border-b border-slate-400 uppercase">
+        <div className={`${webAppTitleXl} border-b uppercase`}>
           {currentItem}
         </div>
         <div>{renderUIData}</div>
@@ -123,27 +124,31 @@ const Outlet = () => {
   }
   if (mutationData.type === "update") {
     renderUI = (
-      <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
-        <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
-          <div className="text-2xl uppercase">Update</div>
-          <div className="cursor-pointer" onClick={() => setMutationData("")}>
-            <RxCross1 />
+      <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
+        <div className="max-w-[600px] px-8 py-4 rounded-lg my-4 bg-blue-50">
+          <div className="w-full flex items-center justify-between pr-1 mr-2">
+            <div className={webAppH2}>Update</div>
+            <div className="cursor-pointer" onClick={() => setMutationData("")}>
+              <RxCross1 />
+            </div>
           </div>
+          <MutationForm />
         </div>
-        <MutationForm />
       </div>
     );
   }
   if (mutationData.type === "add") {
     renderUI = (
-      <div className="min-h-[92vh] h-full w-full flex flex-col p-2">
-        <div className="w-full flex items-center justify-between border-b border-slate-400 pr-1 mr-2">
-          <div className="text-2xl uppercase">Add</div>
-          <div className="cursor-pointer" onClick={() => setMutationData("")}>
-            <RxCross1 />
+      <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
+        <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50">
+          <div className="w-full flex items-center justify-between">
+            <div className={webAppH2}>Add</div>
+            <div className="cursor-pointer" onClick={() => setMutationData("")}>
+              <RxCross1 />
+            </div>
           </div>
+          <MutationForm />
         </div>
-        <MutationForm />
       </div>
     );
   }
