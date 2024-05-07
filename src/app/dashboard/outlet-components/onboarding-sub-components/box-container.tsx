@@ -31,6 +31,8 @@ const BoxContainer = ({
   setValue,
   addNew,
   setAddNew,
+  detailsId,
+  handleDetails,
 }: {
   addNew: {
     newBoard: boolean;
@@ -50,8 +52,10 @@ const BoxContainer = ({
     title: string;
     description?: string | undefined;
   }>;
+  detailsId: string;
   title: string;
   sampleData?: number[];
+  handleDetails: (agr: string) => void;
 }) => {
   const boardTask = useGlobalStore((store) => store.boardTask);
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
@@ -89,7 +93,10 @@ const BoxContainer = ({
     );
     setBoardTask({ ...boardTask, statusLst: filterData });
   };
-
+  const handleEdit = (e: any) => {
+    console.log("handleEdit", e);
+    e.stopPropagation();
+  };
   return (
     <div ref={drop} className="min-h-[80vh] bg-white w-full rounded-lg">
       <div className="flex flex-col w-full h-full">
@@ -185,11 +192,18 @@ const BoxContainer = ({
                 )
                 .sort((a, b) => a.lstUpdate - b.lstUpdate)
                 .map((curr, idx) => (
-                  <SingleBox
-                    curr={curr}
+                  <div
                     key={"" + curr.id + idx}
-                    parentDiv={title}
-                  />
+                    onClick={() => handleDetails(curr.id)}
+                  >
+                    <SingleBox
+                      curr={curr}
+                      parentDiv={title}
+                      setValue={setValue}
+                      addNew={addNew}
+                      setAddNew={setAddNew}
+                    />
+                  </div>
                 ))}
           </div>
           <div className="h-[120px]" />
