@@ -24,6 +24,7 @@ import {
 
 import SingleBox from "./single-box";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { webAppH2 } from "@/components/common/style";
 
 const BoxContainer = ({
   title,
@@ -92,9 +93,9 @@ const BoxContainer = ({
   return (
     <div ref={drop} className="min-h-[80vh] bg-white w-full rounded-lg">
       <div className="flex flex-col w-full h-full">
-        <div className="w-full flex items-center justify-between p-4 pb-1">
+        <div className="w-full flex items-center justify-between px-4 py-2 border-b bg-slate-300 rounded-t-lg text-slate-800">
           <div className="flex flex-col w-full items-start justify-center">
-            <h2 className="text-slate-600 text-xl font-semibold">
+            <h2 className={webAppH2 + " text-slate-800"}>
               {title}
               {boardTask.data.filter(
                 (curr) =>
@@ -171,7 +172,7 @@ const BoxContainer = ({
               (curr) =>
                 curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
             ).length === 0 && (
-              <div className="flex items-center justify-center cursor-pointer hover:border-slate-900  rounded-lg border border-slate-500 h-full w-full text-sm py-2 text-slate-600 font-semibold">
+              <div className={webAppH2 + " text-center pt-6"}>
                 Nothing was found
               </div>
             )}

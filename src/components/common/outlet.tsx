@@ -125,7 +125,7 @@ const Outlet = () => {
   if (mutationData.type === "update") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-        <div className="max-w-[600px] px-8 py-4 rounded-lg my-4 bg-blue-50">
+        <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
           <div className="w-full flex items-center justify-between pr-1 mr-2">
             <div className={webAppH2}>Update</div>
             <div className="cursor-pointer" onClick={() => setMutationData("")}>
@@ -140,7 +140,7 @@ const Outlet = () => {
   if (mutationData.type === "add") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-        <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50">
+        <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
           <div className="w-full flex items-center justify-between">
             <div className={webAppH2}>Add</div>
             <div className="cursor-pointer" onClick={() => setMutationData("")}>

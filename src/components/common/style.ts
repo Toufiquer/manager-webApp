@@ -11,3 +11,5 @@ export const webAppH2 = ` [18px] ${commonStyle}`;
 export const webAppH2Light = ` [18px] ${commonStyle} text-slate-400`;
 export const webAppPLight = ` [16px] ${commonStyle} text-slate-400`;
 export const webAppTitleXl = ` text-xl ${commonStyle}`;
+export const buttonStyle =
+  "w-full mt-8 bg-blue-300 hover:bg-blue-400 cursor-pointer text-white hover:text-white rounded-lg py-2 font-[560]";

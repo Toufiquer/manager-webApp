@@ -15,9 +15,10 @@ import { Switch } from "@/components/ui/switch";
 import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import { buttonStyle } from "./style";
 
 const BorderStyle =
-  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800";
+  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none";
 
 export const zodItemSchema = z.object({
   item: z
@@ -315,7 +316,7 @@ const MutationForm = () => {
     <div>
       <div className="min-h-[52vh] h-full w-full flex items-center justify-center pt-4 flex-col">
         <form onSubmit={onSubmit}>
-          <ScrollArea className="h-[52vh] w-full bg-blue-50 px-4">
+          <ScrollArea className="h-[52vh] w-full px-4">
             <div className="w-full flex flex-col gap-2 min-w-[400px]">
               <div className="flex flex-col mt-4">
                 <label
@@ -398,10 +399,7 @@ const MutationForm = () => {
             </div>
             <div className="mt-12" />
           </ScrollArea>
-          <input
-            type="submit"
-            className="w-full mt-8 bg-blue-300 hover:bg-blue-400 cursor-pointer text-white hover:text-white rounded-lg py-2"
-          />
+          <input type="submit" className={buttonStyle} />
         </form>
       </div>
     </div>

@@ -16,6 +16,11 @@ import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import BoxContainer from "./box-container";
+import {
+  buttonStyle,
+  webAppH2Light,
+  webAppPLight,
+} from "@/components/common/style";
 
 export const zodItemSchema = z.object({
   title: z
@@ -31,7 +36,7 @@ export const zodItemSchema = z.object({
       invalid_type_error: "Item must be a string",
       required_error: "Item is required",
     })
-    .max(140, "Maximum 40 characters")
+    .max(1000, "Maximum 1000 characters")
     .trim()
     .optional(),
 });
@@ -111,37 +116,16 @@ const BoardComponents = () => {
     handleCancel();
   });
   const BorderStyle =
-    "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-sm text-gray-800";
+    "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-sm text-gray-800 focus:outline-none";
 
   return (
-    <main>
-      <div className="w-full min-h-screen flex flex-col">
-        <div className="w-full flex items-center justify-between">
-          <div className="flex w-full gap-4 my-2 text-slate-500">
-            <h2>All Tasks</h2>
-            <div className="flex items-center justify-center">
-              <CiFilter />
-              <h2> Filter</h2>
-            </div>
-            <div className="flex items-center justify-center">
-              <BiSort />
-              <h2>Sort</h2>
-            </div>
-          </div>
-          <p
-            onClick={() =>
-              setAddNew({ ...addNew, isRender: true, newBoard: true })
-            }
-            className="px-4 text-center py-1 mb-1 border rounded-full min-w-[140px] cursor-pointer border-gray-400 hover:border-gray-500 hover:bg-gray-50 hover:text-gray-900 text-gray-800 font-semibold "
-          >
-            New Board
-          </p>
-        </div>
+    <main className={`${!addNew.isRender && " bg-blue-50 "} p-4`}>
+      <div className="w-full min-h-[52vh] flex flex-col">
         {addNew.isRender ? (
-          <div className="py-4 flex flex-col items-center justify-center w-full min-h-screen">
-            <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg border-slate-400 flex items-center justify-between">
+          <div className="py-4 flex flex-col items-center justify-center w-full min-h-[52vh] ">
+            <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg bg-blue-50 border-slate-300 flex items-center justify-between">
               <div className="w-full flex items-center justify-between">
-                <h2 className="font-semibold">
+                <h2 className={webAppH2Light + " text-slate-600"}>
                   {!addNew.isUpdate &&
                     (addNew.newBoard ? "New Board" : "New Item")}
                   {addNew.isUpdate &&
@@ -202,22 +186,80 @@ const BoardComponents = () => {
 
                 <input
                   type="submit"
-                  className="w-full mt-8 bg-blue-300 hover:bg-blue-400 cursor-pointer text-white hover:text-white rounded-lg py-2"
+                  className={buttonStyle + " font-[400] text-[16px] py-[4px]"}
                 />
               </form>
             </div>
           </div>
         ) : (
-          <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
-            {boardTask.statusLst.map((curr, idx) => (
-              <BoxContainer
-                key={curr + idx}
-                title={curr || ""}
-                addNew={addNew}
-                setAddNew={setAddNew}
-                setValue={setValue}
-              />
-            ))}
+          <div>
+            <div className="w-full flex items-center justify-between">
+              <div className="flex w-full gap-4 my-2">
+                <h2
+                  className={
+                    webAppPLight +
+                    " cursor-pointer hover:text-slate-600 hover:underline"
+                  }
+                >
+                  All Tasks
+                </h2>
+                <div className="flex items-center justify-center">
+                  <CiFilter
+                    className={
+                      webAppPLight +
+                      " cursor-pointer hover:text-slate-600 hover:underline"
+                    }
+                  />
+                  <h2
+                    className={
+                      webAppPLight +
+                      " cursor-pointer hover:text-slate-600 hover:underline"
+                    }
+                  >
+                    {" "}
+                    Filter
+                  </h2>
+                </div>
+                <div className="flex items-center justify-center">
+                  <BiSort
+                    className={
+                      webAppPLight +
+                      " cursor-pointer hover:text-slate-600 hover:underline"
+                    }
+                  />
+                  <h2
+                    className={
+                      webAppPLight +
+                      " cursor-pointer hover:text-slate-600 hover:underline"
+                    }
+                  >
+                    Sort
+                  </h2>
+                </div>
+              </div>
+              <p
+                onClick={() =>
+                  setAddNew({ ...addNew, isRender: true, newBoard: true })
+                }
+                className={
+                  webAppPLight +
+                  " cursor-pointer hover:text-slate-600 hover:underline w-[120px]"
+                }
+              >
+                New Board
+              </p>
+            </div>
+            <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
+              {boardTask.statusLst.map((curr, idx) => (
+                <BoxContainer
+                  key={curr + idx}
+                  title={curr || ""}
+                  addNew={addNew}
+                  setAddNew={setAddNew}
+                  setValue={setValue}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
