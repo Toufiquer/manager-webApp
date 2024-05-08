@@ -9,24 +9,35 @@
 import { FaTrash } from "react-icons/fa6";
 import { RxCross1 } from "react-icons/rx";
 import { FaRegEdit } from "react-icons/fa";
+import { UseFormSetValue } from "react-hook-form";
 
 import { useGlobalStore } from "@/lib/global-store";
 import { webAppH2Light } from "@/components/common/style";
 
-const ViewTask = ({ handleCancel }: { handleCancel: () => void }) => {
+const ViewTask = ({
+  handleCancel,
+  setValue,
+}: {
+  handleCancel: () => void;
+  setValue: UseFormSetValue<{
+    title: string;
+    description?: string | undefined;
+  }>;
+}) => {
   const onBoardingStatus = useGlobalStore((store) => store.onBoardingStatus);
   const setonBoardingStatus = useGlobalStore(
     (store) => store.setonBoardingStatus
   );
-  const handleDeleteTask = (taskId: string) => {
+  const handleDeleteTask = () => {
     const result = { ...onBoardingStatus };
     result.isDeleteTask = true;
-    console.log("delete task", result);
     setonBoardingStatus(result);
   };
-  const handleEditTask = (taskId: string) => {
+  const handleEditTask = () => {
     const result = { ...onBoardingStatus };
     result.isUpdateTask = true;
+    setValue("title", onBoardingStatus.currentTitle);
+    setValue("description", onBoardingStatus.currentDescription);
     setonBoardingStatus(result);
   };
   return (
@@ -54,10 +65,10 @@ const ViewTask = ({ handleCancel }: { handleCancel: () => void }) => {
           </div>
           <div className="absolute bottom-2 right-2">
             <div className="flex flex-row items-center justify-between gap-2 pr-2 max-w-[90px]">
-              <div onClick={() => handleEditTask(onBoardingStatus.currentId)}>
+              <div onClick={handleEditTask}>
                 <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
               </div>
-              <div onClick={() => handleDeleteTask(onBoardingStatus.currentId)}>
+              <div onClick={handleDeleteTask}>
                 <FaTrash className="text-red-300 hover:text-red-400 cursor-pointer h-4 w-4" />
               </div>
             </div>

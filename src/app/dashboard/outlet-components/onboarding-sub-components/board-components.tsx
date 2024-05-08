@@ -102,6 +102,15 @@ const BoardComponents = () => {
           lstUpdate: new Date(),
         },
       ];
+    } else if (onBoardingStatus.isUpdateTask) {
+      result.data = boardTask.data.map((curr) => {
+        const i = { ...curr };
+        if (i.id === onBoardingStatus.currentId) {
+          i.title = data.title;
+          i.description = data.description;
+        }
+        return i;
+      });
     }
     setBoardTask({ ...result });
     handleCancel();
@@ -127,9 +136,10 @@ const BoardComponents = () => {
               />
             ) : (
               <div>
-                {onBoardingStatus.isViewTask ? (
+                {onBoardingStatus.isViewTask &&
+                !onBoardingStatus.isUpdateTask ? (
                   // View Task Details
-                  <ViewTask handleCancel={handleCancel} />
+                  <ViewTask handleCancel={handleCancel} setValue={setValue} />
                 ) : (
                   // Add or Update
                   <MutationOnboarding
