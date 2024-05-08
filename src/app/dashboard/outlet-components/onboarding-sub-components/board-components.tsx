@@ -51,11 +51,13 @@ const BoardComponents = () => {
     reset();
   };
 
-  const handleConfirmBoardDelete = (boardId: string) => {
+  const handleConfirmBoardDelete = (id: string) => {
     const result = { ...boardTask };
-    result.statusLst = boardTask.statusLst.filter(
-      (curr) => curr.id !== boardId
-    );
+    if (onBoardingStatus.isDeleteBoard) {
+      result.statusLst = boardTask.statusLst.filter((curr) => curr.id !== id);
+    } else if (onBoardingStatus.isDeleteTask) {
+      result.data = boardTask.data.filter((curr) => curr.id !== id);
+    }
     setBoardTask(result);
     reset();
     setonBoardingStatus(initRenderOnboardingStatus);
@@ -117,7 +119,7 @@ const BoardComponents = () => {
       <div className="w-full min-h-[52vh] flex flex-col">
         {isRenderModal ? (
           <div>
-            {onBoardingStatus.isDeleteBoard ? (
+            {onBoardingStatus.isDeleteBoard || onBoardingStatus.isDeleteTask ? (
               // Check for confirmation
               <BoardConfirmationUi
                 handleCancel={handleCancel}

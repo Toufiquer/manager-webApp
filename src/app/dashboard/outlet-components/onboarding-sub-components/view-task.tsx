@@ -15,6 +15,20 @@ import { webAppH2Light } from "@/components/common/style";
 
 const ViewTask = ({ handleCancel }: { handleCancel: () => void }) => {
   const onBoardingStatus = useGlobalStore((store) => store.onBoardingStatus);
+  const setonBoardingStatus = useGlobalStore(
+    (store) => store.setonBoardingStatus
+  );
+  const handleDeleteTask = (taskId: string) => {
+    const result = { ...onBoardingStatus };
+    result.isDeleteTask = true;
+    console.log("delete task", result);
+    setonBoardingStatus(result);
+  };
+  const handleEditTask = (taskId: string) => {
+    const result = { ...onBoardingStatus };
+    result.isUpdateTask = true;
+    setonBoardingStatus(result);
+  };
   return (
     <div className="w-full flex items-center justify-center min-h-[50vh]">
       <div className="border border-slate-300 rounded-lg bg-white min-w-[400px]">
@@ -40,10 +54,10 @@ const ViewTask = ({ handleCancel }: { handleCancel: () => void }) => {
           </div>
           <div className="absolute bottom-2 right-2">
             <div className="flex flex-row items-center justify-between gap-2 pr-2 max-w-[90px]">
-              <div onClick={() => ""}>
+              <div onClick={() => handleEditTask(onBoardingStatus.currentId)}>
                 <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
               </div>
-              <div onClick={() => ""}>
+              <div onClick={() => handleDeleteTask(onBoardingStatus.currentId)}>
                 <FaTrash className="text-red-300 hover:text-red-400 cursor-pointer h-4 w-4" />
               </div>
             </div>
