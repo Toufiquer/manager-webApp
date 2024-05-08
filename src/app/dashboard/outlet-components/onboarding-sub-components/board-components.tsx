@@ -21,6 +21,7 @@ import {
   webAppH2Light,
   webAppPLight,
 } from "@/components/common/style";
+import { Button } from "@/components/ui/button";
 
 export const zodItemSchema = z.object({
   title: z
@@ -53,6 +54,8 @@ const initRenderData = {
   isUpdateItem: false,
   isDeleteItem: false,
   currentTitle: "",
+  currentDescription: "",
+  currentId: "",
 };
 const BoardComponents = () => {
   const [addNew, setAddNew] = useState(initRenderData);
@@ -75,15 +78,33 @@ const BoardComponents = () => {
     result.isAddBoard = true;
     setAddNew(result);
   };
+  const handleDeleteBoard = (boardId: string) => {
+    const result = { ...addNew };
+    result.isDeleteBoard = true;
+    const findBoard = boardTask.statusLst.find((curr) => curr.id === boardId);
+    result.currentTitle = findBoard?.title || "";
+    result.currentDescription = findBoard?.description || "";
+    result.currentId = boardId;
+    setAddNew(result);
+  };
   const handleUpdateBoard = (boardId: string) => {
     const result = { ...addNew };
     result.isUpdateBoard = true;
     const findBoard = boardTask.statusLst.find((curr) => curr.id === boardId);
-    console.log("findBoard: ", findBoard);
     result.currentTitle = findBoard?.title || "";
     setValue("title", findBoard?.title || "");
     setValue("description", findBoard?.description || "");
     setAddNew(result);
+  };
+  const handleConfirmBoardDelete = (boardId: string) => {
+    const result = { ...boardTask };
+    result.statusLst = boardTask.statusLst.filter(
+      (curr) => curr.id !== boardId
+    );
+    setBoardTask(result);
+    reset();
+    setAddNew(initRenderData);
+    handleCancel();
   };
   const onSubmit = handleSubmit((data) => {
     const result = { ...boardTask };
@@ -168,75 +189,126 @@ const BoardComponents = () => {
     <main className={`${!addNew.isRender && " bg-blue-50 "} p-4`}>
       <div className="w-full min-h-[52vh] flex flex-col">
         {isRenderModal ? (
-          <div className="py-4 flex flex-col items-center justify-center w-full min-h-[52vh] ">
-            <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg bg-blue-50 border-slate-300 flex items-center justify-between">
-              <div className="w-full flex items-center justify-between">
-                <h2 className={webAppH2Light + " text-slate-600"}>
-                  {addNew.isAddBoard && "New Board"}
-                  {addNew.isAddItem && "New Task"}
-                  {addNew.currentBoard && (
-                    <small className="text-sm text-slate-400 px-2">
-                      ({addNew.currentBoard})
-                    </small>
-                  )}
-                </h2>
-                <div onClick={handleCancel} className="cursor-pointer">
-                  <RxCross1 />
+          <div>
+            {addNew.isDeleteBoard ? (
+              // Check for confirmation
+              <main className="w-full min-h-[50vh] h-full flex items-center justify-center">
+                <div className="max-w-[600px]">
+                  <div className="min-h-[40vh] h-full w-full flex flex-col p-2 px-4 border border-slate-300 rounded-lg">
+                    <div className="w-full flex items-center justify-between pr-1 mr-2">
+                      <p
+                        className={
+                          webAppH2Light + " text-2xl mt-4 text-slate-600"
+                        }
+                      >
+                        {addNew.currentTitle}
+                      </p>
+                      <div className="cursor-pointer" onClick={handleCancel}>
+                        <RxCross1 />
+                      </div>
+                    </div>
+                    <div className="h-full min-h-[40vh] w-full flex flex-col gap-4 items-center justify-center">
+                      <div className="min-w-[300px] max-w-[500px] w-full gap-4 flex flex-col">
+                        <p className={webAppPLight}>
+                          {addNew.currentDescription}
+                        </p>
+                        <div className="border p-4 text-rose-400">
+                          <strong>Note</strong>
+                          <p>After Delete Your data will not be recoverable</p>
+                        </div>
+                        <div className="text-center pt-4 mb-0 pb-0 text-rose-400">
+                          Are You Confirm?
+                        </div>
+                        <Button
+                          onClick={() =>
+                            handleConfirmBoardDelete(addNew.currentId)
+                          }
+                          variant="outline"
+                          className="bg-rose-400 hover:bg-rose-500 text-white hover:text-white font-bold"
+                        >
+                          Delete
+                        </Button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </main>
+            ) : (
+              // Add or Update
+              <div className="py-4 flex flex-col items-center justify-center w-full min-h-[52vh] ">
+                <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg bg-blue-50 border-slate-300 flex items-center justify-between">
+                  <div className="w-full flex items-center justify-between">
+                    <h2 className={webAppH2Light + " text-slate-600"}>
+                      {addNew.isAddBoard && "New Board"}
+                      {addNew.isAddItem && "New Task"}
+                      {addNew.currentBoard && (
+                        <small className="text-sm text-slate-400 px-2">
+                          ({addNew.currentBoard})
+                        </small>
+                      )}
+                    </h2>
+                    <div onClick={handleCancel} className="cursor-pointer">
+                      <RxCross1 />
+                    </div>
+                  </div>
+
+                  <form onSubmit={onSubmit} className="w-full">
+                    <div className="w-full flex flex-col gap-2">
+                      <div className="flex flex-col mt-4 w-full">
+                        <label
+                          className="text-sm w-full font-semibold text-slate-500"
+                          htmlFor="title"
+                        >
+                          Title
+                        </label>
+                        <input
+                          className={BorderStyle}
+                          {...register("title")}
+                          placeholder="Title"
+                        />
+                        {errors?.title && (
+                          <p className="text-sm text-rose-400">
+                            {errors.title.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+                    <div className="w-full flex flex-col gap-2">
+                      <div className="flex flex-col mt-4 w-full">
+                        <label
+                          className="text-sm w-full font-semibold text-slate-500"
+                          htmlFor="description"
+                        >
+                          Description
+                        </label>
+                        <textarea
+                          rows={4}
+                          className={BorderStyle}
+                          {...register("description")}
+                          placeholder="Description"
+                        />
+                        {errors?.description && (
+                          <p className="text-sm text-rose-400">
+                            {errors.description.message}
+                          </p>
+                        )}
+                      </div>
+                    </div>
+
+                    <input
+                      type="submit"
+                      className={
+                        buttonStyle + " font-[400] text-[16px] py-[4px]"
+                      }
+                    />
+                  </form>
                 </div>
               </div>
-
-              <form onSubmit={onSubmit} className="w-full">
-                <div className="w-full flex flex-col gap-2">
-                  <div className="flex flex-col mt-4 w-full">
-                    <label
-                      className="text-sm w-full font-semibold text-slate-500"
-                      htmlFor="title"
-                    >
-                      Title
-                    </label>
-                    <input
-                      className={BorderStyle}
-                      {...register("title")}
-                      placeholder="Title"
-                    />
-                    {errors?.title && (
-                      <p className="text-sm text-rose-400">
-                        {errors.title.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-                <div className="w-full flex flex-col gap-2">
-                  <div className="flex flex-col mt-4 w-full">
-                    <label
-                      className="text-sm w-full font-semibold text-slate-500"
-                      htmlFor="description"
-                    >
-                      Description
-                    </label>
-                    <textarea
-                      rows={4}
-                      className={BorderStyle}
-                      {...register("description")}
-                      placeholder="Description"
-                    />
-                    {errors?.description && (
-                      <p className="text-sm text-rose-400">
-                        {errors.description.message}
-                      </p>
-                    )}
-                  </div>
-                </div>
-
-                <input
-                  type="submit"
-                  className={buttonStyle + " font-[400] text-[16px] py-[4px]"}
-                />
-              </form>
-            </div>
+            )}
           </div>
         ) : (
           <div>
+            {/* View all Board  */}
             <div className="w-full flex items-center justify-between">
               <div className="flex w-full gap-4 my-2">
                 <h2
@@ -295,6 +367,7 @@ const BoardComponents = () => {
               {boardTask.statusLst.map((curr, idx) => (
                 <BoxContainer
                   handleUpdateBoard={handleUpdateBoard}
+                  handleDeleteBoard={handleDeleteBoard}
                   curr={curr}
                   key={curr.id + idx}
                   title={curr.title || ""}

@@ -29,13 +29,15 @@ import { webAppH2 } from "@/components/common/style";
 const BoxContainer = ({
   curr,
   handleUpdateBoard,
+  handleDeleteBoard,
   title,
   setValue,
   addNew,
   setAddNew,
 }: {
-  curr: { id: string; title: string; description: string };
+  curr: { id: string; title: string; description?: string };
   handleUpdateBoard: (boardId: string) => void;
+  handleDeleteBoard: (boardId: string) => void;
   addNew: {
     newBoard: boolean;
     isRender: boolean;
@@ -87,13 +89,6 @@ const BoxContainer = ({
     });
     setBoardTask({ ...boardTask, data: result });
   };
-  const handleDelete = (statusName: string) => {
-    // const filterData = boardTask.statusLst.filter(
-    //   (curr) => curr !== statusName
-    // );
-    // setBoardTask({ ...boardTask, statusLst: filterData });
-  };
-
   return (
     <div ref={drop} className="min-h-[80vh] bg-white w-full rounded-lg">
       <div className="flex flex-col w-full h-full">
@@ -138,9 +133,7 @@ const BoxContainer = ({
                 <DropdownMenuItem>
                   <div
                     className="font-semibold cursor-pointer w-full"
-                    onClick={() => {
-                      handleDelete(title);
-                    }}
+                    onClick={() => handleDeleteBoard(curr.id)}
                   >
                     Delete
                   </div>
