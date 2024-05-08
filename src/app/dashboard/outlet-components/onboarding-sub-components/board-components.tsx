@@ -41,15 +41,20 @@ export const zodItemSchema = z.object({
     .optional(),
 });
 type newItemFormSchema = z.infer<typeof zodItemSchema>;
-
+const initRenderData = {
+  newBoard: false,
+  isRender: false,
+  isUpdate: false,
+  isAddBoard: false,
+  isUpdateBoard: false,
+  isDeleteBoard: false,
+  isAddItem: false,
+  isUpdateItem: false,
+  isDeleteItem: false,
+  currentBoard: "",
+};
 const BoardComponents = () => {
-  const [addNew, setAddNew] = useState({
-    newBoard: false,
-    isAddItem: false,
-    isRender: false,
-    isUpdate: false,
-    currentBoard: "",
-  });
+  const [addNew, setAddNew] = useState(initRenderData);
   const boardTask = useGlobalStore((store) => store.boardTask);
   const setBoardTask = useGlobalStore((store) => store.setBoardTask);
   const {
@@ -61,76 +66,87 @@ const BoardComponents = () => {
   } = useForm<newItemFormSchema>({ resolver: zodResolver(zodItemSchema) });
 
   const handleCancel = () => {
-    setAddNew({ ...addNew, isRender: false });
+    setAddNew({ ...initRenderData });
     reset();
+  };
+  const handleAddNewBoard = () => {
+    const result = { ...addNew };
+    result.isAddBoard = true;
+    setAddNew(result);
   };
   const onSubmit = handleSubmit((data) => {
     const result = { ...boardTask };
-    if (addNew.newBoard) {
-      // add board if addNew.newBoard is true
+
+    if (addNew.isAddBoard)
       result.statusLst = [...boardTask.statusLst, data.title];
-    } else if (addNew.isUpdate) {
-      // update board if addNew.isUpdate is true
-      result.statusLst = boardTask.statusLst.map((status) => {
-        if (
-          status.toLocaleLowerCase() === addNew.currentBoard.toLocaleLowerCase()
-        ) {
-          return data.title;
-        } else {
-          return status;
-        }
-      });
-      // console.log(" result : ", addNew.currentBoard.toLocaleLowerCase());
-      result.data = boardTask.data.map((curr) => {
-        const item = { ...curr };
-        // console.log(
-        //   "items : ",
-        //   curr.status.toLocaleLowerCase() ===
-        //     addNew.currentBoard.toLocaleLowerCase(),
-        //   curr.status.toLocaleLowerCase(),
-        //   addNew.currentBoard.toLocaleLowerCase(),
-        //   curr
-        // );
-        if (
-          curr.status.toLocaleLowerCase() ===
-          addNew.currentBoard.toLocaleLowerCase()
-        ) {
-          item.status = data.title;
-        }
-        return item;
-      });
-    } else if (!addNew.newBoard) {
-      // add new item under board
-      result.data = [
-        ...boardTask.data,
-        {
-          ...data,
-          status: addNew.currentBoard || "",
-          id: Math.random() + "",
-          lstUpdate: new Date(),
-        },
-      ];
-    }
-    console.log("final result: ", result);
+    // if (addNew.newBoard) {
+    //   // add board if addNew.newBoard is true
+    // } else if (addNew.isUpdate) {
+    //   // update board if addNew.isUpdate is true
+    //   result.statusLst = boardTask.statusLst.map((status) => {
+    //     if (
+    //       status.toLocaleLowerCase() === addNew.currentBoard.toLocaleLowerCase()
+    //     ) {
+    //       return data.title;
+    //     } else {
+    //       return status;
+    //     }
+    //   });
+    //   // console.log(" result : ", addNew.currentBoard.toLocaleLowerCase());
+    //   result.data = boardTask.data.map((curr) => {
+    //     const item = { ...curr };
+    //     // console.log(
+    //     //   "items : ",
+    //     //   curr.status.toLocaleLowerCase() ===
+    //     //     addNew.currentBoard.toLocaleLowerCase(),
+    //     //   curr.status.toLocaleLowerCase(),
+    //     //   addNew.currentBoard.toLocaleLowerCase(),
+    //     //   curr
+    //     // );
+    //     if (
+    //       curr.status.toLocaleLowerCase() ===
+    //       addNew.currentBoard.toLocaleLowerCase()
+    //     ) {
+    //       item.status = data.title;
+    //     }
+    //     return item;
+    //   });
+    // } else if (!addNew.newBoard) {
+    //   // add new item under board
+    //   result.data = [
+    //     ...boardTask.data,
+    //     {
+    //       ...data,
+    //       status: addNew.currentBoard || "",
+    //       id: Math.random() + "",
+    //       lstUpdate: new Date(),
+    //     },
+    //   ];
+    // }
+    // console.log("final result: ", result);
     setBoardTask({ ...result });
     handleCancel();
   });
   const BorderStyle =
     "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-sm text-gray-800 focus:outline-none";
-
+  let isRenderModal =
+    addNew.isAddBoard ||
+    addNew.isUpdateBoard ||
+    addNew.isDeleteBoard ||
+    addNew.isAddItem ||
+    addNew.isUpdateItem ||
+    addNew.isDeleteItem;
   return (
     <main className={`${!addNew.isRender && " bg-blue-50 "} p-4`}>
       <div className="w-full min-h-[52vh] flex flex-col">
-        {addNew.isRender ? (
+        {isRenderModal ? (
           <div className="py-4 flex flex-col items-center justify-center w-full min-h-[52vh] ">
             <div className="text-xl flex-col w-full max-w-[480px] border p-4 rounded-lg bg-blue-50 border-slate-300 flex items-center justify-between">
               <div className="w-full flex items-center justify-between">
                 <h2 className={webAppH2Light + " text-slate-600"}>
-                  {!addNew.isUpdate &&
-                    (addNew.newBoard ? "New Board" : "New Item")}
-                  {addNew.isUpdate &&
-                    (addNew.newBoard ? "Add Item" : "Update Board")}
-                  {!addNew.isUpdate && !addNew.newBoard && (
+                  {addNew.isAddBoard && "New Board"}
+                  {addNew.isAddItem && "New Task"}
+                  {addNew.currentBoard && (
                     <small className="text-sm text-slate-400 px-2">
                       ({addNew.currentBoard})
                     </small>
@@ -238,9 +254,7 @@ const BoardComponents = () => {
                 </div>
               </div>
               <p
-                onClick={() =>
-                  setAddNew({ ...addNew, isRender: true, newBoard: true })
-                }
+                onClick={handleAddNewBoard}
                 className={
                   webAppPLight +
                   " cursor-pointer hover:text-slate-600 hover:underline w-[120px]"
