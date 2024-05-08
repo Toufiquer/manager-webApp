@@ -50,9 +50,9 @@ const initRenderData = {
   isAddBoard: false,
   isUpdateBoard: false,
   isDeleteBoard: false,
-  isAddItem: false,
-  isUpdateItem: false,
-  isDeleteItem: false,
+  isAddTask: false,
+  isUpdateTask: false,
+  isDeleteTask: false,
   currentTitle: "",
   currentDescription: "",
   currentId: "",
@@ -73,18 +73,11 @@ const BoardComponents = () => {
     setAddNew({ ...initRenderData });
     reset();
   };
+
+  // Board functionality
   const handleAddNewBoard = () => {
     const result = { ...addNew };
     result.isAddBoard = true;
-    setAddNew(result);
-  };
-  const handleDeleteBoard = (boardId: string) => {
-    const result = { ...addNew };
-    result.isDeleteBoard = true;
-    const findBoard = boardTask.statusLst.find((curr) => curr.id === boardId);
-    result.currentTitle = findBoard?.title || "";
-    result.currentDescription = findBoard?.description || "";
-    result.currentId = boardId;
     setAddNew(result);
   };
   const handleUpdateBoard = (boardId: string) => {
@@ -94,6 +87,15 @@ const BoardComponents = () => {
     result.currentTitle = findBoard?.title || "";
     setValue("title", findBoard?.title || "");
     setValue("description", findBoard?.description || "");
+    setAddNew(result);
+  };
+  const handleDeleteBoard = (boardId: string) => {
+    const result = { ...addNew };
+    result.isDeleteBoard = true;
+    const findBoard = boardTask.statusLst.find((curr) => curr.id === boardId);
+    result.currentTitle = findBoard?.title || "";
+    result.currentDescription = findBoard?.description || "";
+    result.currentId = boardId;
     setAddNew(result);
   };
   const handleConfirmBoardDelete = (boardId: string) => {
@@ -106,9 +108,17 @@ const BoardComponents = () => {
     setAddNew(initRenderData);
     handleCancel();
   };
+  // task functionality
+  const handleAddNewTask = (boardTitle: string) => {
+    const result = { ...addNew };
+    result.isAddTask = true;
+    result.currentTitle = boardTitle;
+    setAddNew(result);
+  };
   const onSubmit = handleSubmit((data) => {
     const result = { ...boardTask };
 
+    //  Board Functionality
     if (addNew.isAddBoard) {
       result.statusLst = [
         ...boardTask.statusLst,
@@ -127,7 +137,18 @@ const BoardComponents = () => {
         }
         return i;
       });
+    } else if (addNew.isAddTask) {
+      result.data = [
+        ...boardTask.data,
+        {
+          ...data,
+          status: addNew.currentTitle || "",
+          id: Math.random() + "",
+          lstUpdate: new Date(),
+        },
+      ];
     }
+
     // if (addNew.newBoard) {
     //   // add board if addNew.newBoard is true
     // } else if (addNew.isUpdate) {
@@ -182,9 +203,9 @@ const BoardComponents = () => {
     addNew.isAddBoard ||
     addNew.isUpdateBoard ||
     addNew.isDeleteBoard ||
-    addNew.isAddItem ||
-    addNew.isUpdateItem ||
-    addNew.isDeleteItem;
+    addNew.isAddTask ||
+    addNew.isUpdateTask ||
+    addNew.isDeleteTask;
   return (
     <main className={`${!addNew.isRender && " bg-blue-50 "} p-4`}>
       <div className="w-full min-h-[52vh] flex flex-col">
@@ -240,7 +261,7 @@ const BoardComponents = () => {
                   <div className="w-full flex items-center justify-between">
                     <h2 className={webAppH2Light + " text-slate-600"}>
                       {addNew.isAddBoard && "New Board"}
-                      {addNew.isAddItem && "New Task"}
+                      {addNew.isAddTask && "New Task"}
                       {addNew.currentBoard && (
                         <small className="text-sm text-slate-400 px-2">
                           ({addNew.currentBoard})
@@ -366,6 +387,7 @@ const BoardComponents = () => {
             <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
               {boardTask.statusLst.map((curr, idx) => (
                 <BoxContainer
+                  handleAddNewTask={handleAddNewTask}
                   handleUpdateBoard={handleUpdateBoard}
                   handleDeleteBoard={handleDeleteBoard}
                   curr={curr}

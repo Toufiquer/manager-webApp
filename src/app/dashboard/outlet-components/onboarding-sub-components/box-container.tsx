@@ -28,6 +28,7 @@ import { webAppH2 } from "@/components/common/style";
 
 const BoxContainer = ({
   curr,
+  handleAddNewTask,
   handleUpdateBoard,
   handleDeleteBoard,
   title,
@@ -36,6 +37,7 @@ const BoxContainer = ({
   setAddNew,
 }: {
   curr: { id: string; title: string; description?: string };
+  handleAddNewTask: (handleAddNewTask: string) => void;
   handleUpdateBoard: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
   addNew: {
@@ -116,7 +118,10 @@ const BoxContainer = ({
             <p className="text-xs text-slate-500">{curr.description}</p>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <BsPlusLg className="cursor-pointer" onClick={() => ""} />
+            <BsPlusLg
+              className="cursor-pointer"
+              onClick={() => handleAddNewTask(curr.title)}
+            />
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <HiDotsHorizontal className="cursor-pointer" />

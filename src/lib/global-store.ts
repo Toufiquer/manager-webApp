@@ -22,7 +22,13 @@ interface useGlobalStoreType {
   dashboardData: any;
   setDashboardData: (payload: any) => void;
   boardTask: {
-    data: any[];
+    data: {
+      id: string;
+      title: string;
+      description?: string | undefined;
+      status?: string;
+      lstUpdate?: string | Date | "";
+    }[];
     statusLst: { id: string; title: string; description?: string }[];
   };
   setBoardTask: (payload: any) => void;
