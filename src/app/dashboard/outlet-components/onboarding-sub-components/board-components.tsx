@@ -83,6 +83,13 @@ const BoardComponents = () => {
         }
         return i;
       });
+      result.data = boardTask.data.map((curr) => {
+        const i = { ...curr };
+        if (i.status === onBoardingStatus.currentTitle) {
+          i.status = data.title;
+        }
+        return i;
+      });
     } else if (onBoardingStatus.isAddTask) {
       result.data = [
         ...boardTask.data,
