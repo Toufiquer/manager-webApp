@@ -13,6 +13,7 @@ import { IoAddSharp } from "react-icons/io5";
 
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
 import { webAppH2, webAppTitleXl } from "./style";
 
 const SideBar = () => {

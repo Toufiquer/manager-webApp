@@ -11,8 +11,9 @@
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
-import BoardComponents from "./board-components";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+import BoardComponents from "./board-components";
 
 const Board = () => {
   return (

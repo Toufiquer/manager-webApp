@@ -10,9 +10,10 @@ import {
   ResizablePanel,
   ResizablePanelGroup,
 } from "@/components/ui/resizable";
-import HeaderDashboard from "./header-dashboard";
+
 import Sidebar from "./sidebar";
 import DashboardOutlet from "./dashboard-outlet";
+import HeaderDashboard from "./header-dashboard";
 
 const Page = () => {
   return (

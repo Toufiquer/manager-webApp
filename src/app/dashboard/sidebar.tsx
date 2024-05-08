@@ -8,6 +8,7 @@
 
 "use client";
 
+import Link from "next/link";
 import { MdTaskAlt } from "react-icons/md";
 import { CiCirclePlus } from "react-icons/ci";
 import { IoStatsChart } from "react-icons/io5";
@@ -18,9 +19,8 @@ import { HiOutlineInboxArrowDown } from "react-icons/hi2";
 
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import Link from "next/link";
 import { webAppH2Light, webAppPLight } from "@/components/common/style";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 type sidebarType = {
   id: number;
   name: string;

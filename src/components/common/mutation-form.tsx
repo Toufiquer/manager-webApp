@@ -41,7 +41,6 @@ export const zodItemSchema = z.object({
     .string({
       invalid_type_error: "Info must be a string",
     })
-    .min(3, "Minimum 3 characters")
     .max(120, "Maximum 120 characters")
     .trim()
     .optional(),

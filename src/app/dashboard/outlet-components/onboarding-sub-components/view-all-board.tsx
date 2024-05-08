@@ -1,14 +1,3 @@
-import { webAppPLight } from "@/components/common/style";
-import { initRenderOnboardingStatus, useGlobalStore } from "@/lib/global-store";
-import {
-  UseFormHandleSubmit,
-  UseFormReset,
-  UseFormSetValue,
-} from "react-hook-form";
-import { BiSort } from "react-icons/bi";
-import { CiFilter } from "react-icons/ci";
-import BoxContainer from "./box-container";
-
 /*
 |-----------------------------------------
 | setting up ViewAllBoard for the App
@@ -16,6 +5,16 @@ import BoxContainer from "./box-container";
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
+
+import { BiSort } from "react-icons/bi";
+import { CiFilter } from "react-icons/ci";
+import { UseFormSetValue } from "react-hook-form";
+
+import { useGlobalStore } from "@/lib/global-store";
+import { webAppPLight } from "@/components/common/style";
+
+import BoxContainer from "./box-container";
+
 const ViewAllBoard = ({
   setValue,
 }: {
@@ -137,7 +136,6 @@ const ViewAllBoard = ({
             curr={curr}
             key={curr.id + idx}
             title={curr.title || ""}
-            setValue={setValue}
           />
         ))}
       </div>

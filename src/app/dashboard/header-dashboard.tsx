@@ -9,9 +9,6 @@ import { CiBellOn } from "react-icons/ci";
 import { MdOutlineMailOutline } from "react-icons/md";
 import { GoQuestion } from "react-icons/go";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Sheet,
   SheetClose,
@@ -22,8 +19,11 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { webAppH2 } from "@/components/common/style";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const SearchBar = () => {
   return (

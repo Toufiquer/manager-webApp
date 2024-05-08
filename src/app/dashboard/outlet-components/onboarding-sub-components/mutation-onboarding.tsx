@@ -23,6 +23,7 @@ import {
   webAppH2Light,
 } from "@/components/common/style";
 import { useGlobalStore } from "@/lib/global-store";
+
 export const zodItemSchema = z.object({
   title: z
     .string({
@@ -41,6 +42,7 @@ export const zodItemSchema = z.object({
     .trim()
     .optional(),
 });
+
 const MutationOnboarding = ({
   register,
   formState,

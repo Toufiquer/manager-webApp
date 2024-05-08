@@ -8,23 +8,22 @@
 
 "use client";
 
+import { useEffect } from "react";
 import { useDrop } from "react-dnd";
 import { BsPlusLg } from "react-icons/bs";
 import { HiDotsHorizontal } from "react-icons/hi";
-import { UseFormSetValue } from "react-hook-form";
-import { useEffect } from "react";
 
-import { useGlobalStore } from "@/lib/global-store";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { useGlobalStore } from "@/lib/global-store";
+import { webAppH2 } from "@/components/common/style";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import SingleBox from "./single-box";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { webAppH2 } from "@/components/common/style";
 
 const BoxContainer = ({
   curr,
@@ -33,17 +32,12 @@ const BoxContainer = ({
   handleUpdateBoard,
   handleDeleteBoard,
   title,
-  setValue,
 }: {
   curr: { id: string; title: string; description?: string };
   handleViewTask: (TaskId: string) => void;
   handleAddNewTask: (TaskId: string) => void;
   handleUpdateBoard: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
-  setValue: UseFormSetValue<{
-    title: string;
-    description?: string | undefined;
-  }>;
   title: string;
   sampleData?: number[];
 }) => {
