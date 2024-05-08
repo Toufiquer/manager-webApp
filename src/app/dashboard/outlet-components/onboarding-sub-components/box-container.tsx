@@ -28,6 +28,7 @@ import { webAppH2 } from "@/components/common/style";
 
 const BoxContainer = ({
   curr,
+  handleViewTask,
   handleAddNewTask,
   handleUpdateBoard,
   handleDeleteBoard,
@@ -37,7 +38,8 @@ const BoxContainer = ({
   setAddNew,
 }: {
   curr: { id: string; title: string; description?: string };
-  handleAddNewTask: (handleAddNewTask: string) => void;
+  handleViewTask: (TaskId: string) => void;
+  handleAddNewTask: (TaskId: string) => void;
   handleUpdateBoard: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
   addNew: {
@@ -167,6 +169,7 @@ const BoxContainer = ({
                 .sort((a, b) => a.lstUpdate - b.lstUpdate)
                 .map((curr, idx) => (
                   <SingleBox
+                    handleViewTask={handleViewTask}
                     curr={curr}
                     key={"" + curr.id + idx}
                     parentDiv={title}
