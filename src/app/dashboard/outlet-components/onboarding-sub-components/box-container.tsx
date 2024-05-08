@@ -100,14 +100,14 @@ const BoxContainer = ({
               {curr.title}
               {boardTask.data.filter(
                 (curr) =>
-                  curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
+                  curr.status?.toLocaleLowerCase() === title.toLocaleLowerCase()
               ).length > 0 && (
                 <small className="text-slate-500 text-sm">
                   (
                   {
                     boardTask.data.filter(
                       (curr) =>
-                        curr.status.toLocaleLowerCase() ===
+                        curr.status?.toLocaleLowerCase() ===
                         title.toLocaleLowerCase()
                     ).length
                   }
@@ -151,7 +151,7 @@ const BoxContainer = ({
           <div className="flex flex-col gap-4 mt-4 min-h-[80vh]">
             {boardTask.data.filter(
               (curr) =>
-                curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
+                curr.status?.toLocaleLowerCase() === title.toLocaleLowerCase()
             ).length === 0 && (
               <div className={webAppH2 + " text-center pt-6"}>
                 Nothing was found
@@ -161,7 +161,7 @@ const BoxContainer = ({
               boardTask.data
                 .filter(
                   (curr) =>
-                    curr.status.toLocaleLowerCase() ===
+                    curr.status?.toLocaleLowerCase() ===
                     title.toLocaleLowerCase()
                 )
                 .sort((a, b) => a.lstUpdate - b.lstUpdate)

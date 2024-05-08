@@ -27,7 +27,7 @@ interface useGlobalStoreType {
       title: string;
       description?: string | undefined;
       status?: string;
-      lstUpdate?: string | Date | "";
+      lstUpdate: Date | any;
     }[];
     statusLst: { id: string; title: string; description?: string }[];
   };
