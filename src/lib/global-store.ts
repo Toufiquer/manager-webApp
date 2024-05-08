@@ -10,6 +10,38 @@
 
 import { create } from "zustand";
 
+export type initRenderOnboardingStatusType = {
+  currentBoard: string;
+  newBoard: boolean;
+  isRender: boolean;
+  isUpdate: boolean;
+  isAddBoard: boolean;
+  isUpdateBoard: boolean;
+  isDeleteBoard: boolean;
+  isAddTask: boolean;
+  isUpdateTask: boolean;
+  isDeleteTask: boolean;
+  isViewTask: boolean;
+  currentTitle: string;
+  currentDescription: string;
+  currentId: string;
+};
+export const initRenderOnboardingStatus: initRenderOnboardingStatusType = {
+  currentBoard: "",
+  newBoard: false,
+  isRender: false,
+  isUpdate: false,
+  isAddBoard: false,
+  isUpdateBoard: false,
+  isDeleteBoard: false,
+  isAddTask: false,
+  isUpdateTask: false,
+  isDeleteTask: false,
+  isViewTask: false,
+  currentTitle: "",
+  currentDescription: "",
+  currentId: "",
+};
 interface useGlobalStoreType {
   isRestaurant: boolean;
   setIsRestaurant: (payload: any) => void;
@@ -32,6 +64,8 @@ interface useGlobalStoreType {
     statusLst: { id: string; title: string; description?: string }[];
   };
   setBoardTask: (payload: any) => void;
+  onBoardingStatus: initRenderOnboardingStatusType;
+  setonBoardingStatus: (payload: any) => void;
 }
 export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   isRestaurant: true,
@@ -53,4 +87,6 @@ export const useGlobalStore = create<useGlobalStoreType>((set) => ({
     ],
   },
   setBoardTask: (payload) => set(() => ({ boardTask: payload })),
+  onBoardingStatus: initRenderOnboardingStatus,
+  setonBoardingStatus: (payload) => set(() => ({ onBoardingStatus: payload })),
 }));

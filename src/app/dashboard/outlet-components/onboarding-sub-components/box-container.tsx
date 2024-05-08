@@ -12,7 +12,7 @@ import { useDrop } from "react-dnd";
 import { BsPlusLg } from "react-icons/bs";
 import { HiDotsHorizontal } from "react-icons/hi";
 import { UseFormSetValue } from "react-hook-form";
-import { Dispatch, SetStateAction, useEffect } from "react";
+import { useEffect } from "react";
 
 import { useGlobalStore } from "@/lib/global-store";
 import {
@@ -34,28 +34,12 @@ const BoxContainer = ({
   handleDeleteBoard,
   title,
   setValue,
-  addNew,
-  setAddNew,
 }: {
   curr: { id: string; title: string; description?: string };
   handleViewTask: (TaskId: string) => void;
   handleAddNewTask: (TaskId: string) => void;
   handleUpdateBoard: (boardId: string) => void;
   handleDeleteBoard: (boardId: string) => void;
-  addNew: {
-    newBoard: boolean;
-    isRender: boolean;
-    isUpdate: boolean;
-  };
-  setAddNew: Dispatch<
-    SetStateAction<{
-      newBoard: boolean;
-      isRender: boolean;
-      isUpdate: boolean;
-      currentBoard: string;
-      isAddItem: boolean;
-    }>
-  >;
   setValue: UseFormSetValue<{
     title: string;
     description?: string | undefined;

@@ -6,8 +6,10 @@
 |-----------------------------------------
 */
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useDrag } from "react-dnd";
+
+import { webAppH2Light, webAppPLight } from "@/components/common/style";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const SingleBox = ({
   curr,
@@ -40,8 +42,10 @@ const SingleBox = ({
         ref={drag}
       >
         <div className="w-full relative min-h-[180px] cursor-pointer hover:bg-slate-200 duration-200 bg-slate-100 rounded-lg p-2">
-          <h2 className="text-slate-600 font-semibold">{curr.title}</h2>
-          <p className="text-slate-500">{curr.description}</p>
+          <h2 className={webAppH2Light}>{curr.title}</h2>
+          <p className={webAppPLight + " font-[500] text-sm"}>
+            {curr.description}
+          </p>
           <div className="w-full flex items-center gap-2">
             <div className="bg-orange-100 rounded-lg mt-6 px-4 flex items-center justify-center h-[80px] w-[80px] py-1 ">
               Image
