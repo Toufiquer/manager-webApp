@@ -9,9 +9,10 @@
 import { RxCross1 } from "react-icons/rx";
 
 import { webAppH2Light } from "@/components/common/style";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 import { initRenderDataType } from "./board-components";
+import { FaRegEdit } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa6";
 
 const ViewTask = ({
   addNew,
@@ -42,10 +43,14 @@ const ViewTask = ({
             </div>
           </div>
           <div className="absolute bottom-2 right-2">
-            <Avatar>
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>CN</AvatarFallback>
-            </Avatar>
+            <div className="flex flex-row items-center justify-between gap-4 pr-2 max-w-[90px]">
+              <div onClick={() => ""}>
+                <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
+              </div>
+              <div onClick={() => ""}>
+                <FaTrash className="text-red-300 hover:text-red-400 cursor-pointer h-4 w-4" />
+              </div>
+            </div>
           </div>
         </div>
       </div>
