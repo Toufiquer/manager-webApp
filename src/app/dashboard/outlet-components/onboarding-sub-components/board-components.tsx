@@ -42,6 +42,7 @@ export const zodItemSchema = z.object({
 });
 type newItemFormSchema = z.infer<typeof zodItemSchema>;
 const initRenderData = {
+  currentBoard: "",
   newBoard: false,
   isRender: false,
   isUpdate: false,
@@ -51,7 +52,7 @@ const initRenderData = {
   isAddItem: false,
   isUpdateItem: false,
   isDeleteItem: false,
-  currentBoard: "",
+  currentTitle: "",
 };
 const BoardComponents = () => {
   const [addNew, setAddNew] = useState(initRenderData);
@@ -74,11 +75,38 @@ const BoardComponents = () => {
     result.isAddBoard = true;
     setAddNew(result);
   };
+  const handleUpdateBoard = (boardId: string) => {
+    const result = { ...addNew };
+    result.isUpdateBoard = true;
+    const findBoard = boardTask.statusLst.find((curr) => curr.id === boardId);
+    console.log("findBoard: ", findBoard);
+    result.currentTitle = findBoard?.title || "";
+    setValue("title", findBoard?.title || "");
+    setValue("description", findBoard?.description || "");
+    setAddNew(result);
+  };
   const onSubmit = handleSubmit((data) => {
     const result = { ...boardTask };
 
-    if (addNew.isAddBoard)
-      result.statusLst = [...boardTask.statusLst, data.title];
+    if (addNew.isAddBoard) {
+      result.statusLst = [
+        ...boardTask.statusLst,
+        {
+          id: boardTask.statusLst.length + 1 + "",
+          title: data.title,
+          description: data.description,
+        },
+      ];
+    } else if (addNew.isUpdateBoard) {
+      result.statusLst = boardTask.statusLst.map((curr) => {
+        const i = { ...curr };
+        if (i.title === addNew.currentTitle) {
+          i.title = data.title;
+          i.description = data.description;
+        }
+        return i;
+      });
+    }
     // if (addNew.newBoard) {
     //   // add board if addNew.newBoard is true
     // } else if (addNew.isUpdate) {
@@ -266,8 +294,10 @@ const BoardComponents = () => {
             <div className="w-full grid grid-cols-1 md:grid-cols-3 items-center justify-between gap-4">
               {boardTask.statusLst.map((curr, idx) => (
                 <BoxContainer
-                  key={curr + idx}
-                  title={curr || ""}
+                  handleUpdateBoard={handleUpdateBoard}
+                  curr={curr}
+                  key={curr.id + idx}
+                  title={curr.title || ""}
                   addNew={addNew}
                   setAddNew={setAddNew}
                   setValue={setValue}

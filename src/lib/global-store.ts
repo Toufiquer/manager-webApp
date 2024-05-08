@@ -23,7 +23,7 @@ interface useGlobalStoreType {
   setDashboardData: (payload: any) => void;
   boardTask: {
     data: any[];
-    statusLst: string[];
+    statusLst: { id: string; title: string; description?: string }[];
   };
   setBoardTask: (payload: any) => void;
 }
@@ -40,7 +40,11 @@ export const useGlobalStore = create<useGlobalStoreType>((set) => ({
   setDashboardData: (payload) => set(() => ({ dashboardData: payload })),
   boardTask: {
     data: [],
-    statusLst: ["Task", "Inprogress", "Done"],
+    statusLst: [
+      { id: "1", title: "Task" },
+      { id: "2", title: "Inprogress" },
+      { id: "3", title: "Done" },
+    ],
   },
   setBoardTask: (payload) => set(() => ({ boardTask: payload })),
 }));

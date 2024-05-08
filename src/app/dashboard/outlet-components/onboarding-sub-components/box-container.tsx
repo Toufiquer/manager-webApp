@@ -27,11 +27,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { webAppH2 } from "@/components/common/style";
 
 const BoxContainer = ({
+  curr,
+  handleUpdateBoard,
   title,
   setValue,
   addNew,
   setAddNew,
 }: {
+  curr: { id: string; title: string; description: string };
+  handleUpdateBoard: (boardId: string) => void;
   addNew: {
     newBoard: boolean;
     isRender: boolean;
@@ -84,10 +88,10 @@ const BoxContainer = ({
     setBoardTask({ ...boardTask, data: result });
   };
   const handleDelete = (statusName: string) => {
-    const filterData = boardTask.statusLst.filter(
-      (curr) => curr !== statusName
-    );
-    setBoardTask({ ...boardTask, statusLst: filterData });
+    // const filterData = boardTask.statusLst.filter(
+    //   (curr) => curr !== statusName
+    // );
+    // setBoardTask({ ...boardTask, statusLst: filterData });
   };
 
   return (
@@ -96,7 +100,7 @@ const BoxContainer = ({
         <div className="w-full flex items-center justify-between px-4 py-2 border-b bg-slate-300 rounded-t-lg text-slate-800">
           <div className="flex flex-col w-full items-start justify-center">
             <h2 className={webAppH2 + " text-slate-800"}>
-              {title}
+              {curr.title}
               {boardTask.data.filter(
                 (curr) =>
                   curr.status.toLocaleLowerCase() === title.toLocaleLowerCase()
@@ -114,21 +118,10 @@ const BoxContainer = ({
                 </small>
               )}
             </h2>
+            <p className="text-xs text-slate-500">{curr.description}</p>
           </div>
           <div className="flex items-center justify-center gap-4">
-            <BsPlusLg
-              className="cursor-pointer"
-              onClick={() =>
-                setAddNew({
-                  ...addNew,
-                  isRender: true,
-                  newBoard: false,
-                  isAddItem: true,
-                  isUpdate: false,
-                  currentBoard: title,
-                })
-              }
-            />
+            <BsPlusLg className="cursor-pointer" onClick={() => ""} />
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <HiDotsHorizontal className="cursor-pointer" />
@@ -137,17 +130,7 @@ const BoxContainer = ({
                 <DropdownMenuItem>
                   <div
                     className="font-semibold cursor-pointer w-full"
-                    onClick={() => {
-                      setValue("title", title);
-                      setAddNew({
-                        ...addNew,
-                        currentBoard: title,
-                        isRender: true,
-                        newBoard: false,
-                        isUpdate: true,
-                        isAddItem: false,
-                      });
-                    }}
+                    onClick={() => handleUpdateBoard(curr.id)}
                   >
                     Edit
                   </div>
