@@ -8,6 +8,7 @@
  
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
+import PersonalForm from "./utils/personal-form";
 
 const Page = () => {
   return (
@@ -33,6 +34,9 @@ const Page = () => {
             Change
           </div>
         </div>
+      </div>
+      <div className="mt-12">
+        <PersonalForm />
       </div>
     </main>
   );
