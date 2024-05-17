@@ -7,7 +7,7 @@
 */
 
 import SideBar from "./side-bar";
-import PaymentDetails from "./payment-details";
+import PaymentDetails from "./payment-details/page";
 
 import { useState } from "react";
 

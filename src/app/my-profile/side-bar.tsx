@@ -19,11 +19,10 @@ import {
   DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-import { Button } from "@/components/ui/button";
 import { RxCross2 } from "react-icons/rx";
 import Image from "next/image";
 import { FaEdit } from "react-icons/fa";
-import { sidebarData } from "@/app/profile/utils/data";
+import { sidebarData } from "@/app/my-profile/utils/data";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -53,7 +52,7 @@ const ProfileComponent = () => {
   );
 };
 const SideBarComponent = () => {
-  const activeRoute = true;
+  const path = usePathname();
   const styleBtn =
     " px-4 hover:bg-blue-100 py-2 hover:text-blue-600 cursor-pointer w-full flex items-center rounded-lg justify-start font-medium gap-2 py-1";
   return (
@@ -63,7 +62,7 @@ const SideBarComponent = () => {
           <Link
             href={curr.link}
             className={`${styleBtn} ${
-              curr.id === 1 + "" &&
+              path === curr.link &&
               " bg-blue-100 text-blue-600 border-0 border-l-2 rounded-lg border-blue-800"
             }  ${
               curr.name.toLocaleLowerCase().replace(" ", "_") === "sign_out" &&
@@ -81,9 +80,13 @@ const SideBarComponent = () => {
 
 const MobileSidebar = () => {
   const path = usePathname();
+  let title: string | string[] = path.split("/");
+  title = title[title.length - 1];
   return (
     <div className="w-full flex items-center justify-between">
-      <h2 className="text-3xl font-semibold text-slate-800">{path}</h2>
+      <h2 className="text-3xl font-semibold text-slate-800 first-letter-uppercase">
+        {title.split("-").join(" ")}
+      </h2>
 
       <Drawer direction="left">
         <DrawerTrigger>
