@@ -12,6 +12,6 @@ import PaymentDetails from "./payment-details/page";
 import { useState } from "react";
 
 const Page = () => {
-  return <main></main>;
+  return <main>from profile page</main>;
 };
 export default Page;

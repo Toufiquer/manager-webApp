@@ -16,10 +16,9 @@ const Layout = ({
   return (
     <main className="">
       <Header />
-      <div className="px-4">
-        <SideBar />
+      <SideBar>
         <div>{children}</div>
-      </div>
+      </SideBar>
     </main>
   );
 };

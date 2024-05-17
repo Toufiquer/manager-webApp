@@ -26,6 +26,12 @@ import { sidebarData } from "@/app/my-profile/utils/data";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  ResizableHandle,
+  ResizablePanel,
+  ResizablePanelGroup,
+} from "@/components/ui/resizable";
+import Page from "./page";
 
 const ProfileComponent = () => {
   return (
@@ -78,47 +84,80 @@ const SideBarComponent = () => {
   );
 };
 
-const MobileSidebar = () => {
+const MobileSidebar = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   const path = usePathname();
   let title: string | string[] = path.split("/");
   title = title[title.length - 1];
   return (
-    <div className="w-full flex items-center justify-between">
-      <h2 className="text-3xl font-semibold text-slate-800 first-letter-uppercase">
-        {title.split("-").join(" ")}
-      </h2>
-
-      <Drawer direction="left">
-        <DrawerTrigger>
-          <div className="px-4 py-[6px] rounded-lg font-semibold text-[18px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center">
-            <LiaSlidersHSolid />
-            <p>Menu</p>
-          </div>
-        </DrawerTrigger>
-        <DrawerContent className="max-w-[300px] min-h-screen">
-          <DrawerHeader className="pt-0">
-            <div className="w-full flex items-center justify-between">
-              <div className="text-2xl font-bold text-slate-900">
-                My profile
-              </div>
-              <DrawerClose>
-                <RxCross2 className="w-6 h-6 text-slate-500" />
-              </DrawerClose>
+    <div className=" md:hidden">
+      <div className="w-full flex items-center justify-between">
+        <h2 className="text-3xl font-semibold text-slate-800 first-letter-uppercase">
+          {title.split("-").join(" ")}
+        </h2>
+        <Drawer direction="left">
+          <DrawerTrigger>
+            <div className="px-4 py-[6px] rounded-lg font-semibold text-[18px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center">
+              <LiaSlidersHSolid />
+              <p>Menu</p>
             </div>
-          </DrawerHeader>
+          </DrawerTrigger>
+          <DrawerContent className="max-w-[300px] min-h-screen">
+            <DrawerHeader className="pt-0">
+              <div className="w-full flex items-center justify-between">
+                <div className="text-2xl font-bold text-slate-900">
+                  My profile
+                </div>
+                <DrawerClose>
+                  <RxCross2 className="w-6 h-6 text-slate-500" />
+                </DrawerClose>
+              </div>
+            </DrawerHeader>
+            <ScrollArea className="w-full h-[90vh] pb-12">
+              <ProfileComponent />
+              <SideBarComponent />
+            </ScrollArea>
+          </DrawerContent>
+        </Drawer>
+      </div>
+      {children}
+    </div>
+  );
+};
+
+const DesktopSidebar = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
+  return (
+    <div className="hidden md:block">
+      <ResizablePanelGroup direction="horizontal">
+        <ResizablePanel defaultSize={25}>
           <ScrollArea className="w-full h-[90vh] pb-12">
             <ProfileComponent />
             <SideBarComponent />
           </ScrollArea>
-        </DrawerContent>
-      </Drawer>
+        </ResizablePanel>
+        <ResizableHandle />
+        <ResizablePanel>{children}</ResizablePanel>
+      </ResizablePanelGroup>
     </div>
   );
 };
-const SideBar = () => {
+
+const SideBar = ({
+  children,
+}: Readonly<{
+  children: React.ReactNode;
+}>) => {
   return (
     <div>
-      <MobileSidebar />
+      <MobileSidebar children={children} />
+      <DesktopSidebar children={children} />
     </div>
   );
 };
