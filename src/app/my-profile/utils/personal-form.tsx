@@ -64,31 +64,53 @@ const PersonalForm = () => {
   const { errors } = formState;
   const onSubmit = handleSubmit((data) => console.log(data));
   return (
-    <div>
+    <div className="max-w-4xl">
       <main className=" flex items-center justify-start w-full pr-4">
         <form onSubmit={onSubmit} className="w-full">
           <div className="w-full flex flex-col gap-2">
             <div className="flex flex-col mt-4 w-full">
               <label
-                className="text-sm w-full font-semibold text-slate-500"
-                htmlFor="title"
+                className="text-sm w-full font-semibold text-slate-400"
+                htmlFor="firstName"
               >
-                Title
+                Full Name
               </label>
-              <input
-                className={borderStyle}
-                {...register("address")}
-                placeholder="Title"
-              />
-              {errors?.address && (
-                <p className="text-sm text-rose-400">
-                  {errors.address.message}
-                </p>
-              )}
+              <div className="w-full flex items-center">
+                <div className="w-full">
+                  <input
+                    className={borderStyle + " rounded-r-none"}
+                    {...register("firstName")}
+                    placeholder="First Name"
+                  />
+                  {errors?.firstName && (
+                    <p className="text-sm text-rose-400">
+                      {errors.firstName.message}
+                    </p>
+                  )}
+                </div>
+                <div className="w-full">
+                  <input
+                    className={borderStyle + " rounded-l-none"}
+                    {...register("lastName")}
+                    placeholder="First Name"
+                  />
+                  {errors?.lastName && (
+                    <p className="text-sm text-rose-400">
+                      {errors.lastName.message}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
-
-          <input type="submit" className={" font-[400] text-[16px] py-[4px]"} />
+          <div className="w-full flex items-end justify-end mt-4">
+            <input
+              type="submit"
+              className={
+                "px-4 py-[6px] rounded-lg font-semibold text-[16px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center"
+              }
+            />
+          </div>
         </form>
       </main>
     </div>
