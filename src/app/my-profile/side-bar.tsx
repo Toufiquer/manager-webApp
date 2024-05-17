@@ -5,6 +5,9 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
+
+"use client";
+
 import { LiaSlidersHSolid } from "react-icons/lia";
 import {
   Drawer,
@@ -22,6 +25,8 @@ import Image from "next/image";
 import { FaEdit } from "react-icons/fa";
 import { sidebarData } from "@/app/profile/utils/data";
 import { ScrollArea } from "@/components/ui/scroll-area";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const ProfileComponent = () => {
   return (
@@ -50,20 +55,24 @@ const ProfileComponent = () => {
 const SideBarComponent = () => {
   const activeRoute = true;
   const styleBtn =
-    " px-4 hover:bg-blue-100 hover:text-blue-600 cursor-pointer w-full flex items-start justify-start text-slate-700 font-medium gap-2 py-1";
+    " px-4 hover:bg-blue-100 py-2 hover:text-blue-600 cursor-pointer w-full flex items-center rounded-lg justify-start font-medium gap-2 py-1";
   return (
-    <div className="w-full items-center justify-center flex flex-col gap-2 px-8">
+    <div className="w-full items-center justify-start flex flex-col gap-1 px-8 ">
       {sidebarData.menu.map((curr) => (
-        <div key={curr.id} className="w-full">
-          <div
+        <div key={curr.id} className="w-full text-slate-700">
+          <Link
+            href={curr.link}
             className={`${styleBtn} ${
               curr.id === 1 + "" &&
               " bg-blue-100 text-blue-600 border-0 border-l-2 rounded-lg border-blue-800"
-            }`}
+            }  ${
+              curr.name.toLocaleLowerCase().replace(" ", "_") === "sign_out" &&
+              " text-rose-500 hover:text-rose-600 hover:bg-rose-200 "
+            } `}
           >
-            <div className="p-1">{curr.icon}</div>
-            <div className="p-1">{curr.name}</div>
-          </div>
+            <div>{curr.icon}</div>
+            <div>{curr.name}</div>
+          </Link>
         </div>
       ))}
     </div>
@@ -71,13 +80,14 @@ const SideBarComponent = () => {
 };
 
 const MobileSidebar = () => {
+  const path = usePathname();
   return (
     <div className="w-full flex items-center justify-between">
-      <h2 className="text-3xl font-semibold text-slate-800">Route Name</h2>
+      <h2 className="text-3xl font-semibold text-slate-800">{path}</h2>
 
       <Drawer direction="left">
         <DrawerTrigger>
-          <div className="px-4 py-2 rounded-lg font-semibold text-[18px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center">
+          <div className="px-4 py-[6px] rounded-lg font-semibold text-[18px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center">
             <LiaSlidersHSolid />
             <p>Menu</p>
           </div>
