@@ -24,6 +24,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { webAppH2 } from "@/components/common/style";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Header from "@/components/common/header";
 
 const SearchBar = () => {
   return (
@@ -105,7 +106,8 @@ const iconStyle =
   " text-slate-500 hover:text-slate-600 w-6 h-6 cursor-pointer mr-1";
 const HeaderDashboard = () => {
   return (
-    <main className="min-h-[60px] flex items-center justify-between border-b bg-white">
+    <main className="min-h-[60px] flex items-center justify-between flex-col border-b bg-white">
+      <Header />
       <div className="w-full px-4 flex items-center justify-between">
         <div className={webAppH2 + " text-2xl text-slate-700 uppercase"}>
           dashboard

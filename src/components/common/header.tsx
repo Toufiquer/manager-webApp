@@ -31,6 +31,9 @@ const Header = () => {
           <Link className={linkButton} href="/dashboard">
             Dashboard
           </Link>
+          <Link className={linkButton} href="/profile">
+            Profile
+          </Link>
           <Link className={linkButton} href="/signUp">
             Sign Up
           </Link>
