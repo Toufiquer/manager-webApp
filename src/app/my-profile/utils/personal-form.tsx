@@ -12,6 +12,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { borderStyle } from "@/components/common/style";
+import { Checkbox } from "@/components/ui/checkbox";
+
 const email = z.string().email({
   message: "Invalid email format. Please enter a valid email address.",
 });
@@ -19,6 +21,7 @@ const mobileNumber = z.string().regex(/^\+(?:[0-9] ?){6,14}$/, {
   message:
     "Invalid phone number. Please enter a valid mobile number in international format (+ddd nnnnnnnnnn).",
 });
+const country = ["UK", "USA", "Bangladesh"];
 const nationality = z.enum(["UK", "USA", "Bangladesh"], {
   message:
     "Invalid nationality. Please choose a valid nationality from the list (UK, USA, Bangladesh).",
@@ -59,10 +62,13 @@ export const newItemSchema = z.object({
 });
 type newItemFormSchema = z.infer<typeof newItemSchema>;
 const PersonalForm = () => {
-  const { reset, register, setValue, handleSubmit, formState } =
+  const { reset, register, setValue, handleSubmit, formState, getValues } =
     useForm<newItemFormSchema>({ resolver: zodResolver(newItemSchema) });
   const { errors } = formState;
-  const onSubmit = handleSubmit((data) => console.log(data));
+  const onSubmit = handleSubmit((data) => {
+    console.log("data");
+    console.log(data);
+  });
   return (
     <div className="max-w-4xl">
       <main className=" flex items-center justify-start w-full pr-4">
@@ -100,6 +106,124 @@ const PersonalForm = () => {
                     </p>
                   )}
                 </div>
+              </div>
+            </div>
+            <div className="w-full flex items-center gap-4 mt-2">
+              <div className="w-full">
+                <label
+                  className="text-sm w-full font-semibold pb-1 text-slate-400"
+                  htmlFor="email"
+                >
+                  Email address
+                </label>
+                <input
+                  className={borderStyle + " rounded-r-none"}
+                  {...register("email")}
+                  placeholder="example@gmail.com"
+                />
+                {errors?.email && (
+                  <p className="text-sm text-rose-400">
+                    {errors.email.message}
+                  </p>
+                )}
+              </div>
+              <div className="w-full">
+                <label
+                  className="text-sm w-full font-semibold pb-1 text-slate-400"
+                  htmlFor="mobileNumber"
+                >
+                  Mobile number
+                </label>
+                <input
+                  className={borderStyle + " rounded-r-none"}
+                  {...register("mobileNumber")}
+                  placeholder="222 555 666"
+                />
+                {errors?.mobileNumber && (
+                  <p className="text-sm text-rose-400">
+                    {errors.mobileNumber.message}
+                  </p>
+                )}
+              </div>
+            </div>
+            <div className="w-full flex items-center gap-4 mt-2">
+              <div className="w-full">
+                <label
+                  className="text-sm w-full font-semibold pb-1 text-slate-400"
+                  htmlFor="nationality"
+                >
+                  Nationality
+                </label>
+                <select
+                  className={borderStyle + " rounded-r-none"}
+                  {...register("nationality")}
+                >
+                  {country.map((curr) => (
+                    <option
+                      className="py-2 text-slate-500"
+                      key={curr}
+                      value={curr}
+                    >
+                      {curr}
+                    </option>
+                  ))}
+                </select>
+                {errors?.nationality && (
+                  <p className="text-sm text-rose-400">
+                    {errors.nationality.message}
+                  </p>
+                )}
+              </div>
+              <div className="w-full">
+                <label
+                  className="text-sm w-full font-semibold pb-1 text-slate-400"
+                  htmlFor="gender"
+                >
+                  Select Gender
+                </label>
+                <div className="w-full flex items-center justify-center">
+                  <div
+                    className={
+                      borderStyle +
+                      " rounded-none text-slate-500 flex items-center justify-start gap-4"
+                    }
+                  >
+                    <Checkbox
+                      checked={getValues("gender") === "Male"}
+                      onClick={() => setValue("gender", "Male")}
+                    />
+                    <p>Male</p>
+                  </div>
+                  <div
+                    className={
+                      borderStyle +
+                      " rounded-none text-slate-500 flex items-center justify-start gap-4"
+                    }
+                  >
+                    <Checkbox
+                      checked={getValues("gender") === "Female"}
+                      onClick={() => setValue("gender", "Female")}
+                    />
+                    <p>Female</p>
+                  </div>
+                  <div
+                    className={
+                      borderStyle +
+                      " rounded-none text-slate-500 flex items-center justify-start gap-4"
+                    }
+                  >
+                    <Checkbox
+                      checked={getValues("gender") === "Others"}
+                      onClick={() => setValue("gender", "Others")}
+                    />
+                    <p>Others</p>
+                  </div>
+                </div>
+                {errors?.gender && (
+                  <p className="text-sm text-rose-400">
+                    {errors.gender.message}
+                  </p>
+                )}
               </div>
             </div>
           </div>

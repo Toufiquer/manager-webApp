@@ -13,7 +13,9 @@ import PersonalForm from "./utils/personal-form";
 const Page = () => {
   return (
     <main className="w-full flex flex-col p-8 md:ml-8 ">
-      <h2 className="text-4xl font-bold text-slate-800">My Profile</h2>
+      <h2 className="hidden md:block text-4xl font-bold text-slate-800">
+        My Profile
+      </h2>
       <h2 className="text-xl font-bold text-slate-600 mt-12 ">
         Personal Information
       </h2>

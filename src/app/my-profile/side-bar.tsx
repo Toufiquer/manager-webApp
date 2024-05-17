@@ -94,7 +94,7 @@ const MobileSidebar = ({
   title = title[title.length - 1];
   return (
     <div className=" md:hidden">
-      <div className="w-full flex items-center justify-between">
+      <div className="w-full px-8 pt-8 flex items-center justify-between">
         <h2 className="text-3xl font-semibold text-slate-800 first-letter-uppercase">
           {title.split("-").join(" ")}
         </h2>
