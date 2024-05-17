@@ -22,12 +22,17 @@ const Page = () => {
         <div className="bg-rose-500 cursor-pointer p-1  absolute top-0 right-1 rounded-full">
           <RxCross2 className="text-white p-[2px]" />
         </div>
-        <Image
-          src="/profile.png"
-          width={100}
-          height={100}
-          alt="Picture of the author"
-        />
+        <div className="w-full flex items-center justify-between">
+          <Image
+            src="/profile.png"
+            width={100}
+            height={100}
+            alt="Picture of the author"
+          />
+          <div className="px-4 py-2 bg-slate-600 text-white rounded-lg cursor-pointer font-bold">
+            Change
+          </div>
+        </div>
       </div>
     </main>
   );
