@@ -5,13 +5,31 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-
-import SideBar from "./side-bar";
-import PaymentDetails from "./payment-details/page";
-
-import { useState } from "react";
+ 
+import Image from "next/image";
+import { RxCross2 } from "react-icons/rx";
 
 const Page = () => {
-  return <main>from profile page</main>;
+  return (
+    <main className="w-full flex flex-col p-8 md:ml-8 ">
+      <h2 className="text-4xl font-bold text-slate-800">My Profile</h2>
+      <h2 className="text-xl font-bold text-slate-600 mt-12 ">
+        Personal Information
+      </h2>
+      <div className="w-full border-b py-2" />
+      <div className="text-sm text-slate-500 mt-4">Profile Picture</div>
+      <div className="relative mt-2 max-w-[100px]">
+        <div className="bg-rose-500 cursor-pointer p-1  absolute top-0 right-1 rounded-full">
+          <RxCross2 className="text-white p-[2px]" />
+        </div>
+        <Image
+          src="/profile.png"
+          width={100}
+          height={100}
+          alt="Picture of the author"
+        />
+      </div>
+    </main>
+  );
 };
 export default Page;
