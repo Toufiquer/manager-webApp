@@ -37,16 +37,16 @@ const Page = () => {
         <h2 className="py-8 text-4xl font-semibold hidden md:block">
           Order history
         </h2>
-        <div className="w-full flex flex-col mt-8 md:flex-row gap-2 items-start md:items-center border-b pb-4 justify-start md:justify-between">
+        <div className=" flex flex-col mt-8 md:flex-row gap-2 items-start md:items-center border-b pb-4 justify-start md:justify-between">
           <h2 className="text-xl font-bold">Your order</h2>
-          <div className="w-full bg-gray-50 max-w-[180px] flex items-end justify-end">
+          <div className=" bg-gray-50 max-w-[180px] flex items-end justify-end">
             <DropdownMenu>
               <DropdownMenuTrigger>
                 <Button
                   className="bg-transparent hover:bg-transparent text-slate-600 border border-gray-300 rounded-lg"
                   value="outline"
                 >
-                  <p className="w-full flex items-center justify-between gap-4 min-w-[120px]">
+                  <p className=" flex items-center justify-between gap-4 min-w-[120px]">
                     <span>All</span>
                     <IoIosArrowDown />
                   </p>
@@ -56,7 +56,7 @@ const Page = () => {
                 {["Sort by", "Delivered", "Cancelled", "Processing"].map(
                   (curr) => (
                     <DropdownMenuItem key={curr} className="p-0 min-w-[120px]">
-                      <h2 className="bg-transparent w-full m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
+                      <h2 className="bg-transparent m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
                         {curr}
                       </h2>
                     </DropdownMenuItem>
@@ -66,8 +66,8 @@ const Page = () => {
             </DropdownMenu>
           </div>
         </div>
-        <div className="w-full mt-4">
-          <div className="w-full flex flex-col gap-2">
+        <div className=" mt-4">
+          <div className=" flex flex-col gap-2">
             {[
               {
                 id: 1,
@@ -109,89 +109,92 @@ const Page = () => {
                   <div className="border min-w-[110px] w-[120px] h-[120px] flex items-center justify-center">
                     {curr.img}
                   </div>
-                  <div className="px-4 w-full md:ml-8">
-                    <div className="flex flex-col items-start justify-start w-full">
-                      <div className="text-slate-600">
-                        Order no:
-                        <span className="text-blue-400"> {curr.orderNo}</span>
-                      </div>
-                      <div className="flex items-start py-2 text-xl font-semibold w-full justify-start">
-                        <p>{curr.title}</p>
-                      </div>
 
-                      <div className="w-full flex items-center justify-start gap-4">
-                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                          <p>
-                            Size:
-                            <strong> {curr.size}</strong>
-                          </p>
+                  <div className=" flex flex-col lg:flex-row">
+                    <div className="px-4 lg:ml-8  w-full ">
+                      <div className="flex flex-col items-start justify-start">
+                        <div className="text-slate-600">
+                          Order no:
+                          <span className="text-blue-400"> {curr.orderNo}</span>
                         </div>
-                        <div className="w-auto h-full flex items-center justify-center">
-                          <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mt-1" />
+                        <div className="flex items-start py-2 text-xl font-semibold justify-start">
+                          <p>{curr.title}</p>
                         </div>
-                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                          <p>
-                            Shipped date: <strong>{curr.shippedDate}</strong>
-                          </p>
+
+                        <div className=" flex flex-col lg:flex-row items-center justify-start gap-4">
+                          <div className="text-slate-500 w-full text-[16px] pt-1 flex justify-start items-center text-start">
+                            <p>
+                              Size:
+                              <strong> {curr.size}</strong>
+                            </p>
+                          </div>
+                          <div className="w-auto hidden lg:flex h-full items-center justify-center">
+                            <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mt-1" />
+                          </div>
+                          <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
+                            <p>
+                              Shipped date: <strong>{curr.shippedDate}</strong>
+                            </p>
+                          </div>
                         </div>
                       </div>
                     </div>
-                  </div>
 
-                  <div className="pl-4 w-[420px]">
-                    {curr.traceId && (
-                      <Button
-                        className=" bg-gray-100 border-gray-300 hover:border-gray-400 hover:bg-gray-200 text-slate-600"
-                        variant="outline"
-                      >
-                        <div className="flex items-center justify-center gap-2">
-                          <TbTruckDelivery className="text-xl" />
-                          Track order
+                    <div className="pl-4 lg:w-[420px]">
+                      {curr.traceId && (
+                        <Button
+                          className=" bg-gray-100 border-gray-300 mt-4 hover:border-gray-400 hover:bg-gray-200 text-slate-600"
+                          variant="outline"
+                        >
+                          <div className="flex items-center justify-center gap-2">
+                            <TbTruckDelivery className="text-xl" />
+                            Track order
+                          </div>
+                        </Button>
+                      )}
+                      {curr.traceId && (
+                        <div className=" flex items-center pt-3 gap-2 font-semibold text-blue-600 justify-start">
+                          <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
+                          <p>In transit</p>
                         </div>
-                      </Button>
-                    )}
-                    {curr.traceId && (
-                      <div className="w-full flex items-center pt-3 gap-2 font-semibold text-blue-600 justify-start">
-                        <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
-                        <p>In transit</p>
-                      </div>
-                    )}
-                    {curr.traceId && (
-                      <div className="text-slate-500 text-[16px] justify-start flex items-center ">
-                        <p className="flex items-center justify-start">
-                          Expected at: {curr.expectedAt}
-                        </p>
-                      </div>
-                    )}
-                  </div>
+                      )}
+                      {curr.traceId && (
+                        <div className="text-slate-500 text-[16px] justify-start flex items-center ">
+                          <p className="flex items-center justify-start">
+                            Expected at: {curr.expectedAt}
+                          </p>
+                        </div>
+                      )}
+                    </div>
 
-                  <div className="pl-4">
-                    <div className="flex-col flex min-w-[150px]">
-                      <div className=" text-[16px] pt-1 flex items-end justify-end mb-3">
-                        {curr.status.toLocaleLowerCase() === "delivered" && (
-                          <div className="w-full flex items-center gap-2 font-semibold text-blue-600 justify-end">
-                            <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
-                            <p>Delivered</p>
-                          </div>
-                        )}
-                        {curr.status.toLocaleLowerCase() === "cancelled" && (
-                          <div className="w-full flex items-center gap-2 font-semibold text-rose-600 justify-end">
-                            <RxCrossCircled className="bg-rose-500 text-white rounded-full" />
-                            <p>Cancelled</p>
-                          </div>
-                        )}
-                        {curr.status.toLocaleLowerCase() === "processing" && (
-                          <div className="w-full flex items-center gap-2 font-semibold text-orange-600 justify-end">
-                            <FaRegCheckCircle className="bg-orange-500 text-white rounded-full" />
-                            <p>Processing</p>
-                          </div>
-                        )}
-                      </div>
-                      <div className="text-slate-500 text-[16px] pt-1 flex items-end justify-end ">
-                        <p>Total amount</p>
-                      </div>
-                      <div className="font-bold text-slate-900 text-2xl mb-2 flex items-center justify-end">
-                        &pound; {curr.totalPrice}
+                    <div className="pl-4">
+                      <div className="flex-col flex min-w-[150px]">
+                        <div className=" text-[16px] pt-1 flex items-end lg:justify-end mb-3">
+                          {curr.status.toLocaleLowerCase() === "delivered" && (
+                            <div className=" flex items-center gap-2 font-semibold text-blue-600 lg:justify-end">
+                              <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
+                              <p>Delivered</p>
+                            </div>
+                          )}
+                          {curr.status.toLocaleLowerCase() === "cancelled" && (
+                            <div className=" flex items-center gap-2 font-semibold text-rose-600 lg:justify-end">
+                              <RxCrossCircled className="bg-rose-500 text-white rounded-full" />
+                              <p>Cancelled</p>
+                            </div>
+                          )}
+                          {curr.status.toLocaleLowerCase() === "processing" && (
+                            <div className=" flex items-center gap-2 font-semibold text-orange-600 lg:justify-end">
+                              <FaRegCheckCircle className="bg-orange-500 text-white rounded-full" />
+                              <p>Processing</p>
+                            </div>
+                          )}
+                        </div>
+                        <div className="text-slate-500 text-[16px] pt-1 flex items-end lg:justify-end ">
+                          <p>Total amount</p>
+                        </div>
+                        <div className="font-bold text-slate-900 text-2xl mb-2 flex items-center lg:justify-end">
+                          &pound; {curr.totalPrice}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -200,7 +203,7 @@ const Page = () => {
             ))}
           </div>
         </div>
-        <div className="w-full mt-4 flex items-end justify-end mb-12 py-12">
+        <div className=" mt-4 flex items-end justify-end mb-12 py-12">
           <Pagination>
             <PaginationContent>
               <PaginationItem>
