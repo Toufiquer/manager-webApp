@@ -270,8 +270,9 @@ const PersonalForm = () => {
           <div className="w-full flex items-end justify-end mt-4">
             <input
               type="submit"
+              value="Save Changes"
               className={
-                "px-4 py-[6px] rounded-lg font-semibold text-[16px] text-white bg-blue-400 hover:to-blue-500 duration-200 cursor-pointer flex gap-1 items-center"
+                "px-4 py-[6px] rounded-lg font-semibold text-[16px] text-white bg-blue-400 hover:bg-blue-500 duration-200 cursor-pointer flex gap-1 items-center"
               }
             />
           </div>

@@ -9,6 +9,7 @@
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import PersonalForm from "./utils/personal-form";
+import EmailUpdate from "./utils/email-update";
 
 const Page = () => {
   return (
@@ -39,6 +40,16 @@ const Page = () => {
       </div>
       <div className="mt-12">
         <PersonalForm />
+        <div className="mt-4">
+          <div className="text-xl font-semibold border-b pb-4">
+            Update email
+          </div>
+          <p className="text-slate-500 py-4">
+            Your current email address is
+            <span className="text-blue-400">example@gmail.com</span>
+          </p>
+          <EmailUpdate />
+        </div>
       </div>
     </main>
   );
