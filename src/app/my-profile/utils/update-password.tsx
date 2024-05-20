@@ -9,11 +9,12 @@
 "use client";
 
 import { z } from "zod";
+import { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
+
 import { zodResolver } from "@hookform/resolvers/zod";
 import { borderStyle } from "@/components/common/style";
-import { useState } from "react";
-import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
 export const newItemSchema = z
   .object({
@@ -46,11 +47,22 @@ export const newItemSchema = z
     message: "Passwords don't match",
     path: ["confirmPassword"],
   });
+
 type newItemFormSchema = z.infer<typeof newItemSchema>;
 
-const PasswordField = ({ errors, title, htmlFor, onChangeValue }) => {
+const PasswordField = ({
+  errors,
+  title,
+  htmlFor,
+  onChangeValue,
+}: {
+  errors: any;
+  title: any;
+  htmlFor: any;
+  onChangeValue: any;
+}) => {
   const [passType, setPassType] = useState("password");
-  const handleValueChange = (value) => {
+  const handleValueChange = (value: any) => {
     onChangeValue(htmlFor, value.target.value);
   };
   return (
@@ -88,7 +100,7 @@ const UpdatePassword = () => {
   const { errors } = formState;
 
   const onSubmit: SubmitHandler<any> = (data) => console.log(data);
-  const onChangeValue = (field, value) => {
+  const onChangeValue = (field: any, value: string) => {
     console.log(field, value);
     setValue(field, value);
     console.log(getValues(field));
@@ -96,11 +108,7 @@ const UpdatePassword = () => {
   return (
     <div className="max-w-4xl">
       <main className=" flex items-center justify-start w-full md:pr-4">
-        <form
-          // onSubmit={handleSubmit(handleSubmitForm)}
-          onSubmit={handleSubmit(onSubmit)}
-          className="w-full"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="w-full">
           <div className="w-full flex flex-col gap-2">
             <div className="w-full flex flex-col items-center gap-4 mt-2">
               <PasswordField
@@ -121,63 +129,6 @@ const UpdatePassword = () => {
                 htmlFor="confirmPassword"
                 title="Confirm password"
               />
-              {/* <div className="w-full">
-                <label
-                  className="text-sm w-full font-semibold pb-1 text-slate-400"
-                  htmlFor="currentPassword"
-                >
-                  Current password
-                </label>
-                <input
-                  className={borderStyle + " rounded-r-none"}
-                  placeholder="******"
-                  type="password"
-                  {...register("currentPassword")}
-                />
-                {errors?.currentPassword && (
-                  <p className="text-sm text-rose-400">
-                    {errors.currentPassword.message}
-                  </p>
-                )}
-              </div>
-              <div className="w-full">
-                <label
-                  className="text-sm w-full font-semibold pb-1 text-slate-400"
-                  htmlFor="password"
-                >
-                  New password
-                </label>
-                <input
-                  className={borderStyle + " rounded-r-none"}
-                  placeholder="******"
-                  type="password"
-                  {...register("password")}
-                />
-                {errors?.password && (
-                  <p className="text-sm text-rose-400">
-                    {errors.password.message}
-                  </p>
-                )}
-              </div>
-              <div className="w-full">
-                <label
-                  className="text-sm w-full font-semibold pb-1 text-slate-400"
-                  htmlFor="confirmPassword"
-                >
-                  Confirm password
-                </label>
-                <input
-                  className={borderStyle + " rounded-r-none"}
-                  placeholder="******"
-                  type="password"
-                  {...register("confirmPassword")}
-                />
-                {errors?.confirmPassword && (
-                  <p className="text-sm text-rose-400">
-                    {errors.confirmPassword.message}
-                  </p>
-                )}
-              </div> */}
             </div>
           </div>
           <div className="w-full flex items-end justify-end mt-4">

@@ -8,6 +8,8 @@
  
 import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
+import { HiDotsHorizontal } from "react-icons/hi";
+
 import PersonalForm from "./utils/personal-form";
 import EmailUpdate from "./utils/email-update";
 import UpdatePassword from "./utils/update-password";
@@ -41,6 +43,9 @@ const Page = () => {
       </div>
       <div className="mt-12">
         <PersonalForm />
+        <div className="py-12 my-12 w-full max-w-4xl flex items-center justify-center ">
+          <HiDotsHorizontal />
+        </div>
         <div className="mt-4">
           <div className="text-xl font-semibold border-b pb-4">
             Update email
@@ -51,11 +56,13 @@ const Page = () => {
           </p>
           <EmailUpdate />
         </div>
-        <div className="mt-4">
+        <div className="py-12 my-12 w-full max-w-4xl flex items-center justify-center ">
+          <HiDotsHorizontal />
+        </div>
+        <div className="mt-4 pb-12 mb-12">
           <div className="text-xl font-semibold border-b pb-4">
             Update Password
           </div>
-
           <UpdatePassword />
         </div>
       </div>
