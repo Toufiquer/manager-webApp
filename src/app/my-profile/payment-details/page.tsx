@@ -5,7 +5,14 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
+import ActivePlan from "./active-plan";
+
 const PaymentDetails = () => {
-  return <main></main>;
+  return (
+    <main className="max-w-4xl mx-auto flex flex-col">
+      <h2 className="py-8 text-4xl font-semibold">Payment details</h2>
+      <ActivePlan />
+    </main>
+  );
 };
 export default PaymentDetails;
