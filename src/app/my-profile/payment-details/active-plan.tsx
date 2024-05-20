@@ -7,6 +7,7 @@
 */
 
 import { FaRocket } from "react-icons/fa6";
+import { BsFiletypePdf } from "react-icons/bs";
 
 const commonButtonStyle =
   "px-5 py-2 rounded-lg font-semibold text-[18px] duration-200 cursor-pointer flex gap-1 items-center";
@@ -15,13 +16,20 @@ const ActivePlan = () => {
     <main className="border rounded-lg py-4">
       <div className="w-full flex items-center border-b px-4 pb-4 justify-between">
         <h2 className="text-2xl font-bold">Active Plan</h2>
-        <h2 className="text-sm font-normal">Download Pdf</h2>
+        <h2 className="text-sm font-normal">
+          <p className="flex items-center justify-center border bg-slate-100 p-4 py-2 rounded-lg cursor-pointer gap-2 font-semibold hover:bg-slate-200 border-slate-300 hover:border-slate-400">
+            <BsFiletypePdf className="text-gray-900 w-[20px] h-[20px]" />
+            Download Pdf
+          </p>
+        </h2>
       </div>
       <div className="px-4">
         <div className="w-full flex items-center justify-between">
           <div className="w-full flex flex-col">
-            <div className="p-8">
-              <FaRocket className="w-[25px] h-[25px]" />
+            <div className="pb-2 pt-6">
+              <div className="bg-slate-200 max-w-[60px] max-h-[60px] min-w-[60px] min-h-[60px] flex items-center justify-center border-slate-300 rounded-full ">
+                <FaRocket className="w-[25px] h-[25px]" />
+              </div>
             </div>
             <h3 className="text-[18px] pb-2 font-bold">Standard Plan</h3>
             <p className="text-slate-500">
@@ -69,7 +77,7 @@ const ActivePlan = () => {
             </div>
           </div>
           <div className="py-12">
-            <div className="w-full flex items-center justify-end gap-4">
+            <div className="w-full flex flex-col md:flex-row items-start md:items-center justify-start md:justify-end gap-4">
               <div
                 className={`${commonButtonStyle} bg-rose-100 text-rose-300 hover:bg-rose-500 hover:text-white`}
               >

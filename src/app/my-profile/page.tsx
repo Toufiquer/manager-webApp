@@ -13,6 +13,7 @@ import { HiDotsHorizontal } from "react-icons/hi";
 import PersonalForm from "./utils/personal-form";
 import EmailUpdate from "./utils/email-update";
 import UpdatePassword from "./utils/update-password";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 const Page = () => {
   return (
