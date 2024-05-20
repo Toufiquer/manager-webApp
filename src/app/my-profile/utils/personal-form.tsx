@@ -9,10 +9,11 @@
 "use client";
 
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { borderStyle } from "@/components/common/style";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useState } from "react";
 
 const email = z.string().email({
   message: "Invalid email format. Please enter a valid email address.",
@@ -26,6 +27,11 @@ const nationality = z.enum(["UK", "USA", "Bangladesh"], {
   message:
     "Invalid nationality. Please choose a valid nationality from the list (UK, USA, Bangladesh).",
 });
+enum Gender {
+  Male = "Male",
+  Female = "Female",
+  Others = "Others",
+}
 const gender = z.enum(["Male", "Female", "Others"], {
   message:
     "Invalid gender. Please choose a valid gender option (Male, Female, Others).",
@@ -50,7 +56,6 @@ export const newItemSchema = z.object({
   email,
   mobileNumber,
   nationality,
-  gender,
   address: z
     .string({
       invalid_type_error: "Item must be a string",
@@ -62,17 +67,30 @@ export const newItemSchema = z.object({
 });
 type newItemFormSchema = z.infer<typeof newItemSchema>;
 const PersonalForm = () => {
+  const [genderValue, setGenderValue] = useState("Male");
   const { reset, register, setValue, handleSubmit, formState, getValues } =
     useForm<newItemFormSchema>({ resolver: zodResolver(newItemSchema) });
   const { errors } = formState;
-  const onSubmit = handleSubmit((data) => {
+  const handleSubmitForm = (data) => {
     console.log("data");
     console.log(data);
-  });
+  };
+  const onSubmit: SubmitHandler<any> = (data) => console.log(data);
+  const handleGender = (data: (typeof Gender)[keyof typeof Gender]) => {
+    if (data !== genderValue) {
+      setGenderValue(data);
+    } else {
+      setGenderValue("");
+    }
+  };
   return (
     <div className="max-w-4xl">
       <main className=" flex items-center justify-start w-full pr-4">
-        <form onSubmit={onSubmit} className="w-full">
+        <form
+          // onSubmit={handleSubmit(handleSubmitForm)}
+          onSubmit={handleSubmit(onSubmit)}
+          className="w-full"
+        >
           <div className="w-full flex flex-col gap-2">
             <div className="flex flex-col mt-4 w-full">
               <label
@@ -85,8 +103,8 @@ const PersonalForm = () => {
                 <div className="w-full">
                   <input
                     className={borderStyle + " rounded-r-none"}
-                    {...register("firstName")}
                     placeholder="First Name"
+                    {...register("firstName")}
                   />
                   {errors?.firstName && (
                     <p className="text-sm text-rose-400">
@@ -97,8 +115,8 @@ const PersonalForm = () => {
                 <div className="w-full">
                   <input
                     className={borderStyle + " rounded-l-none"}
-                    {...register("lastName")}
                     placeholder="First Name"
+                    {...register("lastName")}
                   />
                   {errors?.lastName && (
                     <p className="text-sm text-rose-400">
@@ -118,8 +136,8 @@ const PersonalForm = () => {
                 </label>
                 <input
                   className={borderStyle + " rounded-r-none"}
-                  {...register("email")}
                   placeholder="example@gmail.com"
+                  {...register("email")}
                 />
                 {errors?.email && (
                   <p className="text-sm text-rose-400">
@@ -136,8 +154,8 @@ const PersonalForm = () => {
                 </label>
                 <input
                   className={borderStyle + " rounded-r-none"}
-                  {...register("mobileNumber")}
                   placeholder="222 555 666"
+                  {...register("mobileNumber")}
                 />
                 {errors?.mobileNumber && (
                   <p className="text-sm text-rose-400">
@@ -189,8 +207,8 @@ const PersonalForm = () => {
                     }
                   >
                     <Checkbox
-                      checked={getValues("gender") === "Male"}
-                      onClick={() => setValue("gender", "Male")}
+                      checked={genderValue === Gender.Male}
+                      onClick={() => handleGender(Gender.Male)}
                     />
                     <p>Male</p>
                   </div>
@@ -201,8 +219,8 @@ const PersonalForm = () => {
                     }
                   >
                     <Checkbox
-                      checked={getValues("gender") === "Female"}
-                      onClick={() => setValue("gender", "Female")}
+                      checked={genderValue === Gender.Female}
+                      onClick={() => handleGender(Gender.Female)}
                     />
                     <p>Female</p>
                   </div>
@@ -213,15 +231,15 @@ const PersonalForm = () => {
                     }
                   >
                     <Checkbox
-                      checked={getValues("gender") === "Others"}
-                      onClick={() => setValue("gender", "Others")}
+                      checked={genderValue === Gender.Others}
+                      onClick={() => handleGender(Gender.Others)}
                     />
                     <p>Others</p>
                   </div>
                 </div>
-                {errors?.gender && (
+                {genderValue === "" && (
                   <p className="text-sm text-rose-400">
-                    {errors.gender.message}
+                    Please Select a Gender
                   </p>
                 )}
               </div>
