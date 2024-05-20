@@ -10,6 +10,7 @@ import Image from "next/image";
 import { RxCross2 } from "react-icons/rx";
 import PersonalForm from "./utils/personal-form";
 import EmailUpdate from "./utils/email-update";
+import UpdatePassword from "./utils/update-password";
 
 const Page = () => {
   return (
@@ -49,6 +50,13 @@ const Page = () => {
             <span className="text-blue-400">example@gmail.com</span>
           </p>
           <EmailUpdate />
+        </div>
+        <div className="mt-4">
+          <div className="text-xl font-semibold border-b pb-4">
+            Update Password
+          </div>
+
+          <UpdatePassword />
         </div>
       </div>
     </main>

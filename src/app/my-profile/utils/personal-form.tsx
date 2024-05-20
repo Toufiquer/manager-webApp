@@ -72,10 +72,7 @@ const PersonalForm = () => {
   const { reset, register, setValue, handleSubmit, formState, getValues } =
     useForm<newItemFormSchema>({ resolver: zodResolver(newItemSchema) });
   const { errors } = formState;
-  const handleSubmitForm = (data) => {
-    console.log("data");
-    console.log(data);
-  };
+
   const onSubmit: SubmitHandler<any> = (data) => console.log(data);
   const handleGender = (data: (typeof Gender)[keyof typeof Gender]) => {
     if (data !== genderValue) {
