@@ -26,7 +26,7 @@ const Page = () => {
         <h2 className="py-8 text-4xl font-semibold hidden md:block">
           Wishlist
         </h2>
-        <div className="w-full flex flex-col mt-8 md:flex-row gap-2 items-start md:items-center border-b pb-4 justify-start md:justify-between">
+        <div className="w-full flex mt-8 gap-2 items-center border-b pb-4 justify-between">
           <h2 className="text-xl font-bold">Recently add</h2>
           <h2 className="text-slate-500">2 Items</h2>
         </div>
@@ -61,75 +61,79 @@ const Page = () => {
                   <div className="border min-w-[110px] w-[120px] h-[120px] flex items-center justify-center">
                     {curr.img}
                   </div>
-                  <div className="px-4 w-full md:ml-8">
-                    <div className="flex flex-col items-start justify-start w-full">
-                      <div className="flex items-start text-xl font-semibold w-full justify-start">
-                        <p>{curr.title}</p>
-                      </div>
-                      {curr.stock > 0 ? (
-                        <p className="text-blue-500 text-sm pt-1">In Stock</p>
-                      ) : (
-                        <p className="text-rose-500 text-sm pt-1">Stock out</p>
-                      )}
-                      <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                        <p>Gender: {curr.gender}</p>
-                        <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mx-4 " />
-                        <p>Color: {curr.color}</p>
-                      </div>
-                      <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                        <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mx-2 " />
-                        <p>Size: {curr.size.join(", ")}</p>
+                  <div className="w-full flex flex-col lg:flex-row">
+                    <div className="px-4 w-full md:ml-8">
+                      <div className="flex flex-col items-start justify-start w-full">
+                        <div className="flex items-start text-xl font-semibold w-full justify-start">
+                          <p>{curr.title}</p>
+                        </div>
+                        {curr.stock > 0 ? (
+                          <p className="text-blue-500 text-sm pt-1">In Stock</p>
+                        ) : (
+                          <p className="text-rose-500 text-sm pt-1">
+                            Stock out
+                          </p>
+                        )}
+                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
+                          <p>Gender: {curr.gender}</p>
+                          <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mx-4 " />
+                          <p>Color: {curr.color}</p>
+                        </div>
+                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
+                          <div className="bg-slate-600 h-[5px] w-[5px] rounded-full md:ml-2 mr-2" />
+                          <p>Size: {curr.size.join(", ")}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className="px-4 md:ml-8">
-                    <div className="flex flex-col">
-                      <div className="w-full bg-gray-50 max-w-[180px] flex items-end justify-end">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <Button
-                              className="bg-transparent hover:bg-transparent text-slate-600 border border-gray-300 rounded-lg"
-                              value="outline"
-                            >
-                              <p className="w-full flex items-center justify-between gap-4 min-w-[120px]">
-                                <span>{curr.quantity}</span>
-                                <IoIosArrowDown />
-                              </p>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            {["02", "03", "04"].map((curr) => (
-                              <DropdownMenuItem
-                                key={curr}
-                                className="p-0 min-w-[120px]"
+                    <div className="px-4 md:ml-8">
+                      <div className="flex flex-col items-start justify-start">
+                        <div className="w-full bg-gray-50 max-w-[180px] flex items-end mt-4 md:justify-end">
+                          <DropdownMenu>
+                            <DropdownMenuTrigger>
+                              <Button
+                                className="bg-transparent hover:bg-transparent text-slate-600 border border-gray-300 rounded-lg"
+                                value="outline"
                               >
-                                <h2 className="bg-transparent w-full m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
-                                  {curr}
-                                </h2>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
+                                <p className="w-full flex items-center justify-between gap-4 min-w-[120px]">
+                                  <span>{curr.quantity}</span>
+                                  <IoIosArrowDown />
+                                </p>
+                              </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent>
+                              {["02", "03", "04"].map((curr) => (
+                                <DropdownMenuItem
+                                  key={curr}
+                                  className="p-0 min-w-[120px]"
+                                >
+                                  <h2 className="bg-transparent w-full m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
+                                    {curr}
+                                  </h2>
+                                </DropdownMenuItem>
+                              ))}
+                            </DropdownMenuContent>
+                          </DropdownMenu>
+                        </div>
+                        <p className="flex cursor-pointer hover:text-rose-400 items-center justify-end mt-2 gap-2">
+                          <IoTrashOutline />
+                          Remove
+                        </p>
+                        <p className="flex cursor-pointer hover:text-blue-400 items-center justify-end mt-2 gap-2">
+                          <FiHeart />
+                          Save for later
+                        </p>
                       </div>
-                      <p className="flex cursor-pointer hover:text-rose-400 items-center justify-end mt-2 gap-2">
-                        <IoTrashOutline />
-                        Remove
-                      </p>
-                      <p className="flex cursor-pointer hover:text-blue-400 items-center justify-end mt-2 gap-2">
-                        <FiHeart />
-                        Save for later
-                      </p>
                     </div>
-                  </div>
-                  <div className="pl-4 md:ml-8">
-                    <div className="flex-col flex min-w-[150px]">
-                      <div className="font-bold text-slate-900 text-3xl mb-2 flex items-center justify-end">
-                        &pound; {curr.price}
+                    <div className="pl-4 md:ml-8">
+                      <div className="flex-col flex min-w-[150px]">
+                        <div className="font-bold text-slate-900 text-3xl my-2 pt-4 flex items-center md:justify-end">
+                          &pound; {curr.price}
+                        </div>
+                        <Button className="gap-2 flex items-center justify-center">
+                          <MdOutlineShoppingCart className="text-xl" />
+                          Add to cart
+                        </Button>
                       </div>
-                      <Button className="gap-2 flex items-center justify-center">
-                        <MdOutlineShoppingCart className="text-xl" />
-                        Add to cart
-                      </Button>
                     </div>
                   </div>
                 </div>

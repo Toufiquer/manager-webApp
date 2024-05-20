@@ -14,11 +14,22 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
-import { IoTrashOutline } from "react-icons/io5";
-import { FiHeart } from "react-icons/fi";
-import { MdOutlineShoppingCart } from "react-icons/md";
+import { FaRegCheckCircle } from "react-icons/fa";
+import { RxCrossCircled } from "react-icons/rx";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
 import { VscCoffee } from "react-icons/vsc";
 import { GiCoffeeCup } from "react-icons/gi";
+import { TbTruckDelivery } from "react-icons/tb";
+
 const Page = () => {
   return (
     <main className="max-w-5xl flex flex-col p-8 md:ml-8 ">
@@ -27,33 +38,70 @@ const Page = () => {
           Order history
         </h2>
         <div className="w-full flex flex-col mt-8 md:flex-row gap-2 items-start md:items-center border-b pb-4 justify-start md:justify-between">
-          <h2 className="text-2xl font-bold">Recently add</h2>
-          <h2 className="text-slate-500">2 Items</h2>
+          <h2 className="text-xl font-bold">Your order</h2>
+          <div className="w-full bg-gray-50 max-w-[180px] flex items-end justify-end">
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <Button
+                  className="bg-transparent hover:bg-transparent text-slate-600 border border-gray-300 rounded-lg"
+                  value="outline"
+                >
+                  <p className="w-full flex items-center justify-between gap-4 min-w-[120px]">
+                    <span>All</span>
+                    <IoIosArrowDown />
+                  </p>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                {["Sort by", "Delivered", "Cancelled", "Processing"].map(
+                  (curr) => (
+                    <DropdownMenuItem key={curr} className="p-0 min-w-[120px]">
+                      <h2 className="bg-transparent w-full m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
+                        {curr}
+                      </h2>
+                    </DropdownMenuItem>
+                  )
+                )}
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </div>
         <div className="w-full mt-4">
           <div className="w-full flex flex-col gap-2">
             {[
               {
                 id: 1,
-                img: <VscCoffee className="w-[60px] h-[60px]" />,
+                orderNo: "#6526548",
+                shippedDate: "10 Nov 2023",
+                size: "XL",
                 title: "White Coffee",
-                stock: 43,
-                gender: "Male",
-                color: "white",
-                size: ["XL", "L", "M", "S"],
-                quantity: 2,
-                price: 120,
+                totalPrice: 120,
+                img: <VscCoffee className="w-[60px] h-[60px]" />,
+                status: "Delivered",
               },
               {
                 id: 2,
-                img: <GiCoffeeCup className="w-[60px] h-[60px]" />,
                 title: "Black Coffee",
-                stock: 0,
-                gender: "Male",
+                size: "L",
                 color: "white",
-                size: ["XL", "L", "M", "S"],
-                quantity: 5,
-                price: 220,
+                totalPrice: 220,
+                img: <GiCoffeeCup className="w-[60px] h-[60px]" />,
+                orderNo: "#6526548",
+                shippedDate: "20 Dec 2023",
+                status: "Cancelled",
+              },
+              {
+                id: 3,
+                title: "Black Coffee",
+                size: "XL",
+                color: "white",
+                totalPrice: 520,
+                img: <GiCoffeeCup className="w-[60px] h-[60px]" />,
+                orderNo: "#6526548",
+                shippedDate: "20 Dec 2023",
+                status: "Processing",
+                traceId: "26541258",
+                expectedAt: "NY, UK",
               },
             ].map((curr) => (
               <div key={curr.id} className="w-full border-b pb-8 mt-6">
@@ -63,73 +111,88 @@ const Page = () => {
                   </div>
                   <div className="px-4 w-full md:ml-8">
                     <div className="flex flex-col items-start justify-start w-full">
-                      <div className="flex items-start text-xl font-semibold w-full justify-start">
+                      <div className="text-slate-600">
+                        Order no:
+                        <span className="text-blue-400"> {curr.orderNo}</span>
+                      </div>
+                      <div className="flex items-start py-2 text-xl font-semibold w-full justify-start">
                         <p>{curr.title}</p>
                       </div>
-                      {curr.stock > 0 ? (
-                        <p className="text-blue-500 text-sm pt-1">In Stock</p>
-                      ) : (
-                        <p className="text-rose-500 text-sm pt-1">Stock out</p>
-                      )}
-                      <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                        <p>Gender: {curr.gender}</p>
-                        <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mx-4 " />
-                        <p>Color: {curr.color}</p>
-                      </div>
-                      <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
-                        <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mx-2 " />
-                        <p>Size: {curr.size.join(", ")}</p>
+
+                      <div className="w-full flex items-center justify-start gap-4">
+                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
+                          <p>
+                            Size:
+                            <strong> {curr.size}</strong>
+                          </p>
+                        </div>
+                        <div className="w-auto h-full flex items-center justify-center">
+                          <div className="bg-slate-600 h-[5px] w-[5px] rounded-full mt-1" />
+                        </div>
+                        <div className="text-slate-500 text-[16px] pt-1 flex items-center ">
+                          <p>
+                            Shipped date: <strong>{curr.shippedDate}</strong>
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
-                  <div className="px-4 md:ml-8">
-                    <div className="flex flex-col">
-                      <div className="w-full bg-gray-50 max-w-[180px] flex items-end justify-end">
-                        <DropdownMenu>
-                          <DropdownMenuTrigger>
-                            <Button
-                              className="bg-transparent hover:bg-transparent text-slate-600 border border-gray-300 rounded-lg"
-                              value="outline"
-                            >
-                              <p className="w-full flex items-center justify-between gap-4 min-w-[120px]">
-                                <span>{curr.quantity}</span>
-                                <IoIosArrowDown />
-                              </p>
-                            </Button>
-                          </DropdownMenuTrigger>
-                          <DropdownMenuContent>
-                            {["02", "03", "04"].map((curr) => (
-                              <DropdownMenuItem
-                                key={curr}
-                                className="p-0 min-w-[120px]"
-                              >
-                                <h2 className="bg-transparent w-full m-0 hover:bg-transparent text-slate-600 hover:bg-slate-100 cursor-pointer rounded-lg px-4 py-1">
-                                  {curr}
-                                </h2>
-                              </DropdownMenuItem>
-                            ))}
-                          </DropdownMenuContent>
-                        </DropdownMenu>
-                      </div>
-                      <p className="flex cursor-pointer hover:text-rose-400 items-center justify-end mt-2 gap-2">
-                        <IoTrashOutline />
-                        Remove
-                      </p>
-                      <p className="flex cursor-pointer hover:text-blue-400 items-center justify-end mt-2 gap-2">
-                        <FiHeart />
-                        Save for later
-                      </p>
-                    </div>
-                  </div>
-                  <div className="pl-4 md:ml-8">
-                    <div className="flex-col flex min-w-[150px]">
-                      <div className="font-bold text-slate-900 text-3xl mb-2 flex items-center justify-end">
-                        &pound; {curr.price}
-                      </div>
-                      <Button className="gap-2 flex items-center justify-center">
-                        <MdOutlineShoppingCart className="text-xl" />
-                        Add to cart
+
+                  <div className="pl-4 w-[420px]">
+                    {curr.traceId && (
+                      <Button
+                        className=" bg-gray-100 border-gray-300 hover:border-gray-400 hover:bg-gray-200 text-slate-600"
+                        variant="outline"
+                      >
+                        <div className="flex items-center justify-center gap-2">
+                          <TbTruckDelivery className="text-xl" />
+                          Track order
+                        </div>
                       </Button>
+                    )}
+                    {curr.traceId && (
+                      <div className="w-full flex items-center pt-3 gap-2 font-semibold text-blue-600 justify-start">
+                        <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
+                        <p>In transit</p>
+                      </div>
+                    )}
+                    {curr.traceId && (
+                      <div className="text-slate-500 text-[16px] justify-start flex items-center ">
+                        <p className="flex items-center justify-start">
+                          Expected at: {curr.expectedAt}
+                        </p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pl-4">
+                    <div className="flex-col flex min-w-[150px]">
+                      <div className=" text-[16px] pt-1 flex items-end justify-end mb-3">
+                        {curr.status.toLocaleLowerCase() === "delivered" && (
+                          <div className="w-full flex items-center gap-2 font-semibold text-blue-600 justify-end">
+                            <FaRegCheckCircle className="bg-blue-500 text-white rounded-full" />
+                            <p>Delivered</p>
+                          </div>
+                        )}
+                        {curr.status.toLocaleLowerCase() === "cancelled" && (
+                          <div className="w-full flex items-center gap-2 font-semibold text-rose-600 justify-end">
+                            <RxCrossCircled className="bg-rose-500 text-white rounded-full" />
+                            <p>Cancelled</p>
+                          </div>
+                        )}
+                        {curr.status.toLocaleLowerCase() === "processing" && (
+                          <div className="w-full flex items-center gap-2 font-semibold text-orange-600 justify-end">
+                            <FaRegCheckCircle className="bg-orange-500 text-white rounded-full" />
+                            <p>Processing</p>
+                          </div>
+                        )}
+                      </div>
+                      <div className="text-slate-500 text-[16px] pt-1 flex items-end justify-end ">
+                        <p>Total amount</p>
+                      </div>
+                      <div className="font-bold text-slate-900 text-2xl mb-2 flex items-center justify-end">
+                        &pound; {curr.totalPrice}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -138,9 +201,24 @@ const Page = () => {
           </div>
         </div>
         <div className="w-full mt-4 flex items-end justify-end mb-12 py-12">
-          <Button className="" variant="outline">
-            Continue shopping
-          </Button>
+          <Pagination>
+            <PaginationContent>
+              <PaginationItem>
+                <PaginationPrevious href="#" />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationLink href="#">1</PaginationLink>
+                <PaginationLink href="#">2</PaginationLink>
+                <PaginationLink href="#">3</PaginationLink>
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationEllipsis />
+              </PaginationItem>
+              <PaginationItem>
+                <PaginationNext href="#" />
+              </PaginationItem>
+            </PaginationContent>
+          </Pagination>
         </div>
       </div>
     </main>
