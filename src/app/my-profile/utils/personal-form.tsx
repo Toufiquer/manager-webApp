@@ -54,6 +54,7 @@ export const newItemSchema = z.object({
     .max(120, "Maximum 120 characters")
     .trim(),
   email,
+  gender,
   mobileNumber,
   nationality,
   address: z
@@ -67,7 +68,7 @@ export const newItemSchema = z.object({
 });
 type newItemFormSchema = z.infer<typeof newItemSchema>;
 const PersonalForm = () => {
-  const [genderValue, setGenderValue] = useState("Male");
+  const [genderValue, setGenderValue] = useState(" ");
   const { reset, register, setValue, handleSubmit, formState, getValues } =
     useForm<newItemFormSchema>({ resolver: zodResolver(newItemSchema) });
   const { errors } = formState;
@@ -79,8 +80,10 @@ const PersonalForm = () => {
   const handleGender = (data: (typeof Gender)[keyof typeof Gender]) => {
     if (data !== genderValue) {
       setGenderValue(data);
+      setValue("gender", data);
     } else {
       setGenderValue("");
+      setValue("gender", "");
     }
   };
   return (
@@ -237,12 +240,31 @@ const PersonalForm = () => {
                     <p>Others</p>
                   </div>
                 </div>
-                {genderValue === "" && (
+                {errors?.gender && (
                   <p className="text-sm text-rose-400">
-                    Please Select a Gender
+                    {errors.gender.message}
                   </p>
                 )}
               </div>
+            </div>
+            <div className="w-full">
+              <label
+                className="text-sm w-full font-semibold pb-1 text-slate-400"
+                htmlFor="mobileNumber"
+              >
+                address
+              </label>
+              <textarea
+                rows={6}
+                className={borderStyle + " rounded-r-none"}
+                placeholder="Address"
+                {...register("address")}
+              />
+              {errors?.address && (
+                <p className="text-sm text-rose-400">
+                  {errors.address.message}
+                </p>
+              )}
             </div>
           </div>
           <div className="w-full flex items-end justify-end mt-4">
