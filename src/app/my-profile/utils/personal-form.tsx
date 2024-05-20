@@ -85,7 +85,7 @@ const PersonalForm = () => {
   };
   return (
     <div className="max-w-4xl">
-      <main className=" flex items-center justify-start w-full pr-4">
+      <main className=" flex items-center justify-start w-full md:pr-4">
         <form
           // onSubmit={handleSubmit(handleSubmitForm)}
           onSubmit={handleSubmit(onSubmit)}
@@ -99,7 +99,7 @@ const PersonalForm = () => {
               >
                 Full Name
               </label>
-              <div className="w-full flex items-center">
+              <div className="w-full flex flex-col md:flex-row gap-2 md:gap-0 items-center">
                 <div className="w-full">
                   <input
                     className={borderStyle + " rounded-r-none"}
@@ -126,7 +126,7 @@ const PersonalForm = () => {
                 </div>
               </div>
             </div>
-            <div className="w-full flex items-center gap-4 mt-2">
+            <div className="w-full flex flex-col md:flex-row md:gap-0 items-center gap-4 mt-2">
               <div className="w-full">
                 <label
                   className="text-sm w-full font-semibold pb-1 text-slate-400"
@@ -164,7 +164,7 @@ const PersonalForm = () => {
                 )}
               </div>
             </div>
-            <div className="w-full flex items-center gap-4 mt-2">
+            <div className="w-full flex flex-col md:flex-row md:gap-0 items-center gap-4 mt-2">
               <div className="w-full">
                 <label
                   className="text-sm w-full font-semibold pb-1 text-slate-400"

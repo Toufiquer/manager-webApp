@@ -31,7 +31,7 @@ const EmailUpdate = () => {
 
   return (
     <div className="max-w-4xl">
-      <main className=" flex items-center justify-start w-full pr-4">
+      <main className=" flex items-center justify-start w-full md:pr-4">
         <form
           // onSubmit={handleSubmit(handleSubmitForm)}
           onSubmit={handleSubmit(onSubmit)}
