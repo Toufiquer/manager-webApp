@@ -7,6 +7,7 @@
 */
 import Header from "@/components/common/header";
 import ShopCartHeader from "./shop-cart-header";
+import CartContainer from "./cart-container";
 
 const Page = () => {
   return (
@@ -15,6 +16,7 @@ const Page = () => {
 
       <div className="p-2 md:p-4 max-w-7xl mx-auto">
         <ShopCartHeader />
+        <CartContainer />
       </div>
     </main>
   );
