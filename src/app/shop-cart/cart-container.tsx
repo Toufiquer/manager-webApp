@@ -6,15 +6,8 @@
 |-----------------------------------------
 */
 import { X } from "lucide-react";
-import { BsTicketPerforated } from "react-icons/bs";
-import {
-  MdOutlineHeadsetMic,
-  MdOutlineMailOutline,
-  MdOutlineShoppingCart,
-} from "react-icons/md";
 
 import { Button } from "@/components/ui/button";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,11 +15,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
-import { IoTrashOutline } from "react-icons/io5";
-import { FiHeart } from "react-icons/fi";
 import { CiImageOn } from "react-icons/ci";
-
-const iconStyle = "w-[42px] h-[42px] text-blue-400 pr-1";
+import Banner from "./banner";
 
 const exampleData = [
   {
@@ -170,6 +160,7 @@ const CartContainer = () => {
           Update cart
         </Button>
       </div>
+      <Banner />
     </main>
   );
 };
