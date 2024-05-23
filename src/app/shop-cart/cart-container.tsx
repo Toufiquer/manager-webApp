@@ -16,7 +16,6 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { IoIosArrowDown } from "react-icons/io";
 import { CiImageOn } from "react-icons/ci";
-import Banner from "./banner";
 
 const exampleData = [
   {
@@ -160,7 +159,6 @@ const CartContainer = () => {
           Update cart
         </Button>
       </div>
-      <Banner />
     </main>
   );
 };

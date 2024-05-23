@@ -9,6 +9,8 @@ import Header from "@/components/common/header";
 import ShopCartHeader from "./shop-cart-header";
 import CartContainer from "./cart-container";
 import CartSidebar from "./cart-sidebar";
+import Banner from "./banner";
+import ShopCartFaq from "./shop-cart-faq";
 
 const Page = () => {
   return (
@@ -19,6 +21,13 @@ const Page = () => {
         <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_300px]">
           <CartContainer />
           <CartSidebar />
+        </div>
+        <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_300px]">
+          <div className="div">
+            <Banner />
+            <ShopCartFaq />
+          </div>
+          <div />
         </div>
       </div>
     </main>
