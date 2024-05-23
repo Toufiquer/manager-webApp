@@ -6,25 +6,32 @@
 |-----------------------------------------
 */
 
+import { BsTicketPerforated } from "react-icons/bs";
 import { CiBellOn } from "react-icons/ci";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { MdOutlineHeadsetMic, MdOutlineMailOutline } from "react-icons/md";
+
+const iconStyle = "w-[42px] h-[42px] text-blue-400 pr-1";
 
 const exampleData = [
   {
     id: 1,
     title: "Contact Support",
     description: "Not finding the help you need?",
+    icon: <MdOutlineHeadsetMic className={iconStyle} />,
   },
   {
     id: 2,
     title: "Submit a Ticket",
     description: "Prosperous impression had delay",
+    icon: <BsTicketPerforated className={iconStyle} />,
   },
   {
     id: 3,
     title: "Email us",
     description: "Reach us at ",
     email: "example@example.com",
+    icon: <MdOutlineMailOutline className={iconStyle} />,
   },
 ];
 const Ticket = () => {
@@ -37,7 +44,7 @@ const Ticket = () => {
         >
           <div className="p-2 flex gap-2 items-center justify-between">
             <div className="h-full items-start justify-start border flex min-h-[100px] mb-[-18px]">
-              <CiBellOn className="w-[42px] h-[42px] text-blue-400 font-bold rounded-lg" />
+              {curr.icon}
             </div>
             <div className="flex flex-col w-full">
               <div className="font-bold text-[22px] text-slate-700">

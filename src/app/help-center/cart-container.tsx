@@ -9,12 +9,20 @@ import Link from "next/link";
 import { CiBellOn } from "react-icons/ci";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
+import { LuBoxes } from "react-icons/lu";
+import { BsEmojiSmile } from "react-icons/bs";
+import { IoIosPaper } from "react-icons/io";
+import { IoHomeOutline } from "react-icons/io5";
+import { GrIntegration } from "react-icons/gr";
+import { RiMoneyPoundCircleLine } from "react-icons/ri";
 
+const iconStyle = "w-[50px] h-[50px] bg-blue-400 text-white rounded-lg p-1";
 const exampleData = {
   categories: [
     {
       id: 1,
       title: "Getting Started",
+      icon: <LuBoxes className={iconStyle} />,
       articles: [
         { id: "article-1", link: "#", content: "Get Started" },
         { id: "article-2", link: "#", content: "Gulp and Customization" },
@@ -39,6 +47,7 @@ const exampleData = {
     {
       id: 2,
       title: "Account Setup",
+      icon: <BsEmojiSmile className={iconStyle} />,
       articles: [
         { id: "article-7", link: "#", content: "Connecting to your Account" },
         {
@@ -58,6 +67,7 @@ const exampleData = {
     {
       id: 3,
       title: "Other Topics",
+      icon: <IoIosPaper className={iconStyle} />,
       articles: [
         { id: "article-12", link: "#", content: "Security & Privacy" },
         {
@@ -77,6 +87,7 @@ const exampleData = {
     {
       id: 4,
       title: "Advanced Usage",
+      icon: <IoHomeOutline className={iconStyle} />,
       articles: [
         { id: "article-17", link: "#", content: "Admin & Billing" },
         { id: "article-18", link: "#", content: "Become a Pro" },
@@ -92,6 +103,7 @@ const exampleData = {
     {
       id: 5,
       title: "Billing & Payments",
+      icon: <RiMoneyPoundCircleLine className={iconStyle} />,
       articles: [
         { id: "article-22", link: "#", content: "How can I get a refund?" },
         { id: "article-23", link: "#", content: "How do I get a receipt" },
@@ -107,6 +119,7 @@ const exampleData = {
     {
       id: 6,
       title: "Integration",
+      icon: <GrIntegration className={iconStyle} />,
       articles: [
         {
           id: "article-27",
@@ -135,9 +148,7 @@ const CartContainer = () => {
             className="min-w-[120px] w-full pb-12 relative h-full min-h-[120px] border border-slate-300 hover:border-slate-400 duration-200 rounded-lg p-2"
           >
             <div className="p-5 flex flex-col">
-              <div className="pb-4 items-start justify-start">
-                <CiBellOn className="w-[50px] h-[50px] bg-blue-600 font-bold text-white rounded-lg p-1" />
-              </div>
+              <div className="pb-4 items-start justify-start">{curr.icon}</div>
               <div className="font-semibold text-xl pb-4">{curr.title}</div>
 
               <div className="flex flex-col gap-1 pb-8">
