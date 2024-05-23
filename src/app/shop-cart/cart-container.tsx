@@ -71,7 +71,7 @@ const CartContainer = () => {
           <X className="p-1" /> Clear cart
         </Button>
       </div>
-      <div className="flex flex-col mb-12 mt-4 border-b border-slate-300">
+      <div className="flex flex-col mb-4 mt-4 border-b border-slate-300">
         {exampleData.map((curr) => (
           <div
             key={curr.id}
@@ -84,7 +84,7 @@ const CartContainer = () => {
               <div className="w-full flex lg:flex-row min-h-[120px] flex-col">
                 <div className="px-4 w-full">
                   <div className="flex flex-col items-start justify-start w-full">
-                    <div className="flex items-start text-[28px] font-semibold w-full justify-start">
+                    <div className="flex items-start text-[22px] font-semibold w-full justify-start">
                       <p>{curr.name}</p>
                     </div>
 
@@ -161,6 +161,14 @@ const CartContainer = () => {
             </div>
           </div>
         ))}
+      </div>
+      <div className="w-full mb-12 items-center justify-end flex">
+        <Button
+          variant="outline"
+          className="duration-150 bg-slate-100 border-slate-300 hover:bg-slate-200"
+        >
+          Update cart
+        </Button>
       </div>
     </main>
   );

@@ -8,6 +8,7 @@
 import Header from "@/components/common/header";
 import ShopCartHeader from "./shop-cart-header";
 import CartContainer from "./cart-container";
+import CartSidebar from "./cart-sidebar";
 
 const Page = () => {
   return (
@@ -15,7 +16,10 @@ const Page = () => {
       <Header />
       <div className="p-2 md:p-4 max-w-7xl mx-auto">
         <ShopCartHeader />
-        <CartContainer />
+        <div className="w-full grid grid-cols-1 md:grid-cols-[1fr_300px]">
+          <CartContainer />
+          <CartSidebar />
+        </div>
       </div>
     </main>
   );
