@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-
 /*
 |-----------------------------------------
 | setting up CartSidebar for the App
@@ -8,6 +5,10 @@ import { Input } from "@/components/ui/input";
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
+
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
 const CartSidebar = () => {
   return (
     <main className="w-full md:pl-8 mt-14">

@@ -5,10 +5,7 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-
-import Link from "next/link";
  
-
 const ShopCartHeader = () => {
   return (
     <main className="my-8">

@@ -5,12 +5,14 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-import Header from "@/components/common/header";
-import ShopCartHeader from "./shop-cart-header";
-import CartContainer from "./cart-container";
-import CartSidebar from "./cart-sidebar";
+
 import Banner from "./banner";
+import CartSidebar from "./cart-sidebar";
 import ShopCartFaq from "./shop-cart-faq";
+import CartContainer from "./cart-container";
+import ShopCartHeader from "./shop-cart-header";
+
+import Header from "@/components/common/header";
 
 const Page = () => {
   return (

@@ -1,6 +1,3 @@
-import { Button } from "@/components/ui/button";
-import Image from "next/image";
-
 /*
 |-----------------------------------------
 | setting up Banner for the App
@@ -8,6 +5,11 @@ import Image from "next/image";
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
+
+import Image from "next/image";
+
+import { Button } from "@/components/ui/button";
+
 const Banner = () => {
   return (
     <main className="py-12">
