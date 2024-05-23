@@ -11,6 +11,7 @@ import Header from "@/components/common/header";
 import HelpCenterHeader from "./help-center-header";
 import CartContainer from "./cart-container";
 import HelpCenterFaq from "./help-center-faq";
+import Ticket from "./ticket";
 
 const Page = () => {
   return (
@@ -20,6 +21,7 @@ const Page = () => {
         <HelpCenterHeader />
         <CartContainer />
         <HelpCenterFaq />
+        <Ticket />
       </div>
     </main>
   );
