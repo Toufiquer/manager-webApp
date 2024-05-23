@@ -16,7 +16,7 @@ const Header = () => {
   return (
     <div className="border w-full h-[8vh]">
       <div className="flex items-center justify-between">
-        <div className="flex items-center justify-start w-[70vw]">
+        <div className="flex items-center justify-between">
           <div className="border px-4 py-1">
             <Image
               width={40}
@@ -27,7 +27,16 @@ const Header = () => {
           </div>
           <p className="text-bold text-2xl text-start">Meal Night</p>
         </div>
-        <div className="flex items-center justify-end w-[30vw]">
+        <div className="flex items-center justify-end ">
+          <Link className={linkButton} href="/help-center">
+            Help Center
+          </Link>
+          <Link className={linkButton} href="/shop-cart">
+            Shop Cart
+          </Link>
+          <Link className={linkButton} href="/help-center-details">
+            Help Center Details
+          </Link>
           <Link className={linkButton} href="/dashboard">
             Dashboard
           </Link>
