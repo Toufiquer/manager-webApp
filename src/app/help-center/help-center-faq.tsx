@@ -46,7 +46,7 @@ const exampleData = [
   },
   {
     id: "faq-6",
-    title: "What is the difference between a college and a university?",
+    title: "What is the difference from other Services?",
     description:
       "Understand the key differences between colleges and universities to make an informed decision about your education. Yet remarkably appearance gets him his projection. Diverted endeavor bed peculiar men the not desirous. Acuteness abilities ask can offending furnished fulfilled sex. Warrant fifteen exposed ye at mistake. Blush since so in noisy still built up an again. As young ye hopes no he place means. Partiality diminution gay yet entreaties admiration. In mention perhaps attempt pointed suppose. Unknown ye chamber of warrant of Norland arrived.",
   },
@@ -70,7 +70,7 @@ const HelpCenterFaq = () => {
               <AccordionTrigger className="hover:no-underline text-slate-700 hover:text-slate-800 font-semibold text-[18px]">
                 {curr.title}
               </AccordionTrigger>
-              <AccordionContent className="text-sm font-medium text-slate-500 pb-8">
+              <AccordionContent className="text-sm font-medium text-slate-500 pb-8 text-left justify-start">
                 {curr.description}
               </AccordionContent>
             </AccordionItem>
