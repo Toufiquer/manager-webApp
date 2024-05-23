@@ -7,7 +7,7 @@
 */
 import Header from "@/components/common/header";
 import ShopCartHeader from "./shop-cart-header";
-import CartContainer from "./cart-container";
+import CartContainer from "../help-center/cart-container";
 
 const Page = () => {
   return (

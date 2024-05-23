@@ -4,17 +4,11 @@
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
-*/
-
-import { ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { BiLeftArrow } from "react-icons/bi";
+*/ 
+import Link from "next/link"; 
 import { CiBellOn } from "react-icons/ci";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
-import {
-  MdOutlineKeyboardArrowRight,
-  MdOutlineKeyboardDoubleArrowRight,
-} from "react-icons/md";
+import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
 
 const exampleData = {
   categories: [
