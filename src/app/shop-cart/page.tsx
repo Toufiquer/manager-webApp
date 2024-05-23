@@ -13,7 +13,9 @@ const Page = () => {
     <main>
       <Header />
 
-      <ShopCartHeader />
+      <div className="p-2 md:p-4 max-w-7xl mx-auto">
+        <ShopCartHeader />
+      </div>
     </main>
   );
 };

@@ -6,9 +6,11 @@
 |-----------------------------------------
 */
 
+import Link from "next/link";
+
 const SearchBar = () => {
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md">
       <p className="mb-2 text-sm font-medium text-gray-900 sr-only ">Search</p>
       <div className="relative">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
@@ -32,7 +34,7 @@ const SearchBar = () => {
           type="search"
           id="default-search"
           className="block  w-full px-4  focus:outline-none py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-full bg-gray-50 focus:ring-slate-400 focus:border-slate-400 "
-          placeholder="Search Mockups, Logos..."
+          placeholder="Search for answer..."
           required
         />
       </div>
@@ -42,10 +44,24 @@ const SearchBar = () => {
 
 const ShopCartHeader = () => {
   return (
-    <main>
+    <main className="my-8">
       <div>
-        <h2 className="py-4 font-semibold text-2xl">How can we help you?</h2>
-        <SearchBar />
+        <h2 className="py-4 font-bold text-5xl">How can we help you?</h2>
+        <div className="mt-2">
+          <SearchBar />
+          <p className="mt-8 text-slate-500 text-sm max-w-[400px] gap-2 py-4 flex flex-wrap">
+            Popular search:
+            <Link href="#" className="text-slate-800 underline">
+              How can we help?
+            </Link>
+            <Link href="#" className="text-slate-800 underline">
+              Installation Guide
+            </Link>
+            <Link href="#" className="text-slate-800 underline">
+              How to view expired tickets?
+            </Link>
+          </p>
+        </div>
       </div>
     </main>
   );
