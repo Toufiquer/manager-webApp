@@ -5,8 +5,8 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-import { CiImageOn } from "react-icons/ci";
 import { X } from "lucide-react";
+import { CiImageOn } from "react-icons/ci";
 import { IoIosArrowDown } from "react-icons/io";
 
 import {

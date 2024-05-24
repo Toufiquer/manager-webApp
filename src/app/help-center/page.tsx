@@ -8,10 +8,10 @@
 
 import Header from "@/components/common/header";
 
-import HelpCenterHeader from "./help-center-header";
+import Ticket from "./ticket";
 import CartContainer from "./cart-container";
 import HelpCenterFaq from "./help-center-faq";
-import Ticket from "./ticket";
+import HelpCenterHeader from "./help-center-header";
 
 const Page = () => {
   return (

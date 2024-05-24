@@ -5,16 +5,15 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */ 
-import Link from "next/link"; 
-import { CiBellOn } from "react-icons/ci";
+import Link from "next/link";
+import { LuBoxes } from "react-icons/lu";
+import { IoIosPaper } from "react-icons/io";
+import { BsEmojiSmile } from "react-icons/bs";
+import { GrIntegration } from "react-icons/gr";
+import { IoHomeOutline } from "react-icons/io5";
+import { RiMoneyPoundCircleLine } from "react-icons/ri";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { MdOutlineKeyboardDoubleArrowRight } from "react-icons/md";
-import { LuBoxes } from "react-icons/lu";
-import { BsEmojiSmile } from "react-icons/bs";
-import { IoIosPaper } from "react-icons/io";
-import { IoHomeOutline } from "react-icons/io5";
-import { GrIntegration } from "react-icons/gr";
-import { RiMoneyPoundCircleLine } from "react-icons/ri";
 
 const iconStyle = "w-[50px] h-[50px] bg-blue-400 text-white rounded-lg p-1";
 const exampleData = {

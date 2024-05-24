@@ -7,7 +7,6 @@
 */
 
 import { BsTicketPerforated } from "react-icons/bs";
-import { CiBellOn } from "react-icons/ci";
 import { HiOutlineArrowNarrowRight } from "react-icons/hi";
 import { MdOutlineHeadsetMic, MdOutlineMailOutline } from "react-icons/md";
 
@@ -43,7 +42,7 @@ const Ticket = () => {
           className="border border-slate-200 shadow-slate-300 bg-slate-100 hover:border-slate-300 duration-200 rounded-lg p-2 hover:shadow-200 hover:shadow-xl cursor-pointer pt-6 hover:pt-5"
         >
           <div className="p-2 flex gap-2 items-center justify-between">
-            <div className="h-full items-start justify-start border flex min-h-[100px] mb-[-18px]">
+            <div className="h-full items-start justify-start flex min-h-[100px] mb-[-18px]">
               {curr.icon}
             </div>
             <div className="flex flex-col w-full">
