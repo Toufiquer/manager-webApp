@@ -25,51 +25,37 @@ const PricingCard = () => {
   const [month, setMonth] = useState(1);
 
   return (
-    <main className="mt-[-180px] pb-12">
+    <main className="mt-[-380px] pb-12">
       <div className="relative mx-auto max-w-[1200px] py-4">
-        <div className="absolute right-0 top-0 z-[-2]">
-          <Image
-            priority={false}
-            quality={75}
-            src="https://i.ibb.co/GvCk10P/dots-lg.png"
-            width={200}
-            height={200}
-            className="mx-auto h-auto w-[200px]"
-            alt="dots Image"
-          />
-        </div>
-        <div className="absolute bottom-0 left-0 z-[-2] w-full">
-          <Image
-            priority={false}
-            quality={75}
-            src="https://i.ibb.co/CsJXRZh/footer-circle.png"
-            width={200}
-            height={100}
-            className="invisible h-auto w-[200px] overflow-visible p-4 xl:visible"
-            alt="footer-circle Image"
-          />
-        </div>
         <div className="z-40 flex w-full flex-col items-center justify-center">
-          <div className="max-w-[400px]">
+          <div className="max-w-[400px] py-12">
             <div className="relative">
-              <span className="absolute right-[110px] top-[10px]">
-                <PiArrowBendLeftDownBold />
-              </span>
               <Badge
                 variant="outline"
-                className="mb-2 ml-[240px] max-w-[180px] bg-blue-500 text-white"
+                className="mb-2 ml-[240px] rounded-sm border-none max-w-[180px] bg-rose-500 text-white"
               >
-                Save up to 10%
+                20% save
               </Badge>
             </div>
             <div className="flex justify-center">
-              <div className="flex items-center space-x-2">
-                <Label htmlFor="monthlyAnnually">Monthly</Label>
+              <div className="flex text-white items-center space-x-2 gap-2">
+                <Label
+                  htmlFor="monthlyAnnually"
+                  className=" font-semibold text-xl"
+                >
+                  Monthly
+                </Label>
                 <Switch
                   onClick={() => setMonth(month === 1 ? 12 : 1)}
                   id="monthlyAnnually"
+                  className="border-white data-[state=unchecked]:bg-slate-500"
                 />
-                <Label htmlFor="monthlyAnnually">Annually</Label>
+                <Label
+                  htmlFor="monthlyAnnually"
+                  className=" font-semibold text-xl"
+                >
+                  Yearly
+                </Label>
               </div>
             </div>
           </div>

@@ -16,6 +16,16 @@ const Page = () => {
   return (
     <main>
       <Header />
+      <PricingCard />
+      {/* <Enterprise /> */}
+      {/* <PicThePlan /> */}
+      {/* <div className="mx-auto max-w-[960px] px-2">
+        <h2 className="mb-6 text-center text-[calc(1.33rem_+_.85vw)] font-[800]">
+          Frequently Asked Questions
+        </h2>
+        {allFAQ.length > 0 &&
+          allFAQ.map((curr) => <FAQAccordion data={curr} key={curr.id} />)}
+      </div> */}
     </main>
   );
 };
