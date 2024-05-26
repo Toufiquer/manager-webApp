@@ -8,22 +8,41 @@
 
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
+import { type CarouselApi } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { Badge } from "@/components/ui/badge";
 import { PiArrowBendLeftDownBold } from "react-icons/pi";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
 
 import SingleCard from "./single-card";
-import { cardData } from "./pricing-data";
 import { AiOutlineRight } from "react-icons/ai";
+import { cardData } from "./pricing-data";
 
 const PricingCard = () => {
   const [month, setMonth] = useState(1);
-
+  const [api, setApi] = useState<CarouselApi>();
+  const [current, setCurrent] = useState(0);
+  useEffect(() => {
+    if (!api) {
+      return;
+    }
+    setCurrent(api.selectedScrollSnap() + 1);
+    api.on("select", () => {
+      // Do something on select.
+      console.log("changed selected", api);
+      console.log("changed current", current);
+    });
+  }, [api]);
   return (
     <main className="mt-[-380px] pb-12">
       <div className="relative mx-auto max-w-[1200px] py-4">
@@ -59,10 +78,28 @@ const PricingCard = () => {
               </div>
             </div>
           </div>
-          <div className="mx-auto mb-12 mt-8 flex w-full flex-wrap items-stretch justify-center gap-6 xl:min-w-[1200px] ">
+
+          <div className="hidden w-full lg:flex flex-col lg:flex-row items-center justify-center md:justify-between">
             {cardData.map((curr) => (
               <SingleCard key={curr.id} data={curr} month={month} />
             ))}
+          </div>
+          <div className="lg:hidden block w-full p-4">
+            <Carousel
+              opts={{
+                align: "start",
+                loop: true,
+              }}
+              setApi={setApi}
+            >
+              <CarouselContent>
+                {cardData.map((curr) => (
+                  <CarouselItem key={curr.id}>
+                    <SingleCard key={curr.id} data={curr} month={month} />
+                  </CarouselItem>
+                ))}
+              </CarouselContent>
+            </Carousel>
           </div>
         </div>
       </div>
