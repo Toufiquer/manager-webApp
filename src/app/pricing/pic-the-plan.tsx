@@ -16,54 +16,106 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { BsCheck2Circle } from "react-icons/bs";
+import { FiCheckCircle } from "react-icons/fi";
+import { RxCrossCircled } from "react-icons/rx";
 
 const cellStyle = "flex items-center justify-center text-green-500 w-full";
 
 type PLAN = {
   id: string | number;
   title: string;
-  addOnAvailable: string[];
-  emptyCell: string[];
-  professional: boolean;
-  team: boolean;
-  enterprise: boolean;
+  basic: boolean | string;
+  standard: boolean | string;
+  professional: boolean | string;
 };
-const createPlan = (
-  id: string | number,
-  title: string,
-  addOnAvailable: string[],
-  emptyCell: string[]
-): PLAN => ({
-  id,
-  title,
-  addOnAvailable,
-  emptyCell,
-  professional:
-    !addOnAvailable.includes("professional") &&
-    !emptyCell.includes("professional"),
-  team: !addOnAvailable.includes("team") && !emptyCell.includes("team"),
-  enterprise:
-    !addOnAvailable.includes("enterprise") && !emptyCell.includes("enterprise"),
-});
+
 const planData: PLAN[] = [
-  createPlan(1, "Cross-platform UI toolkit", [], []),
-  createPlan(2, "14-days free trial", [], []),
-  createPlan(3, "No user limit", [], ["professional"]),
-  createPlan(4, "Long-term support", [], []),
-  createPlan(5, "Email support", ["professional"], []),
-  createPlan(6, "Developer tools", [], ["team"]),
-  createPlan(7, "Removal of Front branding", [], ["professional"]),
-  createPlan(8, "Active maintenance & support", [], ["enterprise"]),
-  createPlan(9, "Data storage for 365 days", ["team"], []),
+  {
+    id: 1,
+    title: "Storage space",
+    basic: "40GB",
+    standard: "80GB",
+    professional: "Unlimited",
+  },
+  {
+    id: 2,
+    title: "Cloud connected",
+    basic: "Yes",
+    standard: "Yes",
+    professional: "Yes",
+  },
+  {
+    id: 3,
+    title: "Advance debugging",
+    basic: true,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 4,
+    title: "Version control",
+    basic: true,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 5,
+    title: "Security",
+    basic: true,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 6,
+    title: "Team access",
+    basic: true,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 7,
+    title: "Web tools",
+    basic: true,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 8,
+    title: "Mobile apps",
+    basic: false,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 9,
+    title: "Web tools",
+    basic: false,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 10,
+    title: "Version control",
+    basic: false,
+    standard: true,
+    professional: true,
+  },
+  {
+    id: 11,
+    title: "Security",
+    basic: false,
+    standard: false,
+    professional: true,
+  },
+  {
+    id: 12,
+    title: "Team access",
+    basic: false,
+    standard: false,
+    professional: true,
+  },
 ];
 
-const AddOnAvailable = () => (
-  <div className="flex w-full justify-center">
-    <span className="mx-auto rounded-lg bg-blue-100 px-2 py-1 text-sm text-blue-500">
-      Add-on available
-    </span>
-  </div>
-);
 const PicThePlan = () => {
   return (
     <main>
@@ -77,92 +129,91 @@ const PicThePlan = () => {
               <TableRow>
                 <TableHead className="w-[400px]" />
                 <TableHead>
-                  <span className="flex flex-col items-center text-center">
-                    <span>Professional</span>
-                    <span>&#163;19/mon</span>
+                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
+                    <span className="font-semibold text-xl">Basic plan</span>
+                    <span>
+                      <span className="text-4xl font-bold">&#163;19</span>
+                      <span>/mon</span>
+                    </span>
+                    <Button className="my-4">Get Started</Button>
                   </span>
                 </TableHead>
                 <TableHead className="border-l">
-                  <span className="flex flex-col items-center text-center">
+                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
                     <span className="flex gap-2">
-                      <span>Team</span>
+                      <span className="font-semibold text-xl">
+                        Standard plan
+                      </span>
                       <span className="mx-auto rounded-lg bg-orange-100 px-2 py-1 text-xs text-red-500">
                         HOT
                       </span>
                     </span>
-                    <span>&#163;39/mon</span>
+                    <span>
+                      <span className="text-4xl font-bold">&#163;39</span>
+                      <span>/mon</span>
+                    </span>
+                    <Button className="my-4">Get Started</Button>
                   </span>
                 </TableHead>
                 <TableHead className="border-l">
-                  <span className="flex flex-col items-center text-center">
-                    <span>Enterprise</span>
-                    <span>&#163;59/mon</span>
+                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
+                    <span className="font-semibold text-xl">Professional</span>
+                    <span>
+                      <span className="text-4xl font-bold">&#163;59</span>
+                      <span>/mon</span>
+                    </span>
+                    <Button className="my-4">Get Started</Button>
                   </span>
                 </TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
               {planData.map((curr: PLAN) => (
-                <TableRow
-                  key={curr.id}
-                  className={`${(curr.id as number) % 2 !== 0 && "bg-blue-50"}`}
-                >
-                  <TableCell className="font-medium">{curr.title}</TableCell>
-                  <TableCell>
-                    {curr.professional && (
-                      <span className={cellStyle}>
-                        <BsCheck2Circle />
-                      </span>
-                    )}
-                    {curr.emptyCell.includes("professional")
-                      ? ""
-                      : !curr.professional && <AddOnAvailable />}
+                <TableRow key={curr.id} className="border-b">
+                  <TableCell className="font-medium text-start">
+                    {curr.title}
                   </TableCell>
-                  <TableCell className="border-l">
-                    {curr.team && (
-                      <span className={cellStyle}>
-                        <BsCheck2Circle />
+                  <TableCell className="font-medium text-center">
+                    {typeof curr.basic === "string" ? (
+                      curr.basic
+                    ) : curr.basic ? (
+                      <span className="w-full flex items-center justify-center">
+                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                      </span>
+                    ) : (
+                      <span className="w-full flex items-center justify-center">
+                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
                       </span>
                     )}
-                    {curr.emptyCell.includes("team")
-                      ? ""
-                      : !curr.team && <AddOnAvailable />}
                   </TableCell>
-                  <TableCell className="border-l">
-                    {curr.enterprise && (
-                      <span className={cellStyle}>
-                        <BsCheck2Circle />
+                  <TableCell className="font-medium text-center">
+                    {typeof curr.standard === "string" ? (
+                      curr.standard
+                    ) : curr.standard ? (
+                      <span className="w-full flex items-center justify-center">
+                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                      </span>
+                    ) : (
+                      <span className="w-full flex items-center justify-center">
+                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
                       </span>
                     )}
-                    {curr.emptyCell.includes("enterprise")
-                      ? ""
-                      : !curr.enterprise && <AddOnAvailable />}
+                  </TableCell>
+                  <TableCell className="font-medium flex items-center justify-center">
+                    {typeof curr.professional === "string" ? (
+                      curr.professional
+                    ) : curr.professional ? (
+                      <span className="w-full flex items-center justify-center">
+                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                      </span>
+                    ) : (
+                      <span className="w-full flex items-center justify-center">
+                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
+                      </span>
+                    )}
                   </TableCell>
                 </TableRow>
               ))}
-              <TableRow>
-                <TableCell />
-                <TableCell className="font-medium">
-                  <div className="flex w-full justify-center">
-                    <Button variant="outline">Choose plan</Button>
-                  </div>
-                </TableCell>
-                <TableCell className="font-medium">
-                  <div className="flex w-full justify-center">
-                    <Button variant="outline">Choose plan</Button>
-                  </div>
-                </TableCell>
-                <TableCell className="font-medium">
-                  <div className="flex w-full  justify-center">
-                    <Button
-                      variant="outline"
-                      className="bg-blue-500 text-white hover:bg-blue-600 hover:text-white"
-                    >
-                      Contact us
-                    </Button>
-                  </div>
-                </TableCell>
-              </TableRow>
             </TableBody>
           </Table>
         </div>
