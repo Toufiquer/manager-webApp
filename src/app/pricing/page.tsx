@@ -11,13 +11,14 @@ import Enterprise from "./enterprise";
 import Header from "./header";
 import PicThePlan from "./pic-the-plan";
 import PricingCard from "./pricing-card";
+import FeaturesIncluded from "./features-included";
 
 const Page = () => {
   return (
     <main>
       <Header />
       <PricingCard />
-      {/* <Enterprise /> */}
+      <FeaturesIncluded />
       {/* <PicThePlan /> */}
       {/* <div className="mx-auto max-w-[960px] px-2">
         <h2 className="mb-6 text-center text-[calc(1.33rem_+_.85vw)] font-[800]">
