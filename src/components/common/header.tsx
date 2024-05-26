@@ -28,6 +28,9 @@ const Header = () => {
           <p className="text-bold text-2xl text-start">Meal Night</p>
         </div>
         <div className="flex items-center justify-end ">
+          <Link className={linkButton} href="/pricing">
+            Pricing
+          </Link>
           <Link className={linkButton} href="/help-center">
             Help Center
           </Link>
@@ -35,7 +38,7 @@ const Header = () => {
             Shop Cart
           </Link>
           <Link className={linkButton} href="/help-center-details">
-            Help Center Details
+            Help Details
           </Link>
           <Link className={linkButton} href="/dashboard">
             Dashboard
