@@ -16,6 +16,7 @@ import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { buttonStyle } from "./style";
+import { toast } from "sonner";
 
 export const BorderStyle =
   "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none";
@@ -299,6 +300,7 @@ const MutationFormUpdate = () => {
       });
       setApiData(result);
       setMutationData("");
+      toast("Successfully updated");
     } else {
       let result = [];
 
@@ -310,6 +312,7 @@ const MutationFormUpdate = () => {
 
       setApiData(result);
       setMutationData("");
+      toast("Successfully add");
     }
     reset();
   });
