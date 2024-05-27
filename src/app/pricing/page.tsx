@@ -16,19 +16,19 @@ import Productivity from "./productivity";
 
 const Page = () => {
   return (
-    <main>
+    <main className="mb-12 pb-12">
       <Header />
       <PricingCard />
       <FeaturesIncluded />
       <PicThePlan />
       <Productivity />
-      {/* <div className="mx-auto max-w-[960px] px-2">
+      <div className="mx-auto max-w-[960px] px-2">
         <h2 className="mb-6 text-center text-[calc(1.33rem_+_.85vw)] font-[800]">
-          Frequently Asked Questions
+          You have questions we have answers
         </h2>
         {allFAQ.length > 0 &&
           allFAQ.map((curr) => <FAQAccordion data={curr} key={curr.id} />)}
-      </div> */}
+      </div>
     </main>
   );
 };
