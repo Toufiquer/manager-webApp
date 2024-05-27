@@ -79,7 +79,7 @@ const PricingCard = () => {
             </div>
           </div>
 
-          <div className="hidden w-full lg:flex flex-col lg:flex-row items-center justify-center md:justify-between">
+          <div className="hidden w-full lg:flex flex-col lg:flex-row items-center justify-center md:justify-between mt-12">
             {cardData.map((curr) => (
               <SingleCard key={curr.id} data={curr} month={month} />
             ))}
