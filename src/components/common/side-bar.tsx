@@ -11,10 +11,19 @@
 import { FaTrash } from "react-icons/fa6";
 import { IoAddSharp } from "react-icons/io5";
 
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { webAppH2, webAppTitleXl } from "./style";
+import MutationFormUpdate from "./mutation-form-update";
 
 const SideBar = () => {
   const apiData = useGlobalStore((store) => store.apiData);
@@ -59,7 +68,20 @@ const SideBar = () => {
                       setMutationData({ type: "add", name: curr.name })
                     }
                   >
-                    <IoAddSharp className="cursor-pointer" />
+                    <Sheet>
+                      <SheetTrigger>
+                        <IoAddSharp className="cursor-pointer" />
+                      </SheetTrigger>
+                      <SheetContent>
+                        <SheetHeader>
+                          <SheetDescription>
+                            <div className="mt-8">
+                              <MutationFormUpdate />
+                            </div>
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
                   </div>
                   <div
                     onClick={() =>

@@ -6,9 +6,9 @@
 |-----------------------------------------
 */
 import { z } from "zod";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FiPlus } from "react-icons/fi";
-import { RxCross2 } from "react-icons/rx";
+import { RxCross1, RxCross2 } from "react-icons/rx";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 import { Switch } from "@/components/ui/switch";
@@ -105,6 +105,7 @@ const MutationFormUpdate = () => {
   const setApiData = useGlobalStore((store) => store.setApiData);
   const mutationData = useGlobalStore((store) => store.mutationData);
   const setMutationData = useGlobalStore((store) => store.setMutationData);
+  const [isAddInfo, setIsAddInfo] = useState(false);
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "option",
@@ -310,6 +311,7 @@ const MutationFormUpdate = () => {
       setApiData(result);
       setMutationData("");
     }
+    reset();
   });
   let renderUIData = (
     <div className="">
@@ -348,23 +350,52 @@ const MutationFormUpdate = () => {
                 <p className="text-sm text-rose-400">{errors.price.message}</p>
               )}
             </div>
-            <div className="flex flex-col mt-4">
-              <label
-                className="text-sm font-semibold text-slate-500"
-                htmlFor="info"
-              >
-                Item Info
-              </label>
-              <textarea
-                className={BorderStyle}
-                rows="4"
-                {...register("info")}
-                placeholder="Info"
-              />
-              {errors?.info && (
-                <p className="text-sm text-rose-400">{errors.info.message}</p>
-              )}
-            </div>
+            {!mutationData?.info && !isAddInfo && (
+              <div className="w-full flex justify-end mt-4 ">
+                <div
+                  onClick={() => setIsAddInfo(true)}
+                  className="text-slate-800 text-sm border border-slate-500 rounded-lg p-1 px-3 cursor-pointer"
+                >
+                  Add info
+                </div>
+              </div>
+            )}
+            {mutationData?.info ||
+              (isAddInfo && (
+                <div className="flex flex-col mt-4 ">
+                  <div className="w-full flex items-center justify-between">
+                    <label
+                      className="text-sm w-full font-semibold text-slate-500"
+                      htmlFor="info"
+                    >
+                      Item Info
+                    </label>
+                    <div className="w-full flex justify-end">
+                      <div
+                        className="cursor-pointer border"
+                        onClick={() => {
+                          setMutationData("");
+                          setIsAddInfo(false);
+                        }}
+                      >
+                        <RxCross1 />
+                      </div>
+                    </div>
+                  </div>
+
+                  <textarea
+                    className={BorderStyle}
+                    rows="4"
+                    {...register("info")}
+                    placeholder="Info"
+                  />
+                  {errors?.info && (
+                    <p className="text-sm text-rose-400">
+                      {errors.info.message}
+                    </p>
+                  )}
+                </div>
+              ))}
 
             <div className="flex flex-col mt-4">
               <div className="my-4 flex w-full flex-row items-center justify-between ">
