@@ -16,6 +16,15 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import MutationForm from "./mutation-form";
 import DeleteUi from "./delete-ui";
 import { webAppH2, webAppH2Light, webAppPLight, webAppTitleXl } from "./style";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import MutationFormUpdate from "./mutation-form-update";
 
 const Outlet = () => {
   const currentItem = useGlobalStore((store) => store.currentItem);
@@ -41,14 +50,14 @@ const Outlet = () => {
     setMutationData({ ...findData, type });
   };
 
+  let renderUIData;
   if (renderData.length >= 1 && renderData[0]?.data?.lst?.length === 0) {
-    renderData = (
+    renderUIData = (
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
         <div className={webAppH2}>Ops! Nothing was found</div>
       </div>
     );
   }
-  let renderUIData;
   if (renderData.length >= 1 && renderData[0].data.lst.length > 0) {
     renderUIData = (
       <ScrollArea className="h-[92vh] w-full">
@@ -86,7 +95,20 @@ const Outlet = () => {
                       })
                     }
                   >
-                    <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
+                    <Sheet>
+                      <SheetTrigger>
+                        <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
+                      </SheetTrigger>
+                      <SheetContent>
+                        <SheetHeader>
+                          <SheetDescription>
+                            <div className="mt-8">
+                              <MutationFormUpdate />
+                            </div>
+                          </SheetDescription>
+                        </SheetHeader>
+                      </SheetContent>
+                    </Sheet>
                   </div>
                   <div
                     onClick={() =>
@@ -122,21 +144,25 @@ const Outlet = () => {
       </div>
     );
   }
-  if (mutationData.type === "update") {
-    renderUI = (
-      <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-        <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
-          <div className="w-full flex items-center justify-between pr-1 mr-2">
-            <div className={webAppH2}>Update</div>
-            <div className="cursor-pointer" onClick={() => setMutationData("")}>
-              <RxCross1 />
-            </div>
-          </div>
-          <MutationForm />
-        </div>
-      </div>
-    );
+
+  {
+    /* Condition rendering is off it will set to sheet from shadcn */
   }
+  // if (mutationData.type === "update") {
+  //   renderUI = (
+  //     <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
+  //       <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
+  //         <div className="w-full flex items-center justify-between pr-1 mr-2">
+  //           <div className={webAppH2}>Update</div>
+  //           <div className="cursor-pointer" onClick={() => setMutationData("")}>
+  //             <RxCross1 />
+  //           </div>
+  //         </div>
+  //         <MutationForm />
+  //       </div>
+  //     </div>
+  //   );
+  // }
   if (mutationData.type === "add") {
     renderUI = (
       <div className="min-h-[92vh] h-full w-full flex items-center justify-center">

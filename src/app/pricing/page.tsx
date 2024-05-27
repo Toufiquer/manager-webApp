@@ -12,6 +12,7 @@ import Header from "./header";
 import PicThePlan from "./pic-the-plan";
 import PricingCard from "./pricing-card";
 import FeaturesIncluded from "./features-included";
+import Productivity from "./productivity";
 
 const Page = () => {
   return (
@@ -20,6 +21,7 @@ const Page = () => {
       <PricingCard />
       <FeaturesIncluded />
       <PicThePlan />
+      <Productivity />
       {/* <div className="mx-auto max-w-[960px] px-2">
         <h2 className="mb-6 text-center text-[calc(1.33rem_+_.85vw)] font-[800]">
           Frequently Asked Questions

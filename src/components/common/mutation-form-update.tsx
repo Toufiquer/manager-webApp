@@ -1,6 +1,6 @@
 /*
 |-----------------------------------------
-| setting up MutationForm for the App
+| setting up MutationFormUpdate for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
@@ -91,7 +91,7 @@ export const zodItemSchema = z.object({
 });
 export type newItemFormSchema = z.infer<typeof zodItemSchema>;
 
-const MutationForm = () => {
+const MutationFormUpdate = () => {
   const {
     reset,
     control,
@@ -121,7 +121,7 @@ const MutationForm = () => {
     return (
       <div
         key={field.name + index}
-        className="relative mb-4 rounded-lg bg-white p-4"
+        className="relative mb-4 rounded-lg bg-white"
       >
         <div className="absolute cursor-pointer right-[6px] top-[6px] items-end justify-start">
           <div onClick={() => remove(index)}>
@@ -312,97 +312,93 @@ const MutationForm = () => {
     }
   });
   let renderUIData = (
-    <div>
-      <div className="min-h-[52vh] h-full w-full flex items-center justify-center pt-4 flex-col">
-        <form onSubmit={onSubmit}>
-          <ScrollArea className="h-[52vh] w-full px-4">
-            <div className="w-full flex flex-col gap-2">
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="item"
-                >
-                  Item Name
-                </label>
-                <input
-                  className={BorderStyle}
-                  {...register("item")}
-                  placeholder="name"
-                />
-                {errors?.item && (
-                  <p className="text-sm text-rose-400">{errors.item.message}</p>
-                )}
-              </div>
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="price"
-                >
-                  Item Price
-                </label>
-                <input
-                  className={BorderStyle}
-                  {...register("price")}
-                  placeholder="Price"
-                />
-                {errors?.price && (
-                  <p className="text-sm text-rose-400">
-                    {errors.price.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="info"
-                >
-                  Item Info
-                </label>
-                <textarea
-                  className={BorderStyle}
-                  rows="4"
-                  {...register("info")}
-                  placeholder="Info"
-                />
-                {errors?.info && (
-                  <p className="text-sm text-rose-400">{errors.info.message}</p>
-                )}
-              </div>
+    <div className="">
+      <form onSubmit={onSubmit}>
+        <ScrollArea className="h-[80vh] w-full pr-2">
+          <div className="w-full flex flex-col gap-2">
+            <div className="flex flex-col mt-4">
+              <label
+                className="text-sm font-semibold text-slate-500"
+                htmlFor="item"
+              >
+                Item Name
+              </label>
+              <input
+                className={BorderStyle}
+                {...register("item")}
+                placeholder="name"
+              />
+              {errors?.item && (
+                <p className="text-sm text-rose-400">{errors.item.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col mt-4">
+              <label
+                className="text-sm font-semibold text-slate-500"
+                htmlFor="price"
+              >
+                Item Price
+              </label>
+              <input
+                className={BorderStyle}
+                {...register("price")}
+                placeholder="Price"
+              />
+              {errors?.price && (
+                <p className="text-sm text-rose-400">{errors.price.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col mt-4">
+              <label
+                className="text-sm font-semibold text-slate-500"
+                htmlFor="info"
+              >
+                Item Info
+              </label>
+              <textarea
+                className={BorderStyle}
+                rows="4"
+                {...register("info")}
+                placeholder="Info"
+              />
+              {errors?.info && (
+                <p className="text-sm text-rose-400">{errors.info.message}</p>
+              )}
+            </div>
 
-              <div className="flex flex-col mt-4">
-                <div className="my-4 flex w-full flex-row items-center justify-between ">
-                  <p className="text-sm text-gray-900">Option</p>
-                  <div
-                    onClick={() =>
-                      append({
-                        name: "",
-                        options: [],
-                      })
-                    }
-                  >
-                    <div className="flex items-center cursor-pointer justify-center">
-                      <FiPlus className="text-blue-400" />
-                    </div>
+            <div className="flex flex-col mt-4">
+              <div className="my-4 flex w-full flex-row items-center justify-between ">
+                <p className="text-sm text-gray-900">Option</p>
+                <div
+                  onClick={() =>
+                    append({
+                      name: "",
+                      options: [],
+                    })
+                  }
+                >
+                  <div className="flex items-center cursor-pointer justify-center">
+                    <FiPlus className="text-blue-400" />
                   </div>
                 </div>
-                <div className="mt-2" />
-                {fields.map((field, index) => (
-                  <div key={field.id}>
-                    <OptionComponents
-                      key={field.id}
-                      {...{ control, index, field }}
-                    />
-                  </div>
-                ))}
               </div>
+              <div className="mt-2" />
+              {fields.map((field, index) => (
+                <div key={field.id}>
+                  <OptionComponents
+                    key={field.id}
+                    {...{ control, index, field }}
+                  />
+                </div>
+              ))}
             </div>
-            <div className="mt-12" />
-          </ScrollArea>
-          <input type="submit" className={buttonStyle} />
-        </form>
-      </div>
+          </div>
+          <div className="mt-12" />
+        </ScrollArea>
+        <input type="submit" className={buttonStyle} />
+      </form>
     </div>
   );
   return renderUIData;
 };
-export default MutationForm;
+export default MutationFormUpdate;
