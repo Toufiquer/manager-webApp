@@ -15,9 +15,8 @@ import { useEffect, useState } from "react";
 import { RxCross1, RxCross2 } from "react-icons/rx";
 import { useFieldArray, useForm } from "react-hook-form";
 
-import { Switch } from "@/components/ui/switch";
-import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
+
 import {
   Form,
   FormControl,
@@ -27,9 +26,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useGlobalStore } from "@/lib/global-store";
+import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+import { useGlobalStore } from "@/lib/global-store";
 
 const FormSchema = z.object({
   item: z
