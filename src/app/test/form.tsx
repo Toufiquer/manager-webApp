@@ -4,6 +4,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 
+import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -99,21 +100,52 @@ const InputFormComponent = () => {
   });
 
   const OptionComponents = ({ control, index, field }) => {
-    return (
-      <FormField
-        control={control}
-        name={`option.${index}.name`}
-        render={({ field }) => (
-          <FormItem>
-            <FormLabel>Option name</FormLabel>
-            <FormControl>
-              <Input placeholder="Option name" {...field} />
-            </FormControl>
-            <FormMessage />
-          </FormItem>
-        )}
-      />
-    );
+      return (
+        <>
+          <FormField
+            control={control}
+            name={`option.${index}.name`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Option name</FormLabel>
+                <FormControl>
+                  <Input placeholder="Option name" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name={`option.${index}.optionFor`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Option for</FormLabel>
+                <FormControl>
+                  <Input placeholder="Option for" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={control}
+            name={`option.${index}.required`}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Required</FormLabel>
+                <FormControl>
+                  <Switch
+                    checked={field.value}
+                    onCheckedChange={field.onChange}
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </>
+      );
   };
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast("You submitted the following values:");
