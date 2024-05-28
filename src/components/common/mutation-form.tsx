@@ -12,12 +12,12 @@ import { useEffect, useState } from "react";
 import { RxCross1, RxCross2 } from "react-icons/rx";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
+import { Input } from "@/components/ui/input";
 import { Switch } from "@/components/ui/switch";
 import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { Input } from "../ui/input";
 import { buttonStyle } from "./style";
 
 export const BorderStyle =

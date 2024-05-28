@@ -18,11 +18,11 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { useGlobalStore } from "@/lib/global-store";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 import DeleteUi from "./delete-ui";
 import MutationForm from "./mutation-form";
 import { webAppH2, webAppH2Light, webAppPLight, webAppTitleXl } from "./style";
-import { ScrollArea } from "../ui/scroll-area";
 
 const Outlet = () => {
   const currentItem = useGlobalStore((store) => store.currentItem);
@@ -143,42 +143,6 @@ const Outlet = () => {
     );
   }
 
-  {
-    /* Condition rendering is off. and now it will render sheet from shadcn */
-  }
-  // if (mutationData.type === "update") {
-  //   renderUI = (
-  //     <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-  //       <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
-  //         <div className="w-full flex items-center justify-between pr-1 mr-2">
-  //           <div className={webAppH2}>Update</div>
-  //           <div className="cursor-pointer" onClick={() => setMutationData("")}>
-  //             <RxCross1 />
-  //           </div>
-  //         </div>
-  //         <MutationForm />
-  //       </div>
-  //     </div>
-  //   );
-  // }
-  {
-    /* Condition rendering is off. and now it will render sheet from shadcn */
-  }
-  // if (mutationData.type === "add") {
-  //   renderUI = (
-  //     <div className="min-h-[92vh] h-full w-full flex items-center justify-center">
-  //       <div className="max-w-[600px] p-4 rounded-lg my-4 bg-blue-50 border-slate-300 border">
-  //         <div className="w-full flex items-center justify-between">
-  //           <div className={webAppH2}>Add</div>
-  //           <div className="cursor-pointer" onClick={() => setMutationData("")}>
-  //             <RxCross1 />
-  //           </div>
-  //         </div>
-  //         <MutationForm />
-  //       </div>
-  //     </div>
-  //   );
-  // }
   if (mutationData.type === "delete") {
     renderUI = <DeleteUi />;
   }
