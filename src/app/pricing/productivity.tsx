@@ -8,15 +8,16 @@
 
 "use client";
 
+import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
 } from "@/components/ui/carousel";
-import Autoplay from "embla-carousel-autoplay";
-
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
+
 const Productivity = () => {
   return (
     <main className=" my-12 w-full h-full flex items-center justify-center bg-cover bg-[url('https://i.ibb.co/Bjfm6Gt/bg-wave.png')] md:min-w-[600px] min-h-[400px] max-w-7xl mx-auto">

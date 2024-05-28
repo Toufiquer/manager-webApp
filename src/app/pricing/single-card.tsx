@@ -4,8 +4,8 @@
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
-*/
-import Link from "next/link";
+*/ 
+import { AiOutlineCheckCircle } from "react-icons/ai";
 
 import {
   Card,
@@ -15,9 +15,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { AiOutlineCheckCircle } from "react-icons/ai";
+
 import { PRICING } from "./pricing-data";
-import { Button } from "@/components/ui/button";
 
 const SingleCard = ({ data, month }: { data: PRICING; month: number }) => {
   const { monthlyCost, title, description, features, id, icon } = data || {};

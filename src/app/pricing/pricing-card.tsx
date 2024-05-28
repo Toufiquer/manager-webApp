@@ -8,20 +8,16 @@
 
 "use client";
 
-import { useEffect, useState } from "react";
-import Image from "next/image";
+import { useEffect, useState } from "react"; 
 import Link from "next/link";
 import { type CarouselApi } from "@/components/ui/carousel";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { Badge } from "@/components/ui/badge";
-import { PiArrowBendLeftDownBold } from "react-icons/pi";
+import { Badge } from "@/components/ui/badge"; 
 import {
   Carousel,
   CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
+  CarouselItem, 
 } from "@/components/ui/carousel";
 
 import SingleCard from "./single-card";

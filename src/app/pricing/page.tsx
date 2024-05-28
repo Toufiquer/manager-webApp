@@ -5,14 +5,13 @@
 | @copyright: Toufiquer, May, 2024
 |-----------------------------------------
 */
-import FAQAccordion from "./faq-accordion";
 import { allFAQ } from "./faq-data";
-import Enterprise from "./enterprise";
 import Header from "./header";
 import PicThePlan from "./pic-the-plan";
 import PricingCard from "./pricing-card";
-import FeaturesIncluded from "./features-included";
 import Productivity from "./productivity";
+import FAQAccordion from "./faq-accordion";
+import FeaturesIncluded from "./features-included";
 
 const Page = () => {
   return (

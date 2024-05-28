@@ -6,7 +6,9 @@
 |-----------------------------------------
 */
 
-import { Button } from "@/components/ui/button";
+import { FiCheckCircle } from "react-icons/fi";
+import { RxCrossCircled } from "react-icons/rx";
+
 import {
   Table,
   TableBody,
@@ -15,11 +17,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { BsCheck2Circle } from "react-icons/bs";
-import { FiCheckCircle } from "react-icons/fi";
-import { RxCrossCircled } from "react-icons/rx";
-
-const cellStyle = "flex items-center justify-center text-green-500 w-full";
+import { Button } from "@/components/ui/button";
 
 type PLAN = {
   id: string | number;
@@ -118,105 +116,101 @@ const planData: PLAN[] = [
 
 const PicThePlan = () => {
   return (
-    <main>
-      <div className="mt-12 py-8">
-        <h2 className="py-12 text-center text-3xl font-semibold">
-          Pick the plan that works best for you
-        </h2>
-        <div className="mx-auto mb-12 max-w-[960px] p-2">
-          <Table>
-            <TableHeader>
-              <TableRow>
-                <TableHead className="w-[400px]" />
-                <TableHead>
-                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
-                    <span className="font-semibold text-xl">Basic plan</span>
-                    <span>
-                      <span className="text-4xl font-bold">&#163;19</span>
-                      <span>/mon</span>
-                    </span>
-                    <Button className="my-4">Get Started</Button>
+    <main className="mt-12 py-8">
+      <h2 className="py-12 text-center text-3xl font-semibold">
+        Pick the plan that works best for you
+      </h2>
+      <div className="mx-auto mb-12 max-w-[960px] p-2">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="w-[400px]" />
+              <TableHead>
+                <span className="flex flex-col items-center text-center text-slate-800 gap-2">
+                  <span className="font-semibold text-xl">Basic plan</span>
+                  <span>
+                    <span className="text-4xl font-bold">&#163;19</span>
+                    <span>/mon</span>
                   </span>
-                </TableHead>
-                <TableHead className="border-l">
-                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
-                    <span className="flex gap-2">
-                      <span className="font-semibold text-xl">
-                        Standard plan
-                      </span>
-                      <span className="mx-auto rounded-lg bg-orange-100 px-2 py-1 text-xs text-red-500 max-h-[24px]">
-                        HOT
-                      </span>
+                  <Button className="my-4">Get Started</Button>
+                </span>
+              </TableHead>
+              <TableHead className="border-l">
+                <span className="flex flex-col items-center text-center text-slate-800 gap-2">
+                  <span className="flex gap-2">
+                    <span className="font-semibold text-xl">Standard plan</span>
+                    <span className="mx-auto rounded-lg bg-orange-100 px-2 py-1 text-xs text-red-500 max-h-[24px]">
+                      HOT
                     </span>
-                    <span>
-                      <span className="text-4xl font-bold">&#163;39</span>
-                      <span>/mon</span>
-                    </span>
-                    <Button className="my-4">Get Started</Button>
                   </span>
-                </TableHead>
-                <TableHead className="border-l">
-                  <span className="flex flex-col items-center text-center text-slate-800 gap-2">
-                    <span className="font-semibold text-xl">Professional</span>
-                    <span>
-                      <span className="text-4xl font-bold">&#163;59</span>
-                      <span>/mon</span>
-                    </span>
-                    <Button className="my-4">Get Started</Button>
+                  <span>
+                    <span className="text-4xl font-bold">&#163;39</span>
+                    <span>/mon</span>
                   </span>
-                </TableHead>
+                  <Button className="my-4">Get Started</Button>
+                </span>
+              </TableHead>
+              <TableHead className="border-l">
+                <span className="flex flex-col items-center text-center text-slate-800 gap-2">
+                  <span className="font-semibold text-xl">Professional</span>
+                  <span>
+                    <span className="text-4xl font-bold">&#163;59</span>
+                    <span>/mon</span>
+                  </span>
+                  <Button className="my-4">Get Started</Button>
+                </span>
+              </TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {planData.map((curr: PLAN) => (
+              <TableRow key={curr.id} className="border-b">
+                <TableCell className="font-medium text-start">
+                  {curr.title}
+                </TableCell>
+                <TableCell className="font-medium text-center">
+                  {typeof curr.basic === "string" ? (
+                    curr.basic
+                  ) : curr.basic ? (
+                    <span className="w-full flex items-center justify-center">
+                      <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                    </span>
+                  ) : (
+                    <span className="w-full flex items-center justify-center">
+                      <RxCrossCircled className="h-5 w-5 text-rose-500" />
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell className="font-medium text-center">
+                  {typeof curr.standard === "string" ? (
+                    curr.standard
+                  ) : curr.standard ? (
+                    <span className="w-full flex items-center justify-center">
+                      <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                    </span>
+                  ) : (
+                    <span className="w-full flex items-center justify-center">
+                      <RxCrossCircled className="h-5 w-5 text-rose-500" />
+                    </span>
+                  )}
+                </TableCell>
+                <TableCell className="font-medium flex items-center justify-center">
+                  {typeof curr.professional === "string" ? (
+                    curr.professional
+                  ) : curr.professional ? (
+                    <span className="w-full flex items-center justify-center">
+                      <FiCheckCircle className="h-5 w-5 text-blue-500" />
+                    </span>
+                  ) : (
+                    <span className="w-full flex items-center justify-center">
+                      <RxCrossCircled className="h-5 w-5 text-rose-500" />
+                    </span>
+                  )}
+                </TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {planData.map((curr: PLAN) => (
-                <TableRow key={curr.id} className="border-b">
-                  <TableCell className="font-medium text-start">
-                    {curr.title}
-                  </TableCell>
-                  <TableCell className="font-medium text-center">
-                    {typeof curr.basic === "string" ? (
-                      curr.basic
-                    ) : curr.basic ? (
-                      <span className="w-full flex items-center justify-center">
-                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
-                      </span>
-                    ) : (
-                      <span className="w-full flex items-center justify-center">
-                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
-                      </span>
-                    )}
-                  </TableCell>
-                  <TableCell className="font-medium text-center">
-                    {typeof curr.standard === "string" ? (
-                      curr.standard
-                    ) : curr.standard ? (
-                      <span className="w-full flex items-center justify-center">
-                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
-                      </span>
-                    ) : (
-                      <span className="w-full flex items-center justify-center">
-                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
-                      </span>
-                    )}
-                  </TableCell>
-                  <TableCell className="font-medium flex items-center justify-center">
-                    {typeof curr.professional === "string" ? (
-                      curr.professional
-                    ) : curr.professional ? (
-                      <span className="w-full flex items-center justify-center">
-                        <FiCheckCircle className="h-5 w-5 text-blue-500" />
-                      </span>
-                    ) : (
-                      <span className="w-full flex items-center justify-center">
-                        <RxCrossCircled className="h-5 w-5 text-rose-500" />
-                      </span>
-                    )}
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+            ))}
+          </TableBody>
+        </Table>
       </div>
     </main>
   );
