@@ -14,7 +14,7 @@ const FeaturesIncluded = () => {
   return (
     <main className="max-w-7xl mx-auto p-4">
       <div className="flex flex-col items-center justify-center my-12">
-        <h2 className="font-bold text-[42px] text-slate-800">
+        <h2 className="font-bold text-[42px] text-slate-800 text-center">
           Features included in every plan
         </h2>
         <div className="font-normal text-[18px] max-w-4xl text-slate-400 text-center py-8">

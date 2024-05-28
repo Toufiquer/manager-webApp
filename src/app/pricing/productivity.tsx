@@ -22,24 +22,23 @@ import Image from "next/image";
 const Productivity = () => {
   return (
     <main className="py-12 my-12 w-full h-full flex items-center justify-center relative max-w-7xl mx-auto">
-      <div className="relative w-full h-[500px] border">
+      <div className="relative w-full h-[600px] border">
         <Image
-          className="object-cover"
+          className="object-cover "
           src="https://i.ibb.co/Bjfm6Gt/bg-wave.png"
           fill
           sizes="(max-width: 900px) 100vw"
           alt="Stock Price Image"
         />
       </div>
-      <div className=" text-white rounded-lg text-center p-8 w-full absolute top-[68px] left-0">
-        <h2 className="text-4xl font-bold leading-10">
-          Bring your productivity to next
-          <br /> level
+      <div className=" text-white rounded-lg text-center p-8 w-full absolute top-[68px] left-0 ">
+        <h2 className="text-6xl font-bold leading-[50] text-center mx-auto max-w-[580px] mt-12">
+          Bring your productivity to next level
         </h2>
-        <p className="text-sm py-2 leading-6">
+        <p className="text-sm py-2 leading-6 text-center mx-auto max-w-[580px] mt-12">
           The bore of true of no be deal. Drawings offended yet answered
-          Jennings <br /> perceive laughing six did far. Points afraid but may
-          end law lasted.
+          Jennings perceive laughing six did far. Points afraid but may end law
+          lasted.
         </p>
         <Button className="bg-blue-400 text-white mt-8 mb-12">
           Join our waitlist
@@ -52,7 +51,7 @@ const Productivity = () => {
             }}
             plugins={[
               Autoplay({
-                delay: 1200,
+                delay: 1400,
               }),
             ]}
           >
@@ -64,8 +63,11 @@ const Productivity = () => {
                 "https://i.ibb.co/t8BMhqV/04.png",
                 "https://i.ibb.co/W30P4pj/05.png",
               ].map((curr) => (
-                <CarouselItem key={curr} className="md:basis-1/2 lg:basis-1/3">
-                  <div className="flex items-center justify-center w-full h-full p-4">
+                <CarouselItem
+                  key={curr}
+                  className="basis-1/2 md:basis-1/3 lg:basis-1/4"
+                >
+                  <div className="flex items-center justify-center w-full h-full p-12 ">
                     <Image
                       className="w-auto h-auto "
                       src={curr}

@@ -144,7 +144,7 @@ const PicThePlan = () => {
                       <span className="font-semibold text-xl">
                         Standard plan
                       </span>
-                      <span className="mx-auto rounded-lg bg-orange-100 px-2 py-1 text-xs text-red-500">
+                      <span className="mx-auto rounded-lg bg-orange-100 px-2 py-1 text-xs text-red-500 max-h-[24px]">
                         HOT
                       </span>
                     </span>

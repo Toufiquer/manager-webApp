@@ -44,7 +44,7 @@ const PricingCard = () => {
     });
   }, [api]);
   return (
-    <main className="mt-[-380px] pb-12">
+    <main className="mt-[-500px] md:mt-[-380px] pb-12">
       <div className="relative mx-auto max-w-[1200px] py-4">
         <div className="z-40 flex w-full flex-col items-center justify-center">
           <div className="max-w-[400px] py-12">
