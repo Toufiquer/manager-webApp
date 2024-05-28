@@ -12,8 +12,6 @@ import {
   Carousel,
   CarouselContent,
   CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
 } from "@/components/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
 
@@ -21,25 +19,18 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 const Productivity = () => {
   return (
-    <main className="py-12 my-12 w-full h-full flex items-center justify-center relative max-w-7xl mx-auto">
-      <div className="relative w-full h-[600px] border">
-        <Image
-          className="object-cover "
-          src="https://i.ibb.co/Bjfm6Gt/bg-wave.png"
-          fill
-          sizes="(max-width: 900px) 100vw"
-          alt="Stock Price Image"
-        />
-      </div>
-      <div className=" text-white rounded-lg text-center p-8 w-full absolute top-[68px] left-0 ">
-        <h2 className="text-6xl font-bold leading-[50] text-center mx-auto max-w-[580px] mt-12">
-          Bring your productivity to next level
-        </h2>
-        <p className="text-sm py-2 leading-6 text-center mx-auto max-w-[580px] mt-12">
-          The bore of true of no be deal. Drawings offended yet answered
-          Jennings perceive laughing six did far. Points afraid but may end law
-          lasted.
-        </p>
+    <main className=" my-12 w-full h-full flex items-center justify-center bg-cover bg-[url('https://i.ibb.co/Bjfm6Gt/bg-wave.png')] md:min-w-[600px] min-h-[400px] max-w-7xl mx-auto">
+      <div className=" text-white rounded-lg text-center w-full backdrop-blur py-12">
+        <div className=" mx-auto max-w-[400px] md:max-w-[768px]">
+          <h2 className="text-2xl md:text-6xl font-bold text-center mt-12">
+            Bring your productivity to next level
+          </h2>
+          <p className="text-sm py-2 leading-6 text-center mx-auto mt-12">
+            The bore of true of no be deal. Drawings offended yet answered
+            Jennings perceive laughing six did far. Points afraid but may end
+            law lasted.
+          </p>
+        </div>
         <Button className="bg-blue-400 text-white mt-8 mb-12">
           Join our waitlist
         </Button>
@@ -67,7 +58,7 @@ const Productivity = () => {
                   key={curr}
                   className="basis-1/2 md:basis-1/3 lg:basis-1/4"
                 >
-                  <div className="flex items-center justify-center w-full h-full p-12 ">
+                  <div className="flex items-center justify-center w-full p-12 ">
                     <Image
                       className="w-auto h-auto "
                       src={curr}
