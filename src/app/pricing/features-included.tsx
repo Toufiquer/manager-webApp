@@ -52,7 +52,7 @@ const FeaturesIncluded = () => {
             >
               <div className="w-full h-[200px] flex flex-col items-center justify-center">
                 {curr.icon}
-                <div className="text-xl font-semibold pt-6 pb-2">
+                <div className="text-xl font-semibold pt-6 pb-2 text-center">
                   {curr.title}
                 </div>
                 <p className="font-normal text-[18px] text-slate-400 text-center">

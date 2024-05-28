@@ -32,13 +32,17 @@ const PricingCard = () => {
   const [month, setMonth] = useState(1);
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
+  const [count, setCount] = useState(0);
   useEffect(() => {
     if (!api) {
       return;
     }
     setCurrent(api.selectedScrollSnap() + 1);
+    setCount(api.scrollSnapList().length);
     api.on("select", () => {
       // Do something on select.
+      console.log(" count : : :", api.selectedScrollSnap() + 1);
+      setCurrent(api.selectedScrollSnap() + 1);
       console.log("changed selected", api);
       console.log("changed current", current);
     });
@@ -100,6 +104,20 @@ const PricingCard = () => {
                 ))}
               </CarouselContent>
             </Carousel>
+
+            <div className="pb-2 mt-[-40px] text-center text-sm text-muted-foreground flex gap-4 items-center justify-center">
+              {Array.from({ length: count }, (_, i) => i + 1).map((curr) => (
+                <div
+                  key={curr}
+                  onClick={() => api?.scrollTo(curr - 1)}
+                  className={`cursor-pointer border border-slate-300 rounded-full flex items-center justify-center w-6 h-6 ${
+                    curr === current && " bg-slate-400 text-white"
+                  }`}
+                >
+                  {curr}
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </div>
