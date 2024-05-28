@@ -13,22 +13,23 @@ import { IoAddSharp } from "react-icons/io5";
 
 import {
   Sheet,
-  SheetContent,
-  SheetDescription,
+  SheetClose,
   SheetHeader,
-  SheetTitle,
+  SheetContent,
   SheetTrigger,
+  SheetDescription,
 } from "@/components/ui/sheet";
 import { useGlobalStore } from "@/lib/global-store";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
 import { webAppH2, webAppTitleXl } from "./style";
-import MutationFormUpdate from "./mutation-form-update";
+import MutationForm from "./mutation-form";
 
 const SideBar = () => {
   const apiData = useGlobalStore((store) => store.apiData);
   const setCurrentItem = useGlobalStore((store) => store.setCurrentItem);
   const setMutationData = useGlobalStore((store) => store.setMutationData);
+
   return (
     <main>
       <ScrollArea className="h-screen w-auto rounded-md border pr-3">
@@ -63,26 +64,26 @@ const SideBar = () => {
                   </div>
                 </div>
                 <div className="flex flex-row items-center justify-between gap-4 pr-2 max-w-[90px]">
-                  <div
-                    onClick={() =>
-                      setMutationData({ type: "add", name: curr.name })
-                    }
-                  >
-                    <Sheet>
-                      <SheetTrigger>
+                  <Sheet>
+                    <SheetTrigger>
+                      <div
+                        onClick={() =>
+                          setMutationData({ type: "add", name: curr.name })
+                        }
+                      >
                         <IoAddSharp className="cursor-pointer" />
-                      </SheetTrigger>
-                      <SheetContent>
-                        <SheetHeader>
-                          <SheetDescription>
-                            <div className="mt-8">
-                              <MutationFormUpdate />
-                            </div>
-                          </SheetDescription>
-                        </SheetHeader>
-                      </SheetContent>
-                    </Sheet>
-                  </div>
+                      </div>
+                    </SheetTrigger>
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetDescription>
+                          <div className="mt-8">
+                            <MutationForm SheetClose={SheetClose} />
+                          </div>
+                        </SheetDescription>
+                      </SheetHeader>
+                    </SheetContent>
+                  </Sheet>
                   <div
                     onClick={() =>
                       setMutationData({ type: "delete", name: curr.name })

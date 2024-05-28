@@ -1,24 +1,27 @@
 /*
 |-----------------------------------------
-| setting up MutationForm for the App
+| setting up MutationFormUpdate for the App
 | @author: Toufiquer Rahman<toufiquer.0@gmail.com>
 | @copyright: Toufiquer, April, 2024
 |-----------------------------------------
 */
 import { z } from "zod";
-import { useEffect } from "react";
+import { toast } from "sonner";
 import { FiPlus } from "react-icons/fi";
-import { RxCross2 } from "react-icons/rx";
+import { useEffect, useState } from "react";
+import { RxCross1, RxCross2 } from "react-icons/rx";
 import { useForm, useFieldArray, Controller } from "react-hook-form";
 
 import { Switch } from "@/components/ui/switch";
 import { useGlobalStore } from "@/lib/global-store";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
+
+import { Input } from "../ui/input";
 import { buttonStyle } from "./style";
 
 export const BorderStyle =
-  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none";
+  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none [&:has(:focus-visible)]:ring-0";
 
 export const zodItemSchema = z.object({
   item: z
@@ -91,7 +94,7 @@ export const zodItemSchema = z.object({
 });
 export type newItemFormSchema = z.infer<typeof zodItemSchema>;
 
-const MutationForm = () => {
+const MutationFormUpdate = ({ SheetClose }: { SheetClose: any }) => {
   const {
     reset,
     control,
@@ -105,6 +108,7 @@ const MutationForm = () => {
   const setApiData = useGlobalStore((store) => store.setApiData);
   const mutationData = useGlobalStore((store) => store.mutationData);
   const setMutationData = useGlobalStore((store) => store.setMutationData);
+  const [isAddInfo, setIsAddInfo] = useState(false);
   const { fields, append, remove, update } = useFieldArray({
     control,
     name: "option",
@@ -121,7 +125,7 @@ const MutationForm = () => {
     return (
       <div
         key={field.name + index}
-        className="relative mb-4 rounded-lg bg-white p-4"
+        className="relative mb-4 rounded-lg bg-white"
       >
         <div className="absolute cursor-pointer right-[6px] top-[6px] items-end justify-start">
           <div onClick={() => remove(index)}>
@@ -135,7 +139,7 @@ const MutationForm = () => {
             name={`option.${index}.name`}
             render={({ field }) => (
               <div>
-                <input
+                <Input
                   placeholder="Option name"
                   className={BorderStyle}
                   {...field}
@@ -154,7 +158,7 @@ const MutationForm = () => {
             name={`option.${index}.optionFor`}
             render={({ field }) => (
               <div>
-                <input
+                <Input
                   placeholder="Option For"
                   className={BorderStyle}
                   {...field}
@@ -227,7 +231,7 @@ const MutationForm = () => {
             name={`option[${parentIdx}].options.${innerIdx}.name`}
             render={({ field }) => (
               <div>
-                <input
+                <Input
                   placeholder="Option name"
                   className={BorderStyle}
                   {...field}
@@ -252,7 +256,7 @@ const MutationForm = () => {
             name={`option[${parentIdx}].options.${innerIdx}.price`}
             render={({ field }) => (
               <div>
-                <input placeholder="0.0" className={BorderStyle} {...field} />
+                <Input placeholder="0.0" className={BorderStyle} {...field} />
               </div>
             )}
           />
@@ -298,6 +302,7 @@ const MutationForm = () => {
       });
       setApiData(result);
       setMutationData("");
+      toast("Successfully updated");
     } else {
       let result = [];
 
@@ -309,100 +314,129 @@ const MutationForm = () => {
 
       setApiData(result);
       setMutationData("");
+      toast("Successfully add");
     }
+    reset();
   });
   let renderUIData = (
     <div>
-      <div className="min-h-[52vh] h-full w-full flex items-center justify-center pt-4 flex-col">
-        <form onSubmit={onSubmit}>
-          <ScrollArea className="h-[52vh] w-full px-4">
-            <div className="w-full flex flex-col gap-2">
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="item"
+      <form onSubmit={onSubmit}>
+        <ScrollArea className="h-[80vh] w-full pr-2 ">
+          <div className="w-full flex flex-col gap-2 px-2">
+            <div className="flex flex-col mt-4">
+              <label
+                className="text-sm font-semibold text-slate-500 pb-1"
+                htmlFor="item"
+              >
+                Item Name
+              </label>
+              <Input
+                className={BorderStyle}
+                {...register("item")}
+                placeholder="name"
+              />
+              {errors?.item && (
+                <p className="text-sm text-rose-400">{errors.item.message}</p>
+              )}
+            </div>
+            <div className="flex flex-col mt-4">
+              <label
+                className="text-sm font-semibold text-slate-500 pb-1"
+                htmlFor="price"
+              >
+                Item Price
+              </label>
+              <Input
+                className={BorderStyle}
+                {...register("price")}
+                placeholder="Price"
+              />
+              {errors?.price && (
+                <p className="text-sm text-rose-400">{errors.price.message}</p>
+              )}
+            </div>
+            {!mutationData?.info && !isAddInfo && (
+              <div className="w-full flex justify-end mt-4 ">
+                <div
+                  onClick={() => setIsAddInfo(true)}
+                  className="text-slate-800 text-sm border border-slate-500 rounded-lg p-1 px-3 cursor-pointer"
                 >
-                  Item Name
-                </label>
-                <input
-                  className={BorderStyle}
-                  {...register("item")}
-                  placeholder="name"
-                />
-                {errors?.item && (
-                  <p className="text-sm text-rose-400">{errors.item.message}</p>
-                )}
+                  Add info
+                </div>
               </div>
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="price"
-                >
-                  Item Price
-                </label>
-                <input
-                  className={BorderStyle}
-                  {...register("price")}
-                  placeholder="Price"
-                />
-                {errors?.price && (
-                  <p className="text-sm text-rose-400">
-                    {errors.price.message}
-                  </p>
-                )}
-              </div>
-              <div className="flex flex-col mt-4">
-                <label
-                  className="text-sm font-semibold text-slate-500"
-                  htmlFor="info"
-                >
-                  Item Info
-                </label>
-                <textarea
-                  className={BorderStyle}
-                  rows="4"
-                  {...register("info")}
-                  placeholder="Info"
-                />
-                {errors?.info && (
-                  <p className="text-sm text-rose-400">{errors.info.message}</p>
-                )}
-              </div>
-
-              <div className="flex flex-col mt-4">
-                <div className="my-4 flex w-full flex-row items-center justify-between ">
-                  <p className="text-sm text-gray-900">Option</p>
-                  <div
-                    onClick={() =>
-                      append({
-                        name: "",
-                        options: [],
-                      })
-                    }
-                  >
-                    <div className="flex items-center cursor-pointer justify-center">
-                      <FiPlus className="text-blue-400" />
+            )}
+            {mutationData?.info ||
+              (isAddInfo && (
+                <div className="flex flex-col mt-4 ">
+                  <div className="w-full flex items-center justify-between">
+                    <label
+                      className="text-sm w-full font-semibold text-slate-500"
+                      htmlFor="info"
+                    >
+                      Item Info
+                    </label>
+                    <div className="w-full flex justify-end">
+                      <div
+                        className="cursor-pointer border"
+                        onClick={() => {
+                          setMutationData("");
+                          setIsAddInfo(false);
+                        }}
+                      >
+                        <RxCross1 />
+                      </div>
                     </div>
                   </div>
+
+                  <textarea
+                    className={BorderStyle}
+                    rows="4"
+                    {...register("info")}
+                    placeholder="Info"
+                  />
+                  {errors?.info && (
+                    <p className="text-sm text-rose-400">
+                      {errors.info.message}
+                    </p>
+                  )}
                 </div>
-                <div className="mt-2" />
-                {fields.map((field, index) => (
-                  <div key={field.id}>
-                    <OptionComponents
-                      key={field.id}
-                      {...{ control, index, field }}
-                    />
+              ))}
+
+            <div className="flex flex-col mt-4">
+              <div className="my-4 flex w-full flex-row items-center justify-between ">
+                <p className="text-sm text-gray-900">Option</p>
+                <div
+                  onClick={() =>
+                    append({
+                      name: "",
+                      options: [],
+                    })
+                  }
+                >
+                  <div className="flex items-center cursor-pointer justify-center">
+                    <FiPlus className="text-blue-400" />
                   </div>
-                ))}
+                </div>
               </div>
+              <div className="mt-2" />
+              {fields.map((field, index) => (
+                <div key={field.id}>
+                  <OptionComponents
+                    key={field.id}
+                    {...{ control, index, field }}
+                  />
+                </div>
+              ))}
             </div>
-            <div className="mt-12" />
-          </ScrollArea>
-          <input type="submit" className={buttonStyle} />
-        </form>
-      </div>
+          </div>
+          <div className="mt-12" />
+        </ScrollArea>
+        <SheetClose className="w-full pr-2">
+          <Input type="submit" className={buttonStyle} aria-label="Close" />
+        </SheetClose>
+      </form>
     </div>
   );
   return renderUIData;
 };
-export default MutationForm;
+export default MutationFormUpdate;
