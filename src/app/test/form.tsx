@@ -100,20 +100,19 @@ const InputFormComponent = () => {
 
   const OptionComponents = ({ control, index, field }) => {
     return (
-      <div>New Item add </div>
-      //   <FormField
-      //     control={control}
-      //     name={field}
-      //     render={({ field }) => (
-      //       <FormItem>
-      //         <FormLabel>Item name</FormLabel>
-      //         <FormControl>
-      //           <Input placeholder="Fish food" {...field} />
-      //         </FormControl>
-      //         <FormMessage />
-      //       </FormItem>
-      //     )}
-      //   />
+      <FormField
+        control={control}
+        name={`option.${index}.name`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>Option name</FormLabel>
+            <FormControl>
+              <Input placeholder="Option name" {...field} />
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
     );
   };
   function onSubmit(data: z.infer<typeof FormSchema>) {
