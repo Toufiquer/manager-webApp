@@ -7,11 +7,10 @@
 */
 const Header = () => {
   return (
-    <main className="min-h-screen bg-[url('https://i.ibb.co/CvfSM0f/bg-header.jpg')] bg-cover text-white">
+    <main className="min-h-[80vh] bg-[url('https://i.ibb.co/CvfSM0f/bg-header.jpg')] bg-cover text-white">
       <div className="pt-[140px] md:pt-[180px]">
         <h2 className="text-center text-4xl leading-relaxed md:text-6xl font-bold md:leading-relaxed">
-          Choose the right plan for <br />
-          your business
+          Choose the right plan for your business
         </h2>
       </div>
     </main>

@@ -24,7 +24,7 @@ const SingleCard = ({ data, month }: { data: PRICING; month: number }) => {
     month === 1 ? month * monthlyCost : (monthlyCost / 100) * 90
   );
   return (
-    <div className={`${id !== 2 && " my-12 "}`}>
+    <div className={`${id !== 2 && " md:my-12 "}`}>
       <div className="h-full min-w-[380px] overflow-hidden rounded-lg shadow-md hover:shadow-xl">
         <Card
           className={`h-full text-center ${

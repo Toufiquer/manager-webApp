@@ -44,7 +44,7 @@ const PricingCard = () => {
     });
   }, [api]);
   return (
-    <main className="mt-[-500px] md:mt-[-380px] pb-12">
+    <main className="mt-[-400px]  md:mt-[-380px] pb-12">
       <div className="relative mx-auto max-w-[1200px] py-4">
         <div className="z-40 flex w-full flex-col items-center justify-center">
           <div className="max-w-[400px] py-12">
@@ -101,7 +101,7 @@ const PricingCard = () => {
               </CarouselContent>
             </Carousel>
 
-            <div className="pb-2 mt-[-40px] text-center text-sm text-muted-foreground flex gap-4 items-center justify-center">
+            <div className="py-4 text-center text-sm text-muted-foreground flex gap-4 items-center justify-center">
               {Array.from({ length: count }, (_, i) => i + 1).map((curr) => (
                 <div
                   key={curr}
@@ -119,7 +119,7 @@ const PricingCard = () => {
       </div>
       <div className="flex w-full items-center justify-center">
         <div className="rounded-full border p-4 px-8">
-          <div className="flex gap-4">
+          <div className="flex gap-4 flex-col md:flex-row items-start justify-start md:justify-between">
             Prefer to start with the trial version?
             <Link
               className="flex items-center justify-center font-semibold text-blue-500"

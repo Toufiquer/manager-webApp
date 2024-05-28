@@ -22,8 +22,8 @@ const Productivity = () => {
   return (
     <main className=" my-12 w-full h-full flex items-center justify-center bg-cover bg-[url('https://i.ibb.co/Bjfm6Gt/bg-wave.png')] md:min-w-[600px] min-h-[400px] max-w-7xl mx-auto">
       <div className=" text-white rounded-lg text-center w-full backdrop-blur py-12">
-        <div className=" mx-auto max-w-[400px] md:max-w-[768px]">
-          <h2 className="text-2xl md:text-6xl font-bold text-center mt-12">
+        <div className=" mx-auto max-w-[400px] sm:max-w-[580px] md:max-w-[768px]">
+          <h2 className="text-4xl md:text-6xl font-bold text-center mt-12">
             Bring your productivity to next level
           </h2>
           <p className="text-sm py-2 leading-6 text-center mx-auto mt-12">
