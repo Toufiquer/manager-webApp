@@ -17,10 +17,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { buttonStyle } from "./style";
 import { toast } from "sonner";
-import { Input } from "../ui/input";
 
 export const BorderStyle =
-  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none [&:has(:focus-visible)]:ring-0";
+  "w-full rounded border border-gray-300 px-3 py-2 leading-tight text-gray-800 focus:outline-none";
 
 export const zodItemSchema = z.object({
   item: z
@@ -138,7 +137,7 @@ const MutationFormUpdate = () => {
             name={`option.${index}.name`}
             render={({ field }) => (
               <div>
-                <Input
+                <input
                   placeholder="Option name"
                   className={BorderStyle}
                   {...field}
@@ -157,7 +156,7 @@ const MutationFormUpdate = () => {
             name={`option.${index}.optionFor`}
             render={({ field }) => (
               <div>
-                <Input
+                <input
                   placeholder="Option For"
                   className={BorderStyle}
                   {...field}
@@ -230,7 +229,7 @@ const MutationFormUpdate = () => {
             name={`option[${parentIdx}].options.${innerIdx}.name`}
             render={({ field }) => (
               <div>
-                <Input
+                <input
                   placeholder="Option name"
                   className={BorderStyle}
                   {...field}
@@ -255,7 +254,7 @@ const MutationFormUpdate = () => {
             name={`option[${parentIdx}].options.${innerIdx}.price`}
             render={({ field }) => (
               <div>
-                <Input placeholder="0.0" className={BorderStyle} {...field} />
+                <input placeholder="0.0" className={BorderStyle} {...field} />
               </div>
             )}
           />
@@ -318,18 +317,18 @@ const MutationFormUpdate = () => {
     reset();
   });
   let renderUIData = (
-    <div>
+    <div className="">
       <form onSubmit={onSubmit}>
-        <ScrollArea className="h-[80vh] w-full pr-2 ">
-          <div className="w-full flex flex-col gap-2 px-2">
+        <ScrollArea className="h-[80vh] w-full pr-2">
+          <div className="w-full flex flex-col gap-2">
             <div className="flex flex-col mt-4">
               <label
-                className="text-sm font-semibold text-slate-500 pb-1"
+                className="text-sm font-semibold text-slate-500"
                 htmlFor="item"
               >
                 Item Name
               </label>
-              <Input
+              <input
                 className={BorderStyle}
                 {...register("item")}
                 placeholder="name"
@@ -340,12 +339,12 @@ const MutationFormUpdate = () => {
             </div>
             <div className="flex flex-col mt-4">
               <label
-                className="text-sm font-semibold text-slate-500 pb-1"
+                className="text-sm font-semibold text-slate-500"
                 htmlFor="price"
               >
                 Item Price
               </label>
-              <Input
+              <input
                 className={BorderStyle}
                 {...register("price")}
                 placeholder="Price"
@@ -430,7 +429,7 @@ const MutationFormUpdate = () => {
           </div>
           <div className="mt-12" />
         </ScrollArea>
-        <Input type="submit" className={buttonStyle} />
+        <input type="submit" className={buttonStyle} />
       </form>
     </div>
   );

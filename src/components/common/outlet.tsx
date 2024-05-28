@@ -87,29 +87,29 @@ const Outlet = () => {
                   </div>
                 </div>
                 <div className="flex flex-row items-center justify-between gap-4 pr-2 max-w-[90px]">
-                  <div
-                    onClick={() =>
-                      handleSetMutationData({
-                        itemName: curr.item,
-                        type: "update",
-                      })
-                    }
-                  >
-                    <Sheet>
-                      <SheetTrigger>
+                  <Sheet>
+                    <SheetTrigger>
+                      <div
+                        onClick={() =>
+                          handleSetMutationData({
+                            itemName: curr.item,
+                            type: "update",
+                          })
+                        }
+                      >
                         <FaRegEdit className="cursor-pointer h-4 w-4 text-slate-500" />
-                      </SheetTrigger>
-                      <SheetContent>
-                        <SheetHeader>
-                          <SheetDescription>
-                            <div className="mt-8">
-                              <MutationFormUpdate />
-                            </div>
-                          </SheetDescription>
-                        </SheetHeader>
-                      </SheetContent>
-                    </Sheet>
-                  </div>
+                      </div>
+                    </SheetTrigger>
+                    <SheetContent>
+                      <SheetHeader>
+                        <SheetDescription>
+                          <div className="mt-8">
+                            <MutationFormUpdate />
+                          </div>
+                        </SheetDescription>
+                      </SheetHeader>
+                    </SheetContent>
+                  </Sheet>
                   <div
                     onClick={() =>
                       handleSetMutationData({
