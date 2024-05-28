@@ -267,6 +267,9 @@ const MutationFormUpdate = ({ SheetClose }: { SheetClose: any }) => {
               </p>
             )}
         </div>
+
+
+        
         <div
           onClick={() => optionsRemove(innerIdx)}
           className="flex h-[40px] cursor-pointer items-center justify-center "
@@ -429,7 +432,7 @@ const MutationFormUpdate = ({ SheetClose }: { SheetClose: any }) => {
               ))}
             </div>
 
-            
+
           </div>
           <div className="mt-12" />
         </ScrollArea>

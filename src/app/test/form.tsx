@@ -18,6 +18,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { FiPlus } from "react-icons/fi";
+import { RxCross2 } from "react-icons/rx";
 
 const FormSchema = z.object({
   item: z
@@ -100,53 +101,144 @@ const InputFormComponent = () => {
   });
 
   const OptionComponents = ({ control, index, field }) => {
-      return (
-        <>
-          <FormField
-            control={control}
-            name={`option.${index}.name`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Option name</FormLabel>
-                <FormControl>
-                  <Input placeholder="Option name" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name={`option.${index}.optionFor`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Option for</FormLabel>
-                <FormControl>
-                  <Input placeholder="Option for" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-          <FormField
-            control={control}
-            name={`option.${index}.required`}
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Required</FormLabel>
-                <FormControl>
-                  <Switch
-                    checked={field.value}
-                    onCheckedChange={field.onChange}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-        </>
-      );
+    const {
+      fields: optionsFields,
+      append: optionsAppend,
+      remove: optionsRemove,
+    } = useFieldArray({
+      control,
+      name: `option[${index}].options`,
+    });
+    return (
+      <div
+        key={field.name + index}
+        className="relative my-4 rounded-lg bg-white"
+      >
+        <FormField
+          control={control}
+          name={`option.${index}.name`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Option name</FormLabel>
+              <FormControl>
+                <Input placeholder="Option name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name={`option.${index}.optionFor`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Option for</FormLabel>
+              <FormControl>
+                <Input placeholder="Option for" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name={`option.${index}.required`}
+          render={({ field }) => (
+            <FormItem className="my-4 flex flex-row items-center justify-between">
+              <FormLabel>Required</FormLabel>
+              <FormControl>
+                <Switch
+                  checked={field.value}
+                  onCheckedChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormLabel
+          className="my-4 flex w-full flex-row items-center justify-between cursor-pointer"
+          onClick={() => optionsAppend({ name: "" })}
+        >
+          Options <FiPlus className="text-blue-400" />
+        </FormLabel>
+        {/* <div className="flex w-full flex-row items-center justify-between">
+          <p className="font-extrabold text-gray-500">Options</p>
+          <div
+            onClick={() => optionsAppend({ name: "" })}
+            className="flex h-[30px] cursor-pointer items-center justify-center "
+          >
+            <FiPlus className="text-blue-400" />
+          </div>
+        </div> */}
+        <div className="mt-3">
+          {optionsFields.map((field, innerIdx) => (
+            <div key={field.id}>
+              <OptionsComponents
+                key={field.id}
+                {...{
+                  control,
+                  innerIdx,
+                  field,
+                  optionsRemove,
+                  parentIdx: index,
+                }}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+    );
   };
+
+  const OptionsComponents = ({
+    control,
+    innerIdx,
+    field,
+    optionsRemove,
+    parentIdx,
+  }) => {
+    return (
+      <div
+        key={field.name + innerIdx}
+        className="mb-2 flex w-full flex-row justify-between"
+      >
+        <FormField
+          control={control}
+          name={`option[${parentIdx}].options.${innerIdx}.name`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Options name</FormLabel>
+              <FormControl>
+                <Input placeholder="Option name" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={control}
+          name={`option[${parentIdx}].options.${innerIdx}.price`}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Options price</FormLabel>
+              <FormControl>
+                <Input placeholder="Options price" {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div
+          onClick={() => optionsRemove(innerIdx)}
+          className="flex h-[40px] cursor-pointer items-center justify-center "
+        >
+          <RxCross2 className="text-rose-400" />
+        </div>
+      </div>
+    );
+  };
+
   function onSubmit(data: z.infer<typeof FormSchema>) {
     toast("You submitted the following values:");
     console.log("data : ", data);
@@ -194,9 +286,19 @@ const InputFormComponent = () => {
             </FormItem>
           )}
         />
-
+        <FormLabel
+          className="my-4 flex w-full flex-row items-center justify-between cursor-pointer"
+          onClick={() =>
+            append({
+              name: "",
+              options: [],
+            })
+          }
+        >
+          Option <FiPlus className="text-blue-400" />
+        </FormLabel>
         <div className="flex flex-col mt-4">
-          <div className="my-4 flex w-full flex-row items-center justify-between ">
+          {/* <div className="my-4 flex w-full flex-row items-center justify-between ">
             <p className="text-sm text-gray-900">Option</p>
             <div
               onClick={() =>
@@ -210,7 +312,7 @@ const InputFormComponent = () => {
                 <FiPlus className="text-blue-400" />
               </div>
             </div>
-          </div>
+          </div> */}
           <div className="mt-2" />
           {fields.map((field, index) => (
             <div key={field.id}>

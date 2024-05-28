@@ -9,7 +9,7 @@ import { InputFormComponent } from "./form";
 */
 const Page = () => {
   return (
-    <main className="  flex items-center justify-center w-full h-screen">
+    <main className="py-12  flex items-center justify-center w-full min-h-screen">
       <InputFormComponent />
     </main>
   );

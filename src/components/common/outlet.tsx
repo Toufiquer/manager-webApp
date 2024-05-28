@@ -102,7 +102,7 @@ const Outlet = () => {
                       <SheetHeader>
                         <SheetDescription>
                           <div className="mt-8">
-                            <MutationForm SheetClose={SheetClose} />
+                            <MutationForm />
                           </div>
                         </SheetDescription>
                       </SheetHeader>
