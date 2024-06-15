@@ -220,8 +220,6 @@ const MutationForm = () => {
     parentIdx,
   }) => {
     const [isAddPrice, setIsAddPrice] = useState(false);
-    // console.log("field : ", field);
-    console.log("field.inner price : ", field?.price);
     useEffect(() => {
       field?.price && setIsAddPrice(true);
     }, [field?.price]);
@@ -396,7 +394,7 @@ const MutationForm = () => {
                         </div>
                       </div>
                       <FormControl>
-                        <Textarea placeholder="Fish fry" {...field} />
+                        <Textarea placeholder="Fish fry" {...field} rows={4} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
