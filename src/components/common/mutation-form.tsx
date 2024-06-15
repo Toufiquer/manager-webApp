@@ -54,7 +54,7 @@ const FormSchema = z.object({
     .string({
       invalid_type_error: "Info must be a string",
     })
-    .max(120, "Maximum 120 characters")
+    .max(320, "Maximum 320 characters")
     .trim()
     .optional(),
 
@@ -328,7 +328,7 @@ const MutationForm = () => {
                 </FormItem>
               )}
             />
-            {!mutationData?.info && !isAddInfo && (
+            {!mutationData?.info && !isAddInfo ? (
               <div className="w-full flex justify-end mt-4 ">
                 <div
                   onClick={() => setIsAddInfo(true)}
@@ -337,36 +337,34 @@ const MutationForm = () => {
                   Add info
                 </div>
               </div>
-            )}
-            {mutationData?.info ||
-              (isAddInfo && (
-                <div className="w-full flex items-center justify-between">
-                  <FormField
-                    control={form.control}
-                    name="info"
-                    render={({ field }) => (
-                      <FormItem className="pb-3 w-full">
-                        <div className="w-full flex items-center justify-between">
-                          <FormLabel>Info</FormLabel>
-                          <div className="w-full flex justify-end">
-                            <RxCross1
-                              className="cursor-pointer"
-                              onClick={() => {
-                                setMutationData("");
-                                setIsAddInfo(false);
-                              }}
-                            />
-                          </div>
+            ) : (
+              <div className="w-full flex items-center justify-between">
+                <FormField
+                  control={form.control}
+                  name="info"
+                  render={({ field }) => (
+                    <FormItem className="pb-3 w-full">
+                      <div className="w-full flex items-center justify-between">
+                        <FormLabel>Info</FormLabel>
+                        <div className="w-full flex justify-end">
+                          <RxCross1
+                            className="cursor-pointer"
+                            onClick={() => {
+                              setMutationData("");
+                              setIsAddInfo(false);
+                            }}
+                          />
                         </div>
-                        <FormControl>
-                          <Textarea placeholder="Fish fry" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                </div>
-              ))}
+                      </div>
+                      <FormControl>
+                        <Textarea placeholder="Fish fry" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            )}
             <FormLabel className="my-4 flex w-full flex-row items-center justify-between cursor-pointer">
               Option
               <FiPlus
