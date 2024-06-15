@@ -358,7 +358,7 @@ const MutationForm = () => {
                 <FormItem className="pb-3">
                   <FormLabel>Item name</FormLabel>
                   <FormControl>
-                    <Input placeholder="Fish food" {...field} />
+                    <Input placeholder="Item name" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -371,7 +371,7 @@ const MutationForm = () => {
                 <FormItem className="pb-3">
                   <FormLabel>Price</FormLabel>
                   <FormControl>
-                    <Input placeholder="5" {...field} />
+                    <Input placeholder="price" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -406,7 +406,7 @@ const MutationForm = () => {
                         </div>
                       </div>
                       <FormControl>
-                        <Textarea placeholder="Fish fry" {...field} />
+                        <Textarea placeholder="info" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
