@@ -147,7 +147,17 @@ const MutationForm = () => {
           name={`option.${index}.name`}
           render={({ field }) => (
             <FormItem className="pb-3">
-              <FormLabel>Option name</FormLabel>
+              <FormLabel className="flex items-center justify-between">
+                <div>Option name</div>
+                <div>
+                  <div
+                    onClick={() => remove(index)}
+                    className="flex h-[40px] cursor-pointer items-center justify-center "
+                  >
+                    <RxCross2 className="text-rose-400" />
+                  </div>
+                </div>
+              </FormLabel>
               <FormControl>
                 <Input placeholder="Option name" {...field} />
               </FormControl>
@@ -220,6 +230,8 @@ const MutationForm = () => {
     parentIdx,
   }) => {
     const [isAddPrice, setIsAddPrice] = useState(false);
+    // console.log("field : ", field);
+    console.log("field.inner price : ", field?.price);
     useEffect(() => {
       field?.price && setIsAddPrice(true);
     }, [field?.price]);
@@ -310,7 +322,7 @@ const MutationForm = () => {
         });
         return i;
       });
-      
+
       // call api for update
       setApiData(result);
       setMutationData("");
@@ -394,7 +406,7 @@ const MutationForm = () => {
                         </div>
                       </div>
                       <FormControl>
-                        <Textarea placeholder="Fish fry" {...field} rows={4} />
+                        <Textarea placeholder="Fish fry" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
