@@ -70,10 +70,12 @@ const Outlet = () => {
                   <div>
                     <p className={webAppH2}>
                       {curr.item}{" "}
-                      <span className={webAppH2Light + " text-[12px]"}>
-                        (&#163;
-                        {curr.price})
-                      </span>
+                      {curr.price && (
+                        <span className={webAppH2Light + " text-[12px]"}>
+                          (&#163;
+                          {curr.price})
+                        </span>
+                      )}
                     </p>
                     <p className={webAppPLight + " font-normal"}>{curr.info}</p>
                     {curr?.option?.length > 0 && (
