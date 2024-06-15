@@ -276,6 +276,8 @@ const MutationForm = () => {
         });
         return i;
       });
+      
+      // call api for update
       setApiData(result);
       setMutationData("");
       toast("Successfully updated");
@@ -290,6 +292,7 @@ const MutationForm = () => {
         return i;
       });
 
+      // call api for add
       setApiData(result);
       setMutationData("");
       toast("Successfully add");
