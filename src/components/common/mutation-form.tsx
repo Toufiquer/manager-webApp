@@ -91,9 +91,18 @@ const FormSchema = z.object({
             .trim(),
           price: z
             .string()
-            .refine((value) => !isNaN(parseFloat(value)), {
-              message: "Please provide a number",
-            })
+            .refine(
+              (value) => {
+                // If value is an empty string, it's considered optional
+                if (value === "") return true;
+
+                // Otherwise, check if it's a valid number
+                return !isNaN(parseFloat(value));
+              },
+              {
+                message: "Please provide a number",
+              }
+            )
             .optional(),
         })
         .array()
