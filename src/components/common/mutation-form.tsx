@@ -210,10 +210,16 @@ const MutationForm = () => {
     optionsRemove,
     parentIdx,
   }) => {
+    const [isAddPrice, setIsAddPrice] = useState(false);
+    // console.log("field : ", field);
+    console.log("field.inner price : ", field?.price);
+    useEffect(() => {
+      field?.price && setIsAddPrice(true);
+    }, [field?.price]);
     return (
       <div
         key={field.name + innerIdx}
-        className="mb-2 flex w-full flex-row justify-between"
+        className="flex w-full flex-row justify-between mb-8"
       >
         <div className="flex flex-col w-full mt-2">
           <FormField
@@ -229,19 +235,40 @@ const MutationForm = () => {
               </FormItem>
             )}
           />
-          <FormField
-            control={control}
-            name={`option[${parentIdx}].options.${innerIdx}.price`}
-            render={({ field }) => (
-              <FormItem className="pb-3">
-                <FormLabel>Options price</FormLabel>
-                <FormControl>
-                  <Input placeholder="Options price" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {!isAddPrice ? (
+            <div className="w-full flex justify-end">
+              <div
+                onClick={() => setIsAddPrice(true)}
+                className="text-slate-800 text-sm border border-slate-500 rounded-lg p-1 px-3 cursor-pointer"
+              >
+                Add price
+              </div>
+            </div>
+          ) : (
+            <FormField
+              control={control}
+              name={`option[${parentIdx}].options.${innerIdx}.price`}
+              render={({ field }) => (
+                <FormItem className="pb-3">
+                  <FormLabel className="flex items-center justify-between">
+                    <div>Options price</div>
+                    <div>
+                      <div
+                        onClick={() => setIsAddPrice(false)}
+                        className="flex h-[40px] cursor-pointer items-center justify-center "
+                      >
+                        <RxCross2 className="text-rose-400" />
+                      </div>
+                    </div>
+                  </FormLabel>
+                  <FormControl>
+                    <Input placeholder="Options price" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          )}
         </div>
         <div
           onClick={() => optionsRemove(innerIdx)}
