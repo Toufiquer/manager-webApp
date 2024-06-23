@@ -39,6 +39,7 @@ const FormSchema = z.object({
       invalid_type_error: "Item must be a string",
       required_error: "Item is required",
     })
+    .min(3, "Minimum 3 characters")
     .max(40, "Maximum 40 characters")
     .trim(),
 
@@ -64,14 +65,15 @@ const FormSchema = z.object({
           invalid_type_error: "Name must be a string",
           required_error: "Name is required",
         })
+        .min(3, "Minimum 3 characters")
         .max(40, "Maximum 40 characters")
-        .trim()
-        .optional(),
+        .trim(),
 
       optionFor: z
         .string({
           invalid_type_error: "OptionFor must be a string",
         })
+        .min(3, "Minimum 3 characters")
         .max(60, "Maximum 60 characters")
         .trim()
         .optional(),
@@ -84,6 +86,7 @@ const FormSchema = z.object({
             .string({
               invalid_type_error: "Name must be a string",
             })
+            .min(3, "Minimum 3 characters")
             .max(40, "Maximum 40 characters")
             .trim(),
           price: z
@@ -305,74 +308,6 @@ const MutationForm = () => {
         mutationData.option.map((i, idx) => update(idx, i));
     }
   }, []);
-  const cleanArray = (data: any[]) => {
-    for (let category of data) {
-      for (let item of category.data.lst) {
-        // Clean item fields
-        if (item.item === undefined || item.item === "") {
-          delete item.item;
-        }
-        if (item.id === undefined || item.id === "") {
-          delete item.id;
-        }
-        if (item.price === undefined || item.price === "") {
-          delete item.price;
-        }
-        if (item.info === undefined || item.info === "") {
-          delete item.info;
-        }
-
-        // Clean option fields
-        if (item.option) {
-          for (let option of item.option) {
-            if (option.name === undefined || option.name === "") {
-              delete option.name;
-            }
-            if (option.optionFor === undefined || option.optionFor === "") {
-              delete option.optionFor;
-            }
-            if (option.required === undefined || option.required === "") {
-              delete option.required;
-            } else {
-              // If no name, delete the whole option
-              if (option.name === undefined || option.name === "") {
-                item.option.splice(item.option.indexOf(option), 1);
-              }
-            }
-
-            if (option.options) {
-              for (let opt of option.options) {
-                if (opt.name === undefined || opt.name === "") {
-                  delete opt.name;
-                }
-                if (opt.price === undefined || opt.price === "") {
-                  delete opt.price;
-                }
-              }
-            }
-
-            // if options have an empty {} then filter them
-            if (option.options?.length >= 1) {
-              option.options = option.options.filter(
-                (curr) => curr.name || curr.price
-              );
-            }
-
-            // if options inside option is not specified data then delete options
-            if (option.options?.length === 0) {
-              delete option.options;
-            }
-          }
-        }
-
-        // if option is not specified data then delete option
-        if (item.option?.length === 0) {
-          delete item.option;
-        }
-      }
-    }
-    return data;
-  };
   function onSubmit(data: z.infer<typeof FormSchema>) {
     if (mutationData.type === "update") {
       let result = [];
@@ -388,12 +323,10 @@ const MutationForm = () => {
         return i;
       });
 
-      // delete empty field
-      result = cleanArray(result);
       // call api for update
       setApiData(result);
+      setMutationData("");
       toast("Successfully updated");
-      console.log("updated data", result);
     } else {
       let result = [];
 
@@ -401,26 +334,17 @@ const MutationForm = () => {
         let i = { ...curr };
         if (curr.name === mutationData.name) {
           i.data.lst.push(data);
-          // after create a new item, mutation form will work as update
-          setMutationData({
-            ...data,
-            type: "update",
-          });
         }
         return i;
       });
 
-      // delete empty field
-      result = cleanArray(result);
       // call api for add
       setApiData(result);
-
+      setMutationData("");
       toast("Successfully add");
-      console.log("updated data", result);
     }
+    form.reset();
   }
-
-  console.log("mutation Data", mutationData);
 
   return (
     <Form {...form}>
